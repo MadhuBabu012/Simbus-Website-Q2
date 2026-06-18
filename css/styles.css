@@ -264,6 +264,7 @@ footer { background: var(--clr-dark); color: #8aabb8; padding: 56px 5% 24px; }
   display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
   gap: 36px; margin-bottom: 40px;
 }
+.footer-logo img { height: 30px; width: auto; display: block; filter: brightness(0) invert(1); opacity: 0.9; }
 .footer-logo-text { font-size: 1.15rem; font-weight: 800; color: rgba(255,255,255,.9); }
 .footer-desc { font-size: .87rem; line-height: 1.75; color: #6a8ea8; margin-top: 14px; }
 .footer-col h5 {

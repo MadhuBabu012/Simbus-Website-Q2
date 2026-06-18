@@ -10,11 +10,11 @@ Pure HTML/CSS/JS site. No frameworks. Specialist Kinaxis Maestro + Databricks co
 ## Paths (from any HTML file)
 `../css/styles.css` · `../js/main.js` · `../assets/images/<file>` · `../assets/video/<file>`
 
-## Pages (8 total in `html/`)
-`index.html` · `about.html` · `services.html` · `kinaxis.html` · `databricks.html` · `careers.html` · `contact.html` · `roi-calculator.html`
+## Pages (9 total in `html/`)
+`index.html` · `about.html` · `services.html` · `kinaxis.html` · `databricks.html` · `careers.html` · `contact.html` · `roi-calculator.html` · `Kinaxis Planning One Page.html`
 
 ## Nav
-Logo → index · Home · Who We Are · Services (dropdown: services, kinaxis, databricks) · Careers · ROI Calculator · Contact · CTA: "Free Kinaxis Health Check" · Dark mode toggle (localStorage key: `simbus-theme`)
+Logo → index · Home · Who We Are · Services (dropdown: services, kinaxis, **Planning One Page**, databricks) · Careers · ROI Calculator · Contact · CTA: "Free Kinaxis Health Check" · Dark mode toggle (localStorage key: `simbus-theme`)
 
 ## Design Tokens (in `css/styles.css`)
 ```css
@@ -31,9 +31,10 @@ Dark mode toggle · Mobile nav (≤960px) · Scroll reveal (`.reveal`, `.reveal-
 
 ## Rules
 - Never duplicate CSS inline — link shared stylesheet only
-- Nav/footer changes must be applied to **all 8 HTML files**
+- Nav/footer changes must be applied to **all 9 HTML files**
 - `services.html` still uses inline styles (not yet migrated)
 - Some pages have leftover inline `<style>` `:root` blocks — remove when editing
+- `Kinaxis Planning One Page.html` is migrated: uses `../css/styles.css` + `../js/main.js` + a minimal page-specific `<style>` block (`.po-*` classes and hero background image); override `html { font-size: 121%; }` is intentional for this page
 
 ## Company Info
 Email: sales@simbustech.com · Phone: +91 8310047700 · Offices: Bangalore + Atlanta
