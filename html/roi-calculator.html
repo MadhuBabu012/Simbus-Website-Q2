@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Kinaxis ROI Calculator — Simbus Technologies</title>
+  <meta name="description" content="Estimate your Kinaxis Maestro implementation investment or optimization budget with Simbus Technologies, a certified Kinaxis SI Partner.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    /* ROI calculator–specific tokens not present in shared css/styles.css */
+    :root {
+      --clr-muted:      #5a5754;
+      --clr-bg-soft:    #eaf5ff;
+      --clr-green-dark: #0F6E56;
+      --clr-green-bg:   #e8f8f2;
+      --clr-amber:      #b45309;
+      --clr-amber-bg:   #fef3c7;
+      /* border-radius aliases used throughout this page */
+      --r-sm: 7px; --r-md: 11px; --r-lg: 13px; --r-xl: 18px;
+    }
+
+    /* HERO — scoped so .eyebrow inherits from shared CSS everywhere else */
+    .hero{background:linear-gradient(135deg,var(--clr-dark) 0%,var(--clr-navy) 60%,var(--clr-primary) 100%);padding:56px 5% 48px;position:relative;overflow:hidden}
+    .hero::after{content:'';position:absolute;right:-60px;top:-60px;width:420px;height:420px;background:radial-gradient(circle,rgba(0,111,183,.25) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+    .hero-inner{max-width:860px}
+    .hero .eyebrow{font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:10px}
+    .hero h1{font-size:clamp(2.6rem,5vw,4rem);font-weight:800;color:#fff;line-height:1.12;margin-bottom:14px;letter-spacing:-.03em}
+    .hero p{font-size:1rem;color:rgba(255,255,255,.78);max-width:580px;line-height:1.76}
+    .hero-badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+    .hero-badge{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:5px 14px;font-size:.78rem;color:rgba(255,255,255,.85);font-weight:500}
+    .hero-badge .dot{width:6px;height:6px;border-radius:50%;background:#5de3b4;flex-shrink:0}
+
+    /* PAGE */
+    .page-wrap{max-width:980px;margin:0 auto;padding:40px 5% 80px}
+
+    /* MODE SWITCHER */
+    .mode-switcher{margin-bottom:28px}
+    .mode-switcher-label{font-size:.78rem;font-weight:700;color:var(--clr-muted);letter-spacing:.04em;text-transform:uppercase;margin-bottom:12px}
+    .mode-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .mode-card{border:2px solid var(--clr-border);border-radius:var(--r-lg);padding:20px 22px;cursor:pointer;transition:all .2s;background:var(--clr-bg);text-align:left;font-family:var(--font-base)}
+    .mode-card:hover{border-color:var(--clr-primary);background:var(--clr-bg-soft)}
+    .mode-card.active-impl{border-color:var(--clr-primary);background:var(--clr-bg-soft);box-shadow:0 0 0 3px rgba(0,111,183,.12)}
+    .mode-card.active-opt{border-color:var(--clr-amber);background:#fffbeb;box-shadow:0 0 0 3px rgba(180,83,9,.10)}
+    .mode-card-icon{width:40px;height:40px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;margin-bottom:12px;flex-shrink:0}
+    .icon-impl{background:var(--clr-primary)}
+    .icon-opt{background:var(--clr-amber)}
+    .mode-card-icon svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .mode-card-title{font-size:.95rem;font-weight:700;color:var(--clr-dark);margin-bottom:5px}
+    .mode-card-desc{font-size:.78rem;color:var(--clr-muted);line-height:1.55}
+    .mode-tag{display:inline-block;font-size:.68rem;font-weight:700;padding:2px 9px;border-radius:20px;margin-top:10px}
+    .tag-impl{background:var(--clr-bg-soft);color:var(--clr-navy)}
+    .tag-opt{background:#fef3c7;color:var(--clr-amber)}
+
+    /* CALC CARD */
+    .calc-card{background:var(--clr-bg);border:1px solid var(--clr-border);border-radius:var(--r-xl);overflow:hidden;box-shadow:0 4px 32px rgba(0,111,183,.07)}
+    .calc-header{border-bottom:1px solid var(--clr-border);padding:18px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+    .calc-header.hdr-impl{background:var(--clr-bg-alt)}
+    .calc-header.hdr-opt{background:#fffbeb}
+    .calc-header-left{display:flex;align-items:center;gap:14px}
+    .calc-icon{width:44px;height:44px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .calc-icon svg{width:22px;height:22px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .ci-impl{background:var(--clr-primary)}
+    .ci-opt{background:var(--clr-amber)}
+    .calc-title{font-size:1rem;font-weight:700;color:var(--clr-heading)}
+    .calc-subtitle{font-size:.78rem;color:var(--clr-muted);margin-top:2px}
+    .kx-badge{display:flex;align-items:center;gap:6px;border-radius:20px;padding:5px 14px;font-size:.75rem;font-weight:600}
+    .kx-badge-impl{background:var(--clr-bg-soft);border:1px solid #b5d4ef;color:var(--clr-navy)}
+    .kx-badge-impl::before{content:'✦';font-size:.6rem;color:var(--clr-primary)}
+    .kx-badge-opt{background:#fef3c7;border:1px solid #fcd34d;color:var(--clr-amber)}
+    .kx-badge-opt::before{content:'⚙';font-size:.7rem}
+
+    .calc-body{padding:28px}
+    .section-label{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;padding-bottom:8px;border-bottom:1.5px solid var(--clr-bg-soft)}
+    .sl-impl{color:var(--clr-primary)}
+    .sl-opt{color:var(--clr-amber)}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+    .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:16px}
+    .field{display:flex;flex-direction:column;gap:5px}
+    .field label{font-size:.8rem;font-weight:600;color:var(--clr-body)}
+    .field select,.field input[type=number]{font-family:var(--font-base);font-size:.875rem;color:var(--clr-body);border:1.5px solid var(--clr-border);border-radius:var(--r-sm);padding:9px 12px;background:var(--clr-bg);outline:none;transition:border-color .2s;width:100%}
+    .field select:focus,.field input:focus{border-color:var(--clr-primary)}
+    .field .hint{font-size:.72rem;color:var(--clr-muted)}
+    .divider{border:none;border-top:1px solid var(--clr-border);margin:20px 0}
+
+    /* CHECKS */
+    .check-group{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+    .check-label{display:flex;align-items:center;gap:7px;cursor:pointer;font-size:.8rem;font-weight:500;color:var(--clr-body);padding:6px 12px;border:1.5px solid var(--clr-border);border-radius:20px;background:var(--clr-bg);transition:all .15s;user-select:none}
+    .check-label input{display:none}
+    .chip-dot{width:8px;height:8px;border-radius:50%;background:var(--clr-border);transition:background .15s;flex-shrink:0}
+    .check-label:has(input:checked){background:var(--clr-bg-soft);border-color:var(--clr-primary);color:var(--clr-navy)}
+    .check-label:has(input:checked) .chip-dot{background:var(--clr-primary)}
+    .check-label-opt:has(input:checked){background:#fffbeb;border-color:var(--clr-amber);color:var(--clr-amber)}
+    .check-label-opt:has(input:checked) .chip-dot{background:var(--clr-amber)}
+
+    /* SCENARIO */
+    .scenario-wrap{margin-bottom:22px}
+    .scenario-hint{font-size:.78rem;font-weight:600;color:var(--clr-muted);margin-bottom:10px}
+    .scenario-tabs{display:flex;gap:0;border:1.5px solid var(--clr-border);border-radius:var(--r-sm);overflow:hidden;width:fit-content}
+    .scenario-tabs button{font-family:var(--font-base);font-size:.82rem;font-weight:600;padding:8px 22px;cursor:pointer;border:none;border-right:1.5px solid var(--clr-border);background:var(--clr-bg);color:var(--clr-muted);transition:all .15s}
+    .scenario-tabs button:last-child{border-right:none}
+    .scenario-tabs button.active{background:var(--clr-primary);color:#fff}
+    .scenario-tabs button:not(.active):hover{background:var(--clr-bg-alt);color:var(--clr-body)}
+
+    /* METRICS */
+    .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
+    .metric-card{border-radius:var(--r-md);padding:14px 16px;border:1px solid var(--clr-border)}
+    .mc-impl{background:var(--clr-bg-alt)}
+    .mc-opt{background:#fffbeb}
+    .metric-card .m-label{font-size:.72rem;color:var(--clr-muted);line-height:1.4;margin-bottom:6px}
+    .metric-card .m-val{font-size:1.25rem;font-weight:700}
+    .m-val.blue{color:var(--clr-primary)} .m-val.green{color:var(--clr-green-dark)}
+    .m-val.navy{color:var(--clr-navy)}     .m-val.dark{color:var(--clr-dark)}
+    .m-val.amber{color:var(--clr-amber)}
+
+    /* ROI BANNER */
+    .roi-banner{border:1.5px solid var(--clr-border);border-radius:var(--r-lg);padding:22px 24px;margin-bottom:18px}
+    .roi-banner-impl{background:var(--clr-bg-alt)}
+    .roi-banner-opt{background:#fffbeb;border-color:#fcd34d}
+    .roi-top{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:16px}
+    .roi-eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px}
+    .roe-impl{color:var(--clr-green-dark)} .roe-opt{color:var(--clr-amber)}
+    .roi-num{font-size:2.6rem;font-weight:800;line-height:1;letter-spacing:-.03em}
+    .ron-impl{color:var(--clr-green-dark)} .ron-opt{color:var(--clr-amber)}
+    .roi-scenario{font-size:.78rem;color:var(--clr-muted);margin-top:5px}
+    .roi-right{display:flex;flex-direction:column;gap:7px;text-align:right}
+    .meta-row{font-size:.82rem;color:var(--clr-muted)}
+    .meta-row strong{color:var(--clr-heading);font-weight:700}
+    .bar-section{border-top:1px solid var(--clr-border);padding-top:14px}
+    .bar-section-title{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--clr-muted);margin-bottom:10px}
+    .bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+    .bar-label{font-size:.78rem;color:var(--clr-muted);width:160px;flex-shrink:0}
+    .bar-track{flex:1;background:var(--clr-border);border-radius:4px;height:7px;overflow:hidden}
+    .bar-fill{height:100%;border-radius:4px;transition:width .5s cubic-bezier(.4,0,.2,1)}
+    .bar-val{font-size:.78rem;font-weight:600;color:var(--clr-heading);width:72px;text-align:right;flex-shrink:0}
+
+    /* BREAKDOWN */
+    .breakdown-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+    .breakdown-card{border:1px solid var(--clr-border);border-radius:var(--r-lg);padding:18px 20px;background:var(--clr-bg)}
+    .card-head{font-size:.82rem;font-weight:700;color:var(--clr-heading);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+    .head-icon{width:28px;height:28px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .cost-icon{background:#eaf5ff}  .ben-icon{background:var(--clr-green-bg)}
+    .opt-cost-icon{background:#fef3c7} .opt-ben-icon{background:var(--clr-green-bg)}
+    .head-icon svg{width:14px;height:14px;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+    .cost-icon svg,.opt-cost-icon svg{stroke:var(--clr-primary)}
+    .ben-icon svg,.opt-ben-icon svg{stroke:var(--clr-green-dark)}
+    .opt-cost-icon svg{stroke:var(--clr-amber)}
+    .line-item{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--clr-bg-alt);font-size:.8rem}
+    .line-item:last-child{border-bottom:none}
+    .line-label{color:var(--clr-muted)}
+    .line-val{font-weight:700;color:var(--clr-heading)}
+    .line-val.green{color:var(--clr-green-dark)}
+    .line-val.saving{color:var(--clr-green-dark)}
+    .total-row{display:flex;justify-content:space-between;padding:9px 0 0;font-size:.86rem;font-weight:700;border-top:1.5px solid var(--clr-border);margin-top:5px}
+    .t-green{color:var(--clr-green-dark)} .t-amber{color:var(--clr-amber)}
+
+    /* SIMBUS PANEL */
+    .simbus-panel{background:var(--clr-bg-alt);border:1px solid var(--clr-border);border-radius:var(--r-lg);padding:20px 24px;margin-bottom:20px}
+    .panel-head{font-size:.86rem;font-weight:700;color:var(--clr-heading);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+    .panel-head-icon{width:30px;height:30px;background:var(--clr-primary);border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center}
+    .panel-head-icon svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+    .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+    .svc-item{display:flex;align-items:flex-start;gap:8px;font-size:.78rem;color:var(--clr-muted);line-height:1.5}
+    .svc-dot{width:18px;height:18px;border-radius:var(--r-sm);background:var(--clr-bg-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+    .svc-dot svg{width:10px;height:10px;fill:none;stroke:var(--clr-primary);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+    .svc-dot-opt{background:#fef3c7}
+    .svc-dot-opt svg{stroke:var(--clr-amber)}
+
+    /* DISCLAIMER / CTA */
+    .disclaimer{font-size:.74rem;color:var(--clr-muted);padding:14px 16px;background:var(--clr-bg-alt);border-radius:var(--r-sm);line-height:1.65;border-left:3px solid var(--clr-border);margin-bottom:20px}
+    .disclaimer strong{color:var(--clr-body)}
+    .cta-row{display:flex;gap:10px;flex-wrap:wrap}
+    .btn-primary{background:var(--clr-primary);color:#fff;padding:11px 22px;border-radius:var(--r-sm);font-family:var(--font-base);font-size:.84rem;font-weight:700;border:none;cursor:pointer;transition:background .2s}
+    .btn-primary:hover{background:var(--clr-navy)}
+    .btn-amber{background:var(--clr-amber);color:#fff;padding:11px 22px;border-radius:var(--r-sm);font-family:var(--font-base);font-size:.84rem;font-weight:700;border:none;cursor:pointer;transition:background .2s}
+    .btn-amber:hover{background:#92400e}
+    .btn-secondary{background:var(--clr-bg);color:var(--clr-primary);padding:10px 20px;border-radius:var(--r-sm);font-family:var(--font-base);font-size:.84rem;font-weight:600;border:1.5px solid var(--clr-primary);cursor:pointer;transition:background .2s}
+    .btn-secondary:hover{background:var(--clr-bg-soft)}
+
+    @media(max-width:768px){
+      .metrics-grid{grid-template-columns:1fr 1fr}
+      .breakdown-grid{grid-template-columns:1fr}
+      .services-grid{grid-template-columns:1fr 1fr}
+      .grid-3{grid-template-columns:1fr 1fr}
+      .mode-cards{grid-template-columns:1fr}
+      .calc-body{padding:18px}
+    }
+    @media(max-width:520px){
+      .metrics-grid{grid-template-columns:1fr 1fr}
+      .grid-2{grid-template-columns:1fr}
+      .services-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="../assets/images/simbus-technologies.webp" alt="Simbus Technologies" style="height:34px;width:auto;object-fit:contain;">
+    </a>
+    <ul class="nav-links" id="navlinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">Who We Are</a></li>
+      <li class="nav-dropdown">
+        <a href="services.html">Services <span class="nav-arr"></span></a>
+        <ul class="nav-submenu">
+          <li><a href="kinaxis.html">Kinaxis Maestro</a></li>
+          <li><a href="databricks.html">Databricks</a></li>
+        </ul>
+      </li>
+      <li><a href="careers.html">Careers</a></li>
+      <li><a href="roi-calculator.html" class="active">ROI Calculator</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Free Kinaxis Health Check</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">&#127769;</button>
+    <button class="nav-ham" aria-label="Open navigation menu"
+            onclick="document.getElementById(" + chr(39) + "navlinks" + chr(39) + ").classList.toggle(" + chr(39) + "open" + chr(39) + ")">&#9776;</button>
+  </nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <span class="eyebrow">ROI Calculator</span>
+    <h1>Kinaxis Maestro ROI &amp; Budget Estimator</h1>
+    <p>New to Kinaxis or already running it? Get a precise investment estimate and benefit projection tailored to your industry, scope, and journey stage.</p>
+    <div class="hero-badges">
+      <div class="hero-badge"><span class="dot"></span>Certified Kinaxis SI Partner</div>
+      <div class="hero-badge"><span class="dot"></span>New Implementation &amp; Optimization modes</div>
+      <div class="hero-badge"><span class="dot"></span>8 Manufacturing verticals</div>
+    </div>
+  </div>
+</section>
+
+<div class="page-wrap">
+
+  <!-- MODE SWITCHER -->
+  <div class="mode-switcher">
+    <div class="mode-switcher-label">Select your situation</div>
+    <div class="mode-cards">
+      <button class="mode-card active-impl" id="modeImpl" onclick="switchMode('impl')">
+        <div class="mode-card-icon icon-impl">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><circle cx="12" cy="10" r="3"/><line x1="12" y1="7" x2="12" y2="4"/></svg>
+        </div>
+        <div class="mode-card-title">New Kinaxis Maestro Implementation</div>
+        <div class="mode-card-desc">We are evaluating Kinaxis for the first time and want to understand the full investment required — software, services, training, and go-live costs.</div>
+        <span class="mode-tag tag-impl">Fresh deployment · Full ROI projection</span>
+      </button>
+      <button class="mode-card" id="modeOpt" onclick="switchMode('opt')">
+        <div class="mode-card-icon icon-opt">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07M8.46 8.46a5 5 0 0 0 0 7.07"/></svg>
+        </div>
+        <div class="mode-card-title">Already Using Kinaxis — Optimization Budget</div>
+        <div class="mode-card-desc">We have Kinaxis live but want to optimize, expand modules, improve adoption, or fix performance gaps. What will it cost and what additional value can we unlock?</div>
+        <span class="mode-tag tag-opt">Existing customer · Optimization &amp; expansion</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       CALCULATOR CARD
+  ═══════════════════════════════════════════ -->
+  <div class="calc-card">
+
+    <!-- HEADER (swaps per mode) -->
+    <div class="calc-header hdr-impl" id="calcHeader">
+      <div class="calc-header-left">
+        <div class="calc-icon ci-impl" id="calcHeaderIcon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="9" y2="9"/><line x1="15" y1="9" x2="15" y2="9"/><line x1="9" y1="15" x2="9" y2="15"/><line x1="15" y1="15" x2="15" y2="15"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+        </div>
+        <div>
+          <div class="calc-title" id="calcHeaderTitle">New Implementation — Investment &amp; ROI Estimator</div>
+          <div class="calc-subtitle">Pharma · Chemical · Appliances · Retail · Automotive · Equipment · Spare Parts · Machinery</div>
+        </div>
+      </div>
+      <div class="kx-badge kx-badge-impl" id="calcHeaderBadge">Simbus · Certified Kinaxis SI Partner</div>
+    </div>
+
+    <div class="calc-body">
+
+      <!-- ── SHARED: COMPANY PROFILE ── -->
+      <div class="section-label sl-impl" id="sl1">Company profile</div>
+      <div class="grid-2">
+        <div class="field">
+          <label>Industry vertical</label>
+          <select id="industry">
+            <option value="pharma">Pharmaceutical</option>
+            <option value="chemical">Chemical</option>
+            <option value="appliances">Appliances / Consumer Electronics</option>
+            <option value="retail">Retail / FMCG</option>
+            <option value="automotive">Automotive</option>
+            <option value="equipment">Industrial Equipment</option>
+            <option value="spareparts">Spare Parts / MRO</option>
+            <option value="machinery">Machinery / Heavy Equipment</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Company size</label>
+          <select id="companySize">
+            <option value="small">SME ($20M–$100M revenue)</option>
+            <option value="mid" selected>Mid-market ($100M–$500M)</option>
+            <option value="large">Large enterprise ($500M–$2B)</option>
+            <option value="enterprise">Global enterprise ($2B+)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Annual revenue (USD millions)</label>
+          <input type="number" id="revenue" value="250" min="20" max="50000" step="10"/>
+          <span class="hint">Enter total company revenue in $M</span>
+        </div>
+        <div class="field">
+          <label>SKUs / Part numbers</label>
+          <select id="skus">
+            <option value="small">Under 5,000</option>
+            <option value="mid" selected>5,000 – 50,000</option>
+            <option value="large">50,000 – 250,000</option>
+            <option value="xlarge">250,000+</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Manufacturing / distribution sites</label>
+          <select id="sites">
+            <option value="1">1–2 sites</option>
+            <option value="3" selected>3–5 sites</option>
+            <option value="6">6–10 sites</option>
+            <option value="11">11+ global sites</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Supply chain planning users</label>
+          <select id="users">
+            <option value="10">Up to 10 planners</option>
+            <option value="25" selected>11–25 planners</option>
+            <option value="50">26–50 planners</option>
+            <option value="100">51–100 planners</option>
+            <option value="200">100+ planners</option>
+          </select>
+        </div>
+      </div>
+
+      <hr class="divider"/>
+
+      <!-- ── IMPLEMENTATION SECTION ── -->
+      <div id="implSection">
+        <div class="section-label sl-impl">Current pain points</div>
+        <div class="check-group" id="painPoints">
+          <label class="check-label"><input type="checkbox" data-pain="forecast" checked/><span class="chip-dot"></span>Poor forecast accuracy</label>
+          <label class="check-label"><input type="checkbox" data-pain="inventory" checked/><span class="chip-dot"></span>Excess inventory / stockouts</label>
+          <label class="check-label"><input type="checkbox" data-pain="visibility"/><span class="chip-dot"></span>Low supply chain visibility</label>
+          <label class="check-label"><input type="checkbox" data-pain="silos"/><span class="chip-dot"></span>Data silos &amp; spreadsheets</label>
+          <label class="check-label"><input type="checkbox" data-pain="disruption"/><span class="chip-dot"></span>Slow disruption response</label>
+          <label class="check-label"><input type="checkbox" data-pain="sop"/><span class="chip-dot"></span>Ineffective S&amp;OP process</label>
+          <label class="check-label"><input type="checkbox" data-pain="compliance"/><span class="chip-dot"></span>Regulatory / compliance gaps</label>
+          <label class="check-label"><input type="checkbox" data-pain="leadtime"/><span class="chip-dot"></span>Long planning cycle times</label>
+        </div>
+
+        <hr class="divider"/>
+        <div class="section-label sl-impl">Scope &amp; deployment</div>
+        <div class="grid-3">
+          <div class="field">
+            <label>Deployment model</label>
+            <select id="deployment">
+              <option value="saas">SaaS / Cloud</option>
+              <option value="hybrid">Hybrid</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Implementation timeline</label>
+            <select id="timeline">
+              <option value="fast">Fast-track (6–9 months)</option>
+              <option value="standard" selected>Standard (9–15 months)</option>
+              <option value="phased">Phased (18–24 months)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Simbus support tier</label>
+            <select id="support">
+              <option value="basic">Essential (business hours)</option>
+              <option value="premium" selected>Professional (24/5 + CSM)</option>
+              <option value="enterprise">Enterprise (24/7 + dedicated team)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="font-size:.8rem;font-weight:600;color:var(--clr-body);margin-bottom:10px;">Kinaxis Maestro modules to implement:</div>
+        <div class="check-group" id="modules">
+          <label class="check-label"><input type="checkbox" data-mod="dem" checked/><span class="chip-dot"></span>Demand Planning</label>
+          <label class="check-label"><input type="checkbox" data-mod="sup" checked/><span class="chip-dot"></span>Supply Planning</label>
+          <label class="check-label"><input type="checkbox" data-mod="sop"/><span class="chip-dot"></span>S&amp;OP / IBP</label>
+          <label class="check-label"><input type="checkbox" data-mod="inv"/><span class="chip-dot"></span>Inventory Optimization</label>
+          <label class="check-label"><input type="checkbox" data-mod="mfg"/><span class="chip-dot"></span>Production Scheduling</label>
+          <label class="check-label"><input type="checkbox" data-mod="risk"/><span class="chip-dot"></span>Risk &amp; Scenario Analysis</label>
+          <label class="check-label"><input type="checkbox" data-mod="int"/><span class="chip-dot"></span>ERP Integration (SAP/Oracle)</label>
+          <label class="check-label"><input type="checkbox" data-mod="analytics"/><span class="chip-dot"></span>Control Tower / Analytics</label>
+        </div>
+      </div>
+
+      <!-- ── OPTIMIZATION SECTION ── -->
+      <div id="optSection" style="display:none">
+        <div class="section-label sl-opt">Your current Kinaxis environment</div>
+        <div class="grid-2">
+          <div class="field">
+            <label>Years live on Kinaxis</label>
+            <select id="yearsLive">
+              <option value="1">Less than 1 year</option>
+              <option value="2" selected>1–2 years</option>
+              <option value="3">3–4 years</option>
+              <option value="5">5+ years</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Current Kinaxis health</label>
+            <select id="kxHealth">
+              <option value="poor">Poor — significant issues</option>
+              <option value="fair" selected>Fair — working but underperforming</option>
+              <option value="good">Good — mostly optimized</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>User adoption level</label>
+            <select id="adoption">
+              <option value="low">Low (&lt;40% of planners using it)</option>
+              <option value="mid" selected>Medium (40–70% adoption)</option>
+              <option value="high">High (70%+ adoption)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Simbus optimization support tier</label>
+            <select id="optSupport">
+              <option value="basic">Essential — periodic reviews</option>
+              <option value="premium" selected>Professional — monthly sprints</option>
+              <option value="enterprise">Enterprise — dedicated team</option>
+            </select>
+          </div>
+        </div>
+
+        <hr class="divider"/>
+        <div class="section-label sl-opt">Optimization focus areas</div>
+        <div class="check-group" id="optAreas">
+          <label class="check-label check-label-opt"><input type="checkbox" data-opt="perf" checked/><span class="chip-dot"></span>System performance &amp; speed</label>
+          <label class="check-label check-label-opt"><input type="checkbox" data-opt="adopt" checked/><span class="chip-dot"></span>User adoption &amp; training</label>
+          <label class="check-label check-label-opt"><input type="checkbox" data-opt="newmod"/><span class="chip-dot"></span>Add new modules / expand scope</label>
+          <label class="check-label check-label-opt"><input type="checkbox" data-opt="integ"/><span class="chip-dot"></span>ERP integration fixes / new connectors</label>
+          <label class="check-label check-label-opt"><input type="checkbox" data-opt="data"/><span class="chip-dot"></span>Data quality &amp; master data cleanup</label>
+          <label class="check-label check-label-opt"><input type="checkbox" data-opt="analytics"/><span class="chip-dot"></span>Advanced analytics &amp; dashboards</label>
+          <label class="check-label check-label-opt"><input type="checkbox" data-opt="upgrade"/><span class="chip-dot"></span>Version upgrade &amp; regression testing</label>
+          <label class="check-label check-label-opt"><input type="checkbox" data-opt="process"/><span class="chip-dot"></span>Business process re-alignment</label>
+        </div>
+
+        <hr class="divider"/>
+        <div class="section-label sl-opt">Expansion modules (add-on to existing)</div>
+        <div class="check-group" id="optModules">
+          <label class="check-label check-label-opt"><input type="checkbox" data-optmod="sop"/><span class="chip-dot"></span>S&amp;OP / IBP</label>
+          <label class="check-label check-label-opt"><input type="checkbox" data-optmod="inv"/><span class="chip-dot"></span>Inventory Optimization</label>
+          <label class="check-label check-label-opt"><input type="checkbox" data-optmod="mfg"/><span class="chip-dot"></span>Production Scheduling</label>
+          <label class="check-label check-label-opt"><input type="checkbox" data-optmod="risk"/><span class="chip-dot"></span>Risk &amp; Scenario Analysis</label>
+          <label class="check-label check-label-opt"><input type="checkbox" data-optmod="analytics"/><span class="chip-dot"></span>Control Tower / Analytics</label>
+          <label class="check-label check-label-opt"><input type="checkbox" data-optmod="int"/><span class="chip-dot"></span>Additional ERP connector</label>
+        </div>
+      </div>
+
+      <hr class="divider"/>
+
+      <!-- SCENARIO -->
+      <div class="scenario-wrap">
+        <div class="scenario-hint">Projection scenario</div>
+        <div class="scenario-tabs" id="scenarioTabs">
+          <button class="active" data-sc="conservative">Conservative</button>
+          <button data-sc="base">Base case</button>
+          <button data-sc="optimistic">Optimistic</button>
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="metrics-grid" id="metricsGrid"></div>
+      <div class="roi-banner roi-banner-impl" id="roiBanner">
+        <div class="roi-top">
+          <div class="roi-left">
+            <div class="roi-eyebrow roe-impl" id="roiEyebrow">3-Year ROI</div>
+            <div class="roi-num ron-impl" id="roiPct">—</div>
+            <div class="roi-scenario" id="roiScenario">—</div>
+          </div>
+          <div class="roi-right">
+            <div class="meta-row" id="metaPayback">Payback period: <strong>—</strong></div>
+            <div class="meta-row" id="metaNet">3-yr net benefit: <strong>—</strong></div>
+            <div class="meta-row" id="metaNpv">NPV (10% discount): <strong>—</strong></div>
+          </div>
+        </div>
+        <div class="bar-section">
+          <div class="bar-section-title" id="barTitle">Annual benefit drivers</div>
+          <div id="benefitBars"></div>
+        </div>
+      </div>
+
+      <div class="breakdown-grid">
+        <div class="breakdown-card">
+          <div class="card-head">
+            <div class="head-icon cost-icon" id="costIcon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <span id="costCardTitle">Investment estimate</span>
+          </div>
+          <div id="costLines"></div>
+        </div>
+        <div class="breakdown-card">
+          <div class="card-head">
+            <div class="head-icon ben-icon">
+              <svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            </div>
+            <span id="benCardTitle">Annual benefit estimate</span>
+          </div>
+          <div id="benefitLines"></div>
+        </div>
+      </div>
+
+      <!-- SIMBUS SERVICES -->
+      <div class="simbus-panel" id="simbusPanel">
+        <div class="panel-head">
+          <div class="panel-head-icon">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <span id="panelTitle">What Simbus delivers as your Kinaxis SI partner</span>
+        </div>
+        <div class="services-grid" id="servicesGrid"></div>
+      </div>
+
+      <div class="disclaimer">
+        <strong>About these estimates:</strong> Figures are directional, based on Kinaxis-published benchmarks, Gartner supply chain research, and Simbus delivery experience across manufacturing verticals. Actual investment and returns depend on data readiness, scope complexity, change adoption, and business conditions. Contact Simbus for a complimentary scoping assessment and detailed statement of work.
+      </div>
+
+      <div class="cta-row" id="ctaRow"></div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <img src="../assets/images/simbus-technologies.webp" alt="Simbus Technologies" style="height:36px;width:auto;display:block;">
+        </div>
+        <p class="footer-desc">A global consulting and technology partner helping enterprises modernize their supply chain and data ecosystems.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="kinaxis.html">Services</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="roi-calculator.html">ROI Calculator</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="kinaxis.html">Kinaxis Maestro Services</a></li>
+          <li><a href="databricks.html">Databricks Services</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:sales@simbustech.com">sales@simbustech.com</a></li>
+          <li><a href="tel:+918310047700">+91 8310047700</a></li>
+          <li><a href="contact.html">Bangalore, India</a></li>
+          <li><a href="contact.html">Atlanta, USA</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul><li><a href="contact.html">Privacy Policy</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Simbus Technologies. All rights reserved. Bangalore &middot; Atlanta</div>
+  </footer>
+
+<script>
+/* ── DATA ── */
+const IND = {
+  pharma:    {invPct:.18,faDrop:.22,svcUp:.12},
+  chemical:  {invPct:.16,faDrop:.18,svcUp:.10},
+  appliances:{invPct:.20,faDrop:.25,svcUp:.14},
+  retail:    {invPct:.22,faDrop:.28,svcUp:.16},
+  automotive:{invPct:.15,faDrop:.20,svcUp:.12},
+  equipment: {invPct:.17,faDrop:.18,svcUp:.11},
+  spareparts:{invPct:.25,faDrop:.20,svcUp:.15},
+  machinery: {invPct:.16,faDrop:.17,svcUp:.10}
+};
+const SC = {
+  conservative:{inv:.5,fa:.4,svc:.5,label:'Conservative outlook'},
+  base:        {inv:.7,fa:.6,svc:.7,label:'Base case projection'},
+  optimistic:  {inv:1, fa:1, svc:1, label:'Optimistic potential'}
+};
+const MOD_COST   = {dem:80,sup:75,sop:60,inv:55,mfg:70,risk:45,int:90,analytics:50};
+const SUP_COST   = {basic:40,premium:85,enterprise:140};
+const TL_MULT    = {fast:1.15,standard:1,phased:.9};
+const LIC_BASE   = {small:120,mid:260,large:520,enterprise:980};
+const SITES_MULT = {'1':1,'3':1.3,'6':1.7,'11':2.2};
+const USERS_MULT = {10:1,25:1.4,50:2,100:2.8,200:4};
+const SKUS_MULT  = {small:.8,mid:1,large:1.35,xlarge:1.8};
+const BAR_COLORS = ['#006fb7','#1D9E75','#014e82','#d97706','#7c3aed','#0891b2','#b45309','#15803d'];
+// Optimization area base costs ($K)
+const OPT_AREA_COST = {perf:45,adopt:35,newmod:80,integ:60,data:50,analytics:55,upgrade:40,process:30};
+const OPT_SUP_COST  = {basic:30,premium:65,enterprise:110};
+const HEALTH_MULT   = {poor:1.4,fair:1.0,good:.65};
+const ADOPTION_MULT = {low:1.3,mid:1.0,high:.7};
+const OPT_MOD_COST  = {sop:55,inv:50,mfg:60,risk:40,analytics:45,int:70};
+
+let currentMode     = 'impl';
+let currentScenario = 'conservative';
+
+function fmt(n)  { return '$'+Math.round(n).toLocaleString()+'K'; }
+function fmtM(n) { return '$'+Math.abs(n).toFixed(1)+'M'; }
+function pct(n)  { return Math.round(n*100)+'%'; }
+
+function getChecked(id, attr) {
+  return [...document.getElementById(id).querySelectorAll('input[type=checkbox]')]
+    .filter(c=>c.checked).map(c=>c.dataset[attr]);
+}
+
+function svgCheck() {
+  return '<svg viewBox="0 0 12 12" width="10" height="10" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 6 5 9 10 3"/></svg>';
+}
+
+function switchMode(mode) {
+  currentMode = mode;
+  document.getElementById('modeImpl').className = 'mode-card' + (mode==='impl'?' active-impl':'');
+  document.getElementById('modeOpt').className  = 'mode-card' + (mode==='opt'?' active-opt':'');
+  document.getElementById('implSection').style.display = mode==='impl'?'block':'none';
+  document.getElementById('optSection').style.display  = mode==='opt'?'block':'none';
+
+  const hdr = document.getElementById('calcHeader');
+  hdr.className = 'calc-header ' + (mode==='impl'?'hdr-impl':'hdr-opt');
+  document.getElementById('calcHeaderIcon').className = 'calc-icon ' + (mode==='impl'?'ci-impl':'ci-opt');
+  document.getElementById('calcHeaderTitle').textContent = mode==='impl'
+    ? 'New Implementation — Investment & ROI Estimator'
+    : 'Existing Kinaxis — Optimization Budget & Value Estimator';
+  document.getElementById('calcHeaderBadge').className = 'kx-badge ' + (mode==='impl'?'kx-badge-impl':'kx-badge-opt');
+  document.getElementById('calcHeaderBadge').textContent = mode==='impl'
+    ? '✦ Simbus · Certified Kinaxis SI Partner'
+    : '⚙ Simbus · Kinaxis Optimization Services';
+
+  // section labels
+  document.querySelectorAll('.section-label').forEach(el=>{
+    el.classList.remove('sl-impl','sl-opt');
+    el.classList.add(mode==='impl'?'sl-impl':'sl-opt');
+  });
+
+  document.getElementById('roiBanner').className  = 'roi-banner ' + (mode==='impl'?'roi-banner-impl':'roi-banner-opt');
+  document.getElementById('roiEyebrow').className = 'roi-eyebrow ' + (mode==='impl'?'roe-impl':'roe-opt');
+  document.getElementById('roiPct').className     = 'roi-num ' + (mode==='impl'?'ron-impl':'ron-opt');
+
+  calc();
+}
+
+/* ── IMPLEMENTATION CALC ── */
+function calcImpl(rev,sz,dep,tl,sup,skuSz,siteV,userV,pains,mods,sc,bench) {
+  const licAnnual     = LIC_BASE[sz]*SITES_MULT[siteV]*USERS_MULT[userV]*SKUS_MULT[skuSz];
+  const modCost       = mods.reduce((a,m)=>a+(MOD_COST[m]||0),0)*TL_MULT[tl];
+  const implCost      = modCost*(dep==='hybrid'?1.2:1);
+  const annualSupport = SUP_COST[sup]+licAnnual*.18;
+  const trainChange   = implCost*.20;
+  const dataReady     = implCost*.14;
+  const accelerator   = -(implCost*.08);
+  const year1Total    = implCost+licAnnual+annualSupport+trainChange+dataReady+accelerator;
+  const yr2yr3        = (licAnnual+annualSupport)*2;
+  const totalInv      = year1Total+yr2yr3;
+
+  const invCarrying = rev*bench.invPct*.25*1000*sc.inv*(pains.includes('inventory')?1.15:1);
+  const forecastBen = rev*.004*bench.faDrop*1000*sc.fa*(pains.includes('forecast')?1.2:.8);
+  const svcBen      = rev*bench.svcUp*.02*1000*sc.svc;
+  const plannerProd = (parseInt(userV)||25)*120*sc.inv;
+  const expediting  = rev*.006*1000*sc.fa*(pains.includes('disruption')?1.2:1);
+  const sopBen      = pains.includes('sop')?rev*.002*1000*sc.svc:0;
+  const compBen     = (bench===IND.pharma||bench===IND.chemical)?rev*.003*1000*sc.svc:0;
+  const ltBen       = pains.includes('leadtime')?rev*.001*1000*sc.inv:0;
+  const totalAnnual = invCarrying+forecastBen+svcBen+plannerProd+expediting+sopBen+compBen+ltBen;
+
+  const yr1B=totalAnnual*.40, yr2B=totalAnnual*.85, yr3B=totalAnnual;
+  const total3B=yr1B+yr2B+yr3B;
+  const roi=(total3B-totalInv)/totalInv;
+  const payback=Math.round(year1Total/(totalAnnual/12));
+  const d=.10;
+  const npv=(yr1B/(1+d))+(yr2B/Math.pow(1+d,2))+(yr3B/Math.pow(1+d,3))-totalInv;
+
+  // Metrics
+  renderMetrics([
+    {label:'Year 1 implementation cost',val:fmtM(year1Total/1000),cls:'blue',mc:'mc-impl'},
+    {label:'Annual license + support',val:fmtM((licAnnual+annualSupport)/1000),cls:'navy',mc:'mc-impl'},
+    {label:'3-year total investment',val:fmtM(totalInv/1000),cls:'dark',mc:'mc-impl'},
+    {label:'Annual benefit (steady state)',val:fmtM(totalAnnual/1000),cls:'green',mc:'mc-impl'},
+  ]);
+
+  document.getElementById('roiEyebrow').textContent = '3-Year ROI';
+  document.getElementById('roiPct').textContent     = pct(roi);
+  document.getElementById('roiScenario').textContent= SC[currentScenario].label;
+  document.getElementById('metaPayback').innerHTML  = 'Payback period: <strong>'+(payback<=36?payback+' months':'> 36 months')+'</strong>';
+  document.getElementById('metaNet').innerHTML      = '3-yr net benefit: <strong>'+fmtM((total3B-totalInv)/1000)+'</strong>';
+  document.getElementById('metaNpv').innerHTML      = 'NPV (10% discount): <strong>'+fmtM(npv/1000)+'</strong>';
+
+  const bars=[
+    {l:'Inventory reduction',v:invCarrying},
+    {l:'Forecast accuracy',v:forecastBen},
+    {l:'Service level gains',v:svcBen},
+    {l:'Planner productivity',v:plannerProd},
+    {l:'Expediting savings',v:expediting},
+  ];
+  if(sopBen>0) bars.push({l:'S&OP improvement',v:sopBen});
+  if(compBen>0) bars.push({l:'Compliance efficiency',v:compBen});
+  if(ltBen>0)   bars.push({l:'Planning cycle time',v:ltBen});
+  renderBars(bars,'Annual benefit drivers');
+  document.getElementById('barTitle').textContent='Annual benefit drivers';
+
+  renderCostLines([
+    {l:'Kinaxis license (annual)',v:fmt(licAnnual)},
+    {l:'Simbus implementation services',v:fmt(implCost)},
+    {l:'Training & change management',v:fmt(trainChange)},
+    {l:'Data readiness & migration',v:fmt(dataReady)},
+    {l:'Simbus accelerator savings',v:fmt(accelerator),saving:true},
+    {l:'Annual support (ongoing)',v:fmt(annualSupport)},
+  ], fmtM(totalInv/1000), false);
+
+  renderBenLines(bars.map(b=>({l:b.l,v:fmt(b.v)})), fmtM(totalAnnual/1000));
+
+  document.getElementById('costCardTitle').textContent = 'Investment estimate';
+  document.getElementById('benCardTitle').textContent  = 'Annual benefit estimate';
+  document.getElementById('costIcon').className        = 'head-icon cost-icon';
+
+  renderImplServices();
+  renderImplCTA();
+}
+
+/* ── OPTIMIZATION CALC ── */
+function calcOpt(rev,sz,skuSz,siteV,userV,sc,bench) {
+  const yrsLive   = parseInt(document.getElementById('yearsLive').value)||2;
+  const health    = document.getElementById('kxHealth').value;
+  const adoption  = document.getElementById('adoption').value;
+  const optSup    = document.getElementById('optSupport').value;
+  const areas     = getChecked('optAreas','opt');
+  const optMods   = getChecked('optModules','optmod');
+
+  const areaCost   = areas.reduce((a,x)=>a+(OPT_AREA_COST[x]||0),0)*HEALTH_MULT[health]*ADOPTION_MULT[adoption];
+  const modExpCost = optMods.reduce((a,m)=>a+(OPT_MOD_COST[m]||0),0);
+  const annSupCost = OPT_SUP_COST[optSup]+(parseInt(userV)||25)*2.5;
+  const dataCost   = areas.includes('data')?35:0;
+  const totalOptInv = areaCost+modExpCost+annSupCost+dataCost;
+
+  // Incremental benefits from optimization
+  const healthGain = {poor:.18,fair:.10,good:.05}[health];
+  const adoptGain  = {low:.15,mid:.08,high:.03}[adoption];
+  const baseGain   = (healthGain+adoptGain)*sc.inv;
+
+  const invBen     = rev*bench.invPct*.12*1000*baseGain;
+  const fcastBen   = rev*.004*bench.faDrop*1000*sc.fa*.6;
+  const svcBen     = rev*bench.svcUp*.01*1000*sc.svc;
+  const adoptBen   = areas.includes('adopt')?(parseInt(userV)||25)*80*sc.inv:0;
+  const perfBen    = areas.includes('perf')?totalOptInv*.30*sc.inv:0;
+  const analyticsBen = areas.includes('analytics')||optMods.includes('analytics')?rev*.001*1000*sc.svc:0;
+  const processBen = areas.includes('process')?rev*.0015*1000*sc.inv:0;
+  const totalAnnual= invBen+fcastBen+svcBen+adoptBen+perfBen+analyticsBen+processBen;
+
+  const yr1B=totalAnnual*.55, yr2B=totalAnnual*.85, yr3B=totalAnnual;
+  const total3B=yr1B+yr2B+yr3B;
+  const totalInvK=totalOptInv; // already in $K
+  const roi=(total3B-totalInvK)/totalInvK;
+  const payback=Math.round(totalInvK/(totalAnnual/12));
+  const d=.10;
+  const npv=(yr1B/(1+d))+(yr2B/Math.pow(1+d,2))+(yr3B/Math.pow(1+d,3))-totalInvK;
+
+  renderMetrics([
+    {label:'Optimization engagement cost',val:fmt(areaCost),cls:'amber',mc:'mc-opt'},
+    {label:'Module expansion cost',val:fmt(modExpCost)||'$0K',cls:'amber',mc:'mc-opt'},
+    {label:'Total optimization investment',val:fmt(totalOptInv),cls:'dark',mc:'mc-opt'},
+    {label:'Annual incremental benefit',val:fmtM(totalAnnual/1000),cls:'green',mc:'mc-opt'},
+  ]);
+
+  document.getElementById('roiEyebrow').textContent  = 'Optimization ROI';
+  document.getElementById('roiPct').textContent      = pct(roi);
+  document.getElementById('roiScenario').textContent = SC[currentScenario].label;
+  document.getElementById('metaPayback').innerHTML   = 'Payback period: <strong>'+(payback<=36?payback+' months':'> 36 months')+'</strong>';
+  document.getElementById('metaNet').innerHTML       = 'Net incremental benefit: <strong>'+fmtM((total3B-totalInvK)/1000)+'</strong>';
+  document.getElementById('metaNpv').innerHTML       = 'NPV (10% discount): <strong>'+fmtM(npv/1000)+'</strong>';
+
+  const bars=[
+    {l:'Inventory reduction',v:invBen},
+    {l:'Forecast accuracy',v:fcastBen},
+    {l:'Service level uplift',v:svcBen},
+  ];
+  if(adoptBen>0)    bars.push({l:'Adoption improvement',v:adoptBen});
+  if(perfBen>0)     bars.push({l:'System performance',v:perfBen});
+  if(analyticsBen>0) bars.push({l:'Analytics & insights',v:analyticsBen});
+  if(processBen>0)  bars.push({l:'Process re-alignment',v:processBen});
+  renderBars(bars,'Incremental benefit drivers');
+
+  const areaLabels={perf:'Performance optimization',adopt:'Adoption & training',newmod:'New module impl.',integ:'Integration fixes',data:'Data quality cleanup',analytics:'Analytics build-out',upgrade:'Version upgrade',process:'Process re-alignment'};
+  const costRows = areas.map(a=>({l:areaLabels[a]||a, v:fmt(OPT_AREA_COST[a]*HEALTH_MULT[health]*ADOPTION_MULT[adoption])}));
+  if(modExpCost>0) costRows.push({l:'Module expansion',v:fmt(modExpCost)});
+  costRows.push({l:'Annual managed support',v:fmt(annSupCost)});
+  if(dataCost>0) costRows.push({l:'Data readiness',v:fmt(dataCost)});
+
+  renderCostLines(costRows, fmt(totalOptInv), true);
+  renderBenLines(bars.map(b=>({l:b.l,v:fmt(b.v)})), fmtM(totalAnnual/1000));
+
+  document.getElementById('costCardTitle').textContent = 'Optimization investment';
+  document.getElementById('benCardTitle').textContent  = 'Incremental annual benefit';
+  document.getElementById('costIcon').className        = 'head-icon opt-cost-icon';
+
+  renderOptServices();
+  renderOptCTA();
+}
+
+/* ── RENDER HELPERS ── */
+function renderMetrics(items) {
+  document.getElementById('metricsGrid').innerHTML = items.map(m=>
+    `<div class="metric-card ${m.mc}"><div class="m-label">${m.label}</div><div class="m-val ${m.cls}">${m.val}</div></div>`
+  ).join('');
+}
+
+function renderBars(bars,title) {
+  const maxB = Math.max(...bars.map(b=>b.v),1);
+  document.getElementById('benefitBars').innerHTML = bars.map((b,i)=>
+    `<div class="bar-row">
+      <div class="bar-label">${b.l}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${Math.round(b.v/maxB*100)}%;background:${BAR_COLORS[i%BAR_COLORS.length]}"></div></div>
+      <div class="bar-val">${fmtM(b.v/1000)}/yr</div>
+    </div>`).join('');
+}
+
+function renderCostLines(rows, total, isOpt) {
+  document.getElementById('costLines').innerHTML =
+    rows.map(r=>`<div class="line-item"><span class="line-label">${r.l}</span><span class="line-val${r.saving?' saving':''}">${r.v}</span></div>`).join('')
+    +`<div class="total-row"><span>Total investment</span><span class="${isOpt?'t-amber':''}">${total}</span></div>`;
+}
+
+function renderBenLines(rows, total) {
+  document.getElementById('benefitLines').innerHTML =
+    rows.map(r=>`<div class="line-item"><span class="line-label">${r.l}</span><span class="line-val green">${r.v}</span></div>`).join('')
+    +`<div class="total-row"><span>Annual (steady state)</span><span class="t-green">${total}</span></div>`;
+}
+
+function svcItem(text,opt) {
+  const cls = opt?'svc-dot svc-dot-opt':'svc-dot';
+  return `<div class="svc-item"><div class="${cls}">${svgCheck()}</div><span>${text}</span></div>`;
+}
+
+function renderImplServices() {
+  document.getElementById('panelTitle').textContent = 'What Simbus delivers as your Kinaxis SI partner';
+  document.getElementById('servicesGrid').innerHTML = [
+    'Pre-configured industry templates for manufacturing verticals',
+    'Accelerated ERP connectors — SAP, Oracle, Microsoft D365',
+    'End-user training & change management programs',
+    'Managed support services — ongoing optimization post go-live',
+    'Data readiness assessments & migration services',
+    'GxP / regulatory compliance configurations (Pharma · Chemical)',
+  ].map(t=>svcItem(t,false)).join('');
+}
+
+function renderOptServices() {
+  document.getElementById('panelTitle').textContent = 'What Simbus delivers in your optimization engagement';
+  document.getElementById('servicesGrid').innerHTML = [
+    'Health check & gap analysis against Kinaxis best practices',
+    'Configuration tuning, algorithm parameter optimization',
+    'Change management & planner re-enablement workshops',
+    'Data quality remediation & master data governance',
+    'Performance benchmarking & KPI dashboard build-out',
+    'Roadmap advisory — module expansion & upgrade planning',
+  ].map(t=>svcItem(t,true)).join('');
+}
+
+function renderImplCTA() {
+  document.getElementById('ctaRow').innerHTML =
+    `<button class="btn-primary" onclick="window.location.href='contact.html?ref=roi-impl'">Request Simbus scoping assessment →</button>`;
+}
+
+function renderOptCTA() {
+  document.getElementById('ctaRow').innerHTML =
+    `<button class="btn-amber" onclick="window.location.href='contact.html?ref=roi-opt'">Book a Kinaxis optimization review →</button>`;
+}
+
+/* ── MAIN CALC ── */
+function calc() {
+  const ind   = document.getElementById('industry').value;
+  const rev   = parseFloat(document.getElementById('revenue').value)||250;
+  const sz    = document.getElementById('companySize').value;
+  const skuSz = document.getElementById('skus').value;
+  const siteV = document.getElementById('sites').value;
+  const userV = document.getElementById('users').value;
+  const sc    = SC[currentScenario];
+  const bench = IND[ind];
+
+  if(currentMode==='impl') {
+    const dep   = document.getElementById('deployment').value;
+    const tl    = document.getElementById('timeline').value;
+    const sup   = document.getElementById('support').value;
+    const pains = getChecked('painPoints','pain');
+    const mods  = getChecked('modules','mod');
+    calcImpl(rev,sz,dep,tl,sup,skuSz,siteV,userV,pains,mods,sc,bench);
+  } else {
+    calcOpt(rev,sz,skuSz,siteV,userV,sc,bench);
+  }
+}
+
+/* ── EVENT LISTENERS ── */
+document.querySelectorAll('#scenarioTabs button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('#scenarioTabs button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentScenario=btn.dataset.sc;
+    calc();
+  });
+});
+document.querySelectorAll('select,input[type=number]').forEach(el=>el.addEventListener('change',calc));
+document.querySelectorAll('input[type=checkbox]').forEach(el=>el.addEventListener('change',calc));
+
+calc();
+</script>
+  <script src="../js/main.js"></script>
+</body>
+</html>

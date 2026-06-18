@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Services — Simbus Technologies</title>
+  <meta name="description" content="Simbus Technologies delivers expert Kinaxis Maestro and Databricks services — supply chain planning and data-driven AI solutions for mid-market and enterprise.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+
+/* ── SERVICES PAGE — CUSTOM STYLES ── */
+
+/* Hero */
+.sov-hero {
+  background: linear-gradient(to bottom, rgba(0,0,0,.45) 0%, rgba(0,0,0,.35) 100%),
+              url('../assets/images/services-hero-bg.jpg') center center / cover no-repeat;
+  color: #fff;
+  padding: 100px 5% 90px;
+  position: relative;
+  overflow: hidden;
+}
+.sov-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,.04) 0%, transparent 60%),
+                    radial-gradient(circle at 80% 20%, rgba(255,255,255,.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+.sov-hero .hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: 40px; padding: 8px 20px;
+  font-size: 0.8rem; font-weight: 600; color: rgba(255,255,255,.85);
+  letter-spacing: 0.05em; text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.sov-hero h1 {
+  font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+  font-weight: 900; line-height: 1.1;
+  letter-spacing: -0.03em; margin-bottom: 20px;
+}
+.sov-hero p {
+  font-size: 1.1rem; color: rgba(255,255,255,.75);
+  max-width: 620px; margin: 0 0 36px; line-height: 1.7;
+}
+
+/* Value strip */
+.val-strip {
+  background: var(--clr-primary);
+  display: flex; justify-content: center; gap: 0;
+  overflow: hidden;
+}
+.val-item {
+  flex: 1; max-width: 280px;
+  padding: 22px 20px; text-align: center;
+  border-right: 1px solid rgba(255,255,255,.15);
+}
+.val-item:last-child { border-right: none; }
+.val-num {
+  font-size: 1.9rem; font-weight: 900; color: #fff;
+  letter-spacing: -0.02em; line-height: 1;
+}
+.val-lbl {
+  font-size: 0.72rem; color: rgba(255,255,255,.65);
+  margin-top: 5px; text-transform: uppercase; letter-spacing: 0.07em;
+}
+
+/* Intro strip */
+.intro-strip {
+  background: var(--clr-bg-alt);
+  padding: 56px 5%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.intro-strip .sh2 { margin-bottom: 12px; }
+.intro-strip .slead { margin-bottom: 0; }
+
+/* 4-block grid */
+.kv-blocks-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+.kv-block {
+  background: var(--clr-bg);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+.kv-block::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--clr-primary), #00aaff);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s ease;
+}
+.kv-block:hover { transform: translateY(-6px); box-shadow: 0 12px 36px rgba(0,111,183,.14); }
+.kv-block:hover::before { transform: scaleX(1); }
+.kv-block-icon {
+  width: 44px; height: 44px;
+  background: var(--clr-bg-blue-soft);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.3s ease;
+}
+.kv-block:hover .kv-block-icon { background: var(--clr-primary); }
+.kv-block-icon svg { width: 22px; height: 22px; color: var(--clr-primary); transition: color 0.3s ease; }
+.kv-block:hover .kv-block-icon svg { color: #fff; }
+.kv-block strong { font-size: 0.92rem; font-weight: 700; color: var(--clr-heading); line-height: 1.3; }
+.kv-block span { font-size: 0.82rem; color: var(--clr-text-muted); line-height: 1.6; }
+
+/* Service cards */
+.svc-cards-section { padding: 80px 5%; background: var(--clr-bg); }
+.svc-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px; margin-top: 52px;
+}
+.svc-big-card {
+  background: var(--clr-bg);
+  border: 1px solid var(--clr-border);
+  border-radius: 20px; overflow: hidden;
+  transition: box-shadow .3s, transform .3s;
+  display: flex; flex-direction: column;
+}
+.svc-big-card:hover { box-shadow: 0 16px 48px rgba(0,111,183,.13); transform: translateY(-4px); }
+.sbc-stripe { height: 4px; }
+.sbc-stripe-kinaxis { background: linear-gradient(90deg, #006fb7, #00aaff); }
+.sbc-stripe-databricks { background: linear-gradient(90deg, var(--clr-primary), #00aaff); }
+.sbc-header {
+  padding: 36px 36px 28px;
+  background: linear-gradient(135deg, var(--clr-dark) 0%, var(--clr-navy) 100%);
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: row;
+  align-items: flex-start; justify-content: space-between;
+  gap: 20px;
+}
+.sbc-header::after {
+  content: '';
+  position: absolute; top: -40px; right: -40px;
+  width: 160px; height: 160px;
+  background: rgba(255,255,255,.05);
+  border-radius: 50%; pointer-events: none;
+}
+.sbc-header-text { flex: 1; display: flex; flex-direction: column; }
+.sbc-logo-right {
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: flex-end;
+  align-self: center; padding-left: 16px; position: relative; z-index: 1;
+}
+.sbc-tag {
+  display: inline-block;
+  background: rgba(255,255,255,.15); color: rgba(255,255,255,.9);
+  font-size: 0.7rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  padding: 5px 14px; border-radius: 20px; margin-bottom: 20px;
+}
+.sbc-header h3 {
+  font-size: 1.55rem; font-weight: 900;
+  color: #fff; line-height: 1.2;
+  letter-spacing: -0.02em; margin-bottom: 12px;
+}
+.sbc-header p { font-size: 0.88rem; color: rgba(255,255,255,.72); line-height: 1.65; max-width: 380px; }
+.sbc-body { padding: 28px 36px 32px; flex: 1; display: flex; flex-direction: column; }
+.sbc-features {
+  list-style: none; display: flex;
+  flex-direction: column; gap: 9px;
+  margin-bottom: 24px; flex: 1;
+}
+.sbc-features li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 0.875rem; color: var(--clr-text-muted);
+}
+.sbc-features li::before {
+  content: '';
+  width: 18px; height: 18px; flex-shrink: 0;
+  background: var(--clr-bg-blue-soft);
+  border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23006fb7'%3E%3Cpath fill-rule='evenodd' d='M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z' clip-rule='evenodd'/%3E%3C/svg%3E");
+  background-size: 11px; background-repeat: no-repeat; background-position: center;
+}
+.sbc-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap;
+}
+.sbc-pill {
+  font-size: 0.72rem; font-weight: 700;
+  background: var(--clr-tag-bg); color: var(--clr-primary);
+  padding: 5px 13px; border-radius: 20px;
+}
+.sbc-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.875rem; font-weight: 700; color: var(--clr-primary);
+  text-decoration: none; transition: gap .2s;
+}
+.sbc-link:hover { gap: 10px; }
+.sbc-link svg { width: 16px; height: 16px; }
+
+/* Capability grid */
+.cap-section { background: var(--clr-bg-alt); padding: 80px 5%; }
+.cap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
+.cap-card {
+  background: var(--clr-bg);
+  border: 1px solid var(--clr-border);
+  border-radius: 14px; padding: 28px;
+  transition: box-shadow .2s, transform .2s;
+}
+.cap-card:hover { box-shadow: 0 6px 28px rgba(0,111,183,.1); transform: translateY(-3px); }
+.cap-icon {
+  width: 48px; height: 48px;
+  background: var(--clr-bg-blue-soft);
+  border-radius: 12px; margin-bottom: 16px;
+  display: flex; align-items: center; justify-content: center;
+}
+.cap-icon svg { width: 24px; height: 24px; color: var(--clr-primary); }
+.cap-card h4 { font-size: 0.97rem; font-weight: 700; color: var(--clr-heading); margin-bottom: 8px; }
+.cap-card p { font-size: 0.84rem; color: var(--clr-text-muted); line-height: 1.65; }
+
+/* Process steps */
+.process-section { padding: 80px 5%; background: var(--clr-bg); }
+.process-steps {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; margin-top: 52px; position: relative;
+}
+.process-steps::after {
+  content: '';
+  position: absolute; top: 38px; left: 10%; right: 10%;
+  height: 2px; background: var(--clr-border); z-index: 0;
+}
+.ps { text-align: center; padding: 0 16px; position: relative; z-index: 1; }
+.ps-num {
+  width: 76px; height: 76px;
+  background: var(--clr-primary);
+  color: #fff; font-size: 1.3rem; font-weight: 900;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 18px;
+  border: 4px solid var(--clr-bg);
+  box-shadow: 0 0 0 2px var(--clr-primary);
+}
+.ps h4 { font-size: 0.95rem; font-weight: 700; color: var(--clr-heading); margin-bottom: 8px; }
+.ps p { font-size: 0.82rem; color: var(--clr-text-muted); line-height: 1.6; }
+
+/* CTA */
+.cta-sov {
+  background: linear-gradient(135deg, var(--clr-navy) 0%, var(--clr-primary) 100%);
+  padding: 80px 5%; text-align: center; position: relative; overflow: hidden;
+}
+.cta-sov::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(circle at 70% 50%, rgba(255,255,255,.06) 0%, transparent 55%);
+  pointer-events: none;
+}
+.cta-sov .sh2 { color: #fff; }
+.cta-sov .eyebrow { color: rgba(255,255,255,.7); }
+.cta-sov .slead { color: rgba(255,255,255,.75); margin: 0 auto 36px; }
+
+/* Dark mode overrides */
+[data-theme="dark"] .kv-block { background: #131f2e; border-color: var(--clr-border); }
+[data-theme="dark"] .kv-block:hover { box-shadow: 0 12px 36px rgba(0,0,0,.4); }
+[data-theme="dark"] .svc-big-card { background: #131f2e; border-color: var(--clr-border); }
+[data-theme="dark"] .svc-big-card:hover { box-shadow: 0 16px 48px rgba(0,0,0,.4); }
+[data-theme="dark"] .cap-card { background: #131f2e; border-color: var(--clr-border); }
+[data-theme="dark"] .cap-card:hover { box-shadow: 0 6px 28px rgba(0,0,0,.4); }
+[data-theme="dark"] .intro-strip { background: var(--clr-bg-alt); }
+[data-theme="dark"] .cap-section { background: var(--clr-bg-alt); }
+[data-theme="dark"] .sbc-pill { background: var(--clr-bg-blue-soft); color: var(--clr-primary); }
+[data-theme="dark"] .sbc-link { color: var(--clr-primary); }
+
+/* Responsive */
+@media (max-width: 960px) {
+  .kv-blocks-grid { grid-template-columns: 1fr 1fr; }
+  .svc-cards-grid { grid-template-columns: 1fr; }
+  .cap-grid { grid-template-columns: 1fr 1fr; }
+  .process-steps { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .process-steps::after { display: none; }
+  .val-strip { flex-wrap: wrap; }
+  .val-item { flex: 0 0 50%; max-width: none; }
+}
+@media (max-width: 640px) {
+  .kv-blocks-grid { grid-template-columns: 1fr; }
+  .cap-grid { grid-template-columns: 1fr; }
+  .val-item { flex: 0 0 100%; }
+  .sbc-header, .sbc-body { padding-left: 24px; padding-right: 24px; }
+  .sbc-header { flex-direction: column; }
+  .sbc-logo-right { display: none; }
+}
+
+  </style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<nav>
+  <a href="index.html" class="nav-logo"><img src="../assets/images/simbus-technologies.webp" alt="Simbus Technologies" style="height:34px;width:auto;display:block;"></a>
+  <ul class="nav-links" id="navlinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">Who We Are</a></li>
+    <li class="nav-dropdown">
+      <a href="services.html" class="active">Services <span class="nav-arr"></span></a>
+      <ul class="nav-submenu">
+        <li><a href="kinaxis.html">Kinaxis Maestro</a></li>
+        <li><a href="databricks.html">Databricks</a></li>
+      </ul>
+    </li>
+    <li><a href="careers.html">Careers</a></li>
+    <li><a href="roi-calculator.html">ROI Calculator</a></li>
+    <li><a href="contact.html">Contact Us</a></li>
+  </ul>
+  <a href="contact.html" class="nav-cta">Free Kinaxis Health Check</a>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+  <button class="nav-ham" aria-label="Open navigation menu"
+          onclick="document.getElementById('navlinks').classList.toggle('open')">&#9776;</button>
+</nav>
+
+<main id="main">
+
+  <!-- HERO -->
+  <section class="sov-hero">
+    <div class="hero-badge">Simbus Technologies &middot; Services</div>
+    <h1 class="reveal">Two Practices.<br>One Mission.</h1>
+    <p class="reveal delay-1">We go deep on two platforms where we know we can make the biggest difference — Kinaxis Maestro for supply chain planning, and Databricks for data &amp; AI. No generalism. No diluted expertise.</p>
+    <div class="btn-group reveal delay-2">
+      <a href="contact.html" class="btn-white">Talk to an Expert &rarr;</a>
+      <a href="roi-calculator.html" class="btn-wout">Estimate Your ROI</a>
+    </div>
+  </section>
+
+  <!-- VALUE STRIP -->
+  <div class="val-strip">
+    <div class="val-item reveal">
+      <div class="val-num" data-target="100" data-suffix="%">100%</div>
+      <div class="val-lbl">Client Satisfaction</div>
+    </div>
+    <div class="val-item reveal delay-1">
+      <div class="val-num" data-target="40" data-suffix="+">40+</div>
+      <div class="val-lbl">Certified Consultants</div>
+    </div>
+    <div class="val-item reveal delay-2">
+      <div class="val-num" data-target="100" data-suffix="+">100+</div>
+      <div class="val-lbl">Projects Delivered</div>
+    </div>
+    <div class="val-item reveal delay-3">
+      <div class="val-num" data-target="15" data-suffix="+">15+</div>
+      <div class="val-lbl">Years in Supply Chain</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section class="intro-strip">
+    <div>
+      <span class="eyebrow reveal">Our Approach</span>
+      <h2 class="sh2 reveal delay-1">Specialist Depth, Not Broad Generalism</h2>
+      <p class="slead reveal delay-2">Most consultancies spread thin across dozens of platforms. Simbus doesn't. We've chosen two best-in-class platforms and built unrivalled depth in both — so every engagement benefits from the collective experience of a team that has seen and solved your exact problem before.</p>
+    </div>
+    <div class="kv-blocks-grid">
+      <div class="kv-block reveal">
+        <div class="kv-block-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <strong>Named Senior Consultants</strong>
+        <span>You know who is on your project before day one — no bait-and-switch staffing.</span>
+      </div>
+      <div class="kv-block reveal delay-1">
+        <div class="kv-block-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <strong>Transparent Commercial Models</strong>
+        <span>Fixed-price, milestone-based and outcome-tied — never open-ended T&amp;M surprises.</span>
+      </div>
+      <div class="kv-block reveal delay-2">
+        <div class="kv-block-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+        </div>
+        <strong>ROI Accountability</strong>
+        <span>We define measurable outcomes at kick-off and track them through delivery — and beyond.</span>
+      </div>
+      <div class="kv-block reveal delay-3">
+        <div class="kv-block-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+        </div>
+        <strong>Independent Advice</strong>
+        <span>We hold no vendor sales quota. Our only incentive is delivering the right solution for you.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE CARDS -->
+  <section class="svc-cards-section">
+    <div class="center">
+      <span class="eyebrow reveal">Our Practices</span>
+      <h2 class="sh2 reveal delay-1">Choose Your Platform Journey</h2>
+      <p class="slead center reveal delay-2">Two specialist practices, each with deep bench strength and a proven delivery methodology. Explore what we can do for you.</p>
+    </div>
+
+    <div class="svc-cards-grid">
+
+      <!-- KINAXIS CARD -->
+      <div class="svc-big-card reveal">
+        <div class="sbc-stripe sbc-stripe-kinaxis"></div>
+        <div class="sbc-header">
+          <div class="sbc-header-text">
+            <div class="sbc-tag">Supply Chain Planning</div>
+            <h3>Kinaxis Maestro<br>Services</h3>
+            <p>Expert-led implementation, application management, and value realisation for organisations running or adopting Kinaxis Maestro.</p>
+          </div>
+          <div class="sbc-logo-right">
+            <img src="../assets/images/kinaxis-logo-services.png" alt="Kinaxis Maestro" style="max-width:110px;max-height:52px;object-fit:contain;">
+          </div>
+        </div>
+        <div class="sbc-body">
+          <ul class="sbc-features">
+            <li>Implementation &amp; Programme Recovery</li>
+            <li>Application Management &amp; Support (AMS)</li>
+            <li>Post Go-Live Value Realisation</li>
+            <li>SAP APO / IBP Migration to Maestro</li>
+            <li>Supply Chain Analytics &amp; Reporting</li>
+            <li>Kinaxis Health Check (Free Assessment)</li>
+          </ul>
+          <div class="sbc-footer">
+            <span class="sbc-pill">40+ Certified Consultants</span>
+            <a href="kinaxis.html" class="sbc-link">
+              Explore Kinaxis Services
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- DATABRICKS CARD -->
+      <div class="svc-big-card reveal delay-1">
+        <div class="sbc-stripe sbc-stripe-databricks"></div>
+        <div class="sbc-header">
+          <div class="sbc-header-text">
+            <div class="sbc-tag">Data &amp; AI Platform</div>
+            <h3>Databricks<br>Services</h3>
+            <p>Accelerate your data platform, build production-grade ML pipelines, and unlock enterprise-scale AI on the Databricks Lakehouse.</p>
+          </div>
+          <div class="sbc-logo-right">
+            <img src="../assets/images/databricks-logo-services.png" alt="Databricks" style="max-width:110px;max-height:52px;object-fit:contain;">
+          </div>
+        </div>
+        <div class="sbc-body">
+          <ul class="sbc-features">
+            <li>Lakehouse Architecture &amp; Migration</li>
+            <li>Data Engineering &amp; Pipeline Automation</li>
+            <li>ML &amp; AI Model Development</li>
+            <li>Supply Chain Analytics on Databricks</li>
+            <li>Databricks + Kinaxis Integration</li>
+            <li>Unity Catalog &amp; Data Governance</li>
+          </ul>
+          <div class="sbc-footer">
+            <span class="sbc-pill">Databricks Partner</span>
+            <a href="databricks.html" class="sbc-link">
+              Explore Databricks Services
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CAPABILITY GRID -->
+  <section class="cap-section">
+    <div class="center">
+      <span class="eyebrow reveal">Why Choose Simbus</span>
+      <h2 class="sh2 reveal delay-1">What Sets Our Delivery Apart</h2>
+      <p class="slead center reveal delay-2">Six principles that shape every engagement — regardless of platform, size, or complexity.</p>
+    </div>
+    <div class="cap-grid">
+
+      <div class="cap-card reveal">
+        <div class="cap-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <h4>Named Senior Teams</h4>
+        <p>Senior consultants are assigned before kick-off. The people who scope your project are the people who deliver it.</p>
+      </div>
+
+      <div class="cap-card reveal delay-1">
+        <div class="cap-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h4>Commercial Transparency</h4>
+        <p>Fixed-price and milestone-based engagements. No hidden rate cards, no scope creep by stealth.</p>
+      </div>
+
+      <div class="cap-card reveal delay-2">
+        <div class="cap-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <h4>Speed to Value</h4>
+        <p>Pre-built accelerators and reusable assets mean faster time-to-value — without cutting corners on quality.</p>
+      </div>
+
+      <div class="cap-card reveal">
+        <div class="cap-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        </div>
+        <h4>ROI Accountability</h4>
+        <p>We measure what matters — forecast accuracy, inventory reduction, cycle time — and report against targets throughout.</p>
+      </div>
+
+      <div class="cap-card reveal delay-1">
+        <div class="cap-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+        </div>
+        <h4>Pure-Play Focus</h4>
+        <p>Kinaxis and Databricks only. Every consultant, every case study, every lesson learned maps directly to your challenge.</p>
+      </div>
+
+      <div class="cap-card reveal delay-2">
+        <div class="cap-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h4>Independent Advice</h4>
+        <p>No vendor sales quotas. We advise on what is right for your architecture, your team, and your business goals.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOW WE WORK -->
+  <section class="process-section">
+    <div class="center">
+      <span class="eyebrow reveal">How We Engage</span>
+      <h2 class="sh2 reveal delay-1">From First Call to Ongoing Value</h2>
+      <p class="slead center reveal delay-2">A repeatable, transparent four-stage process that gets you to ROI faster — and keeps you there.</p>
+    </div>
+    <div class="process-steps">
+      <div class="ps reveal">
+        <div class="ps-num">1</div>
+        <h4>Discovery &amp; Health Check</h4>
+        <p>We assess your current state, pain points, and goals — free of charge for Kinaxis clients.</p>
+      </div>
+      <div class="ps reveal delay-1">
+        <div class="ps-num">2</div>
+        <h4>Solution Design</h4>
+        <p>We co-create a delivery plan with defined outcomes, milestones, and a fixed commercial model.</p>
+      </div>
+      <div class="ps reveal delay-2">
+        <div class="ps-num">3</div>
+        <h4>Delivery &amp; Build</h4>
+        <p>Named senior consultants execute using proven accelerators and agile checkpoints.</p>
+      </div>
+      <div class="ps reveal delay-3">
+        <div class="ps-num">4</div>
+        <h4>Sustain &amp; Optimise</h4>
+        <p>Post go-live AMS, quarterly ROI reviews, and continuous improvement to protect your investment.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section class="cta-sov">
+    <span class="eyebrow">Get Started</span>
+    <h2 class="sh2 reveal">Not Sure Which Service Fits?</h2>
+    <p class="slead reveal delay-1">Our team will help you map your challenge to the right practice — and give you an honest assessment of where Simbus can add the most value.</p>
+    <div class="btn-group reveal delay-2" style="justify-content:center;">
+      <a href="contact.html" class="btn-white">Book a Free Consultation &rarr;</a>
+      <a href="roi-calculator.html" class="btn-wout">Use the ROI Calculator</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">
+        <img src="../assets/images/simbus-technologies.webp" alt="Simbus Technologies" style="height:36px;width:auto;display:block;margin-bottom:12px;">
+      </div>
+      <p class="footer-desc">A global consulting and technology partner helping enterprises modernize their supply chain and data ecosystems.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Quick Links</h5>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Services</h5>
+      <ul>
+        <li><a href="kinaxis.html">Kinaxis Maestro Services</a></li>
+        <li><a href="databricks.html">Databricks Services</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Contact</h5>
+      <ul>
+        <li><a href="mailto:sales@simbustech.com">sales@simbustech.com</a></li>
+        <li><a href="tel:+918310047700">+91 8310047700</a></li>
+        <li><a href="contact.html">Bangalore, India</a></li>
+        <li><a href="contact.html">Atlanta, USA</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <ul><li><a href="privacy.html">Privacy Policy</a></li></ul>
+    </div>
+  </div>
+  <div class="footer-bottom">&copy; 2026 Simbus Technologies. All rights reserved. Bangalore &middot; Atlanta</div>
+</footer>
+
+<script src="../js/main.js"></script>
+
+</body>
+</html>
