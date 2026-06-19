@@ -6,6 +6,7 @@ Pure HTML/CSS/JS site. No frameworks. Specialist Kinaxis Maestro + Databricks co
 - Shared CSS: `css/styles.css` — single source of truth
 - Shared JS: `js/main.js`
 - All HTML in `html/`, assets in `assets/images/` and `assets/video/`
+- **No framework** — vanilla JS only. If interactions grow complex, Alpine.js is the preferred upgrade (drop-in `<script>` tag, no build step). React/Vue/Next.js are overkill for this static site.
 
 ## Paths (from any HTML file)
 `../css/styles.css` · `../js/main.js` · `../assets/images/<file>` · `../assets/video/<file>`
@@ -14,7 +15,7 @@ Pure HTML/CSS/JS site. No frameworks. Specialist Kinaxis Maestro + Databricks co
 `index.html` · `about.html` · `services.html` · `kinaxis.html` · `databricks.html` · `careers.html` · `contact.html` · `roi-calculator.html` · `Kinaxis Planning One Page.html`
 
 ## Nav
-Logo → index · Home · Who We Are · Services (dropdown: services, kinaxis, **Planning One Page**, databricks) · Careers · ROI Calculator · Contact · CTA: "Free Kinaxis Health Check" · Dark mode toggle (localStorage key: `simbus-theme`)
+Logo → index · Home · Who We Are · Services (dropdown: services, kinaxis, **Kinaxis Planning One**, databricks) · Careers · ROI Calculator · Contact · CTA: "Free Kinaxis Health Check" · Dark mode toggle (localStorage key: `simbus-theme`)
 
 ## Design Tokens (in `css/styles.css`)
 ```css

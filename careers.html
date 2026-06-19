@@ -117,10 +117,28 @@
       background: #fff; color: var(--clr-primary);
       padding: 8px 20px; border-radius: var(--radius-sm);
       font-size: 0.85rem; font-weight: 700;
-      text-decoration: none; white-space: nowrap;
-      flex-shrink: 0; transition: background 0.2s;
+      text-decoration: none; white-space: nowrap; flex-shrink: 0;
+      position: relative; overflow: hidden; display: inline-flex; align-items: center;
+      transition: background .25s, color .25s, transform .25s, box-shadow .25s;
+      animation: navCtaPulse 2.8s ease-in-out infinite;
     }
-    .nav-cta:hover { background: #d6ecf8; }
+    @keyframes navCtaPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,.65); }
+      55%       { box-shadow: 0 0 0 9px rgba(255,255,255,0); }
+    }
+    .nav-cta::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.32) 50%, transparent 65%);
+      transform: translateX(-120%); transition: transform .5s ease;
+    }
+    .nav-cta:hover {
+      background: var(--clr-dark); color: #fff;
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 6px 22px rgba(0,0,0,.25);
+      animation: none;
+    }
+    .nav-cta:hover::after { transform: translateX(120%); }
+    .nav-cta:active { transform: scale(1); box-shadow: 0 2px 8px rgba(0,0,0,.15); }
     .nav-ham {
       display: none; background: none; border: none;
       color: #fff; font-size: 1.5rem; cursor: pointer;
@@ -337,11 +355,27 @@
     .pc:hover { box-shadow: 0 4px 22px rgba(14,90,138,.1); }
     .ab {
       background: var(--clr-primary); color: #fff;
-      padding: 10px 20px; border-radius: var(--radius-sm);
+      padding: 10px 22px; border-radius: var(--radius-sm);
       font-weight: 700; font-size: 0.875rem;
-      text-decoration: none; white-space: nowrap; transition: background 0.2s;
+      text-decoration: none; white-space: nowrap;
+      display: inline-flex; align-items: center;
+      position: relative; overflow: hidden;
+      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
     }
-    .ab:hover { background: var(--clr-primary-dark); }
+    .ab::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.38) 50%, transparent 65%);
+      transform: translateX(-120%);
+      transition: transform 0.5s ease;
+    }
+    .ab:hover {
+      background: var(--clr-navy);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,111,183,.45);
+    }
+    .ab:hover::after { transform: translateX(120%); }
+    .ab:active { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,111,183,.35); }
 
     /* ================================================================
        21. THEME TOGGLE
@@ -415,8 +449,10 @@
         position: absolute; top: 68px; left: 0; right: 0;
         background: var(--clr-dark-nav); padding: 14px 5%; gap: 1rem;
       }
+      .nav-cta { display: none; }
+      .theme-toggle { margin-left: auto; }
+      .nav-ham { display: flex; align-items: center; justify-content: center; margin-left: 10px; }
       .nav-links.open { display: flex; }
-      .nav-ham { display: block; }
       .nav-submenu {
         position: static; transform: none; box-shadow: none;
         background: rgba(0,0,0,.2); border-radius: var(--radius-sm);
@@ -476,24 +512,47 @@
     }
       100% { transform: translateX(-50%); }
     }
-    /* Prev/Next buttons */
-    .sv-btn {
-      position: absolute;
-      top: 50%; transform: translateY(-50%);
-      background: rgba(0,111,183,.85);
-      border: none; color: #fff;
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      font-size: 1.2rem;
-      cursor: pointer;
-      z-index: 10;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s, opacity 0.2s;
-      opacity: 0.75;
+    /* Prev/Next buttons — centred below the carousel */
+    .sv-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      margin: 28px auto 0;
     }
-    .sv-btn:hover { background: #006fb7; opacity: 1; }
-    .sv-btn-prev { left: 12px; }
-    .sv-btn-next { right: 12px; }
+    .sv-btn {
+      background: var(--clr-primary);
+      border: 2.5px solid transparent;
+      color: #fff;
+      width: 25px; height: 25px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 18px rgba(0,111,183,.38);
+      transition: background 0.22s, transform 0.2s, box-shadow 0.22s, border-color 0.22s;
+      position: relative;
+    }
+    .sv-btn:hover {
+      background: var(--clr-primary-dark);
+      border-color: rgba(255,255,255,.3);
+      transform: scale(1.1);
+      box-shadow: 0 8px 28px rgba(0,111,183,.55);
+    }
+    .sv-btn:active { transform: scale(0.96); }
+    .sv-btn-label {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .sv-btn-text {
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--clr-primary);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
     /* Fade edges */
     .sv-carousel-wrap::before,
     .sv-carousel-wrap::after {
@@ -524,7 +583,7 @@
         <a href="services.html">Services <span class="nav-arr"></span></a>
         <ul class="nav-submenu">
           <li><a href="kinaxis.html">Kinaxis Maestro</a></li>
-          <li><a href="Kinaxis Planning One Page.html">Planning One Page</a></li>
+          <li><a href="Kinaxis Planning One Page.html">Kinaxis® Planning One™</a></li>
           <li><a href="databricks.html">Databricks</a></li>
         </ul>
       </li>
@@ -534,7 +593,7 @@
     </ul>
     <a href="contact.html" class="nav-cta">Free Kinaxis Health Check</a>
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    <button class="nav-ham" aria-label="Open navigation menu" onclick="document.getElementById('navlinks').classList.toggle('open')"></button>
+    <button class="nav-ham" aria-label="Open navigation menu" onclick="document.getElementById('navlinks').classList.toggle('open')">&#9776;</button>
   </nav>
 
   <!-- HERO -->
@@ -830,9 +889,12 @@
         </div>
       </div>
 
-      <!-- Prev / Next arrows -->
-      <button class="sv-btn sv-btn-prev" id="svPrev" aria-label="Previous">&#8592;</button>
-      <button class="sv-btn sv-btn-next" id="svNext" aria-label="Next">&#8594;</button>
+    </div>
+
+    <!-- Prev / Next controls — centred below the carousel -->
+    <div class="sv-controls">
+      <button class="sv-btn sv-btn-prev" id="svPrev" aria-label="Previous slide">&#8592;</button>
+      <button class="sv-btn sv-btn-next" id="svNext" aria-label="Next slide">&#8594;</button>
     </div>
   </section>
 
@@ -923,8 +985,9 @@
       <div class="footer-col">
         <h5>Services</h5>
         <ul>
-          <li><a href="kinaxis.html">Kinaxis Maestro Services</a></li>
-          <li><a href="databricks.html">Databricks Services</a></li>
+          <li><a href="kinaxis.html">Kinaxis Maestro</a></li>
+          <li><a href="Kinaxis Planning One Page.html">Kinaxis® Planning One™</a></li>
+          <li><a href="databricks.html">Databricks</a></li>
         </ul>
       </div>
       <div class="footer-col">

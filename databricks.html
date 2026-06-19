@@ -91,7 +91,12 @@ nav {
 .nav-links a { text-decoration: none; color: rgba(255,255,255,.82); font-size: .875rem; font-weight: 500; transition: color .2s; white-space: nowrap; }
 .nav-links a:hover, .nav-links a.active { color: #fff; }
 
-.nav-cta { background: #fff; color: var(--clr-primary); padding: 8px 20px; border-radius: var(--radius-sm); font-size: .85rem; font-weight: 700; text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: background .2s; }
+.nav-cta { background:#fff;color:var(--clr-primary);padding:8px 20px;border-radius:var(--radius-sm);font-size:.85rem;font-weight:700;text-decoration:none;white-space:nowrap;flex-shrink:0;position:relative;overflow:hidden;display:inline-flex;align-items:center;transition:background .25s,color .25s,transform .25s,box-shadow .25s;animation:navCtaPulse 2.8s ease-in-out infinite; }
+@keyframes navCtaPulse { 0%,100% { box-shadow:0 0 0 0 rgba(255,255,255,.65); } 55% { box-shadow:0 0 0 9px rgba(255,255,255,0); } }
+.nav-cta::after { content:'';position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.32) 50%,transparent 65%);transform:translateX(-120%);transition:transform .5s ease; }
+.nav-cta:hover { background:var(--clr-dark);color:#fff;transform:translateY(-2px) scale(1.05);box-shadow:0 6px 22px rgba(0,0,0,.25);animation:none; }
+.nav-cta:hover::after { transform:translateX(120%); }
+.nav-cta:active { transform:scale(1);box-shadow:0 2px 8px rgba(0,0,0,.15); }
 .nav-cta:hover { background: #d6ecf8; }
 
 .nav-ham { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; padding: 4px; line-height: 1; }
@@ -253,23 +258,20 @@ footer { background: var(--clr-dark); color: #8aabb8; padding: 56px 5% 24px; }
 
 /* RESPONSIVE */
 @media (max-width:960px) {
-  nav { flex-wrap: wrap; height: auto; padding: 0 4%; gap: 0; }
-  .nav-links {
-    display: none; flex-direction: column; align-items: flex-start;
-    width: 100%; background: var(--clr-dark-nav);
-    padding: 14px 16px 18px; gap: 0; order: 3;
-  }
-  .nav-links li { width: 100%; }
-  .nav-links a { display: block; padding: 10px 4px; font-size: .9rem; }
-  .nav-cta { order: 2; margin: 8px 0; font-size: .82rem; padding: 7px 14px; }
-  .theme-toggle { order: 2; }
-  .nav-links.open { display: flex; }
-  .nav-ham { display: block; }
-  .nav-submenu { position: static; transform: none; box-shadow: none; background: rgba(0,0,0,.2); border-radius: var(--radius-sm); min-width: auto; padding: 0; margin-top: 4px; }
-  .nav-dropdown:hover .nav-submenu, .nav-dropdown:focus-within .nav-submenu { display: none; }
-  .nav-dropdown.open .nav-submenu { display: block; }
-  .nav-dropdown.open .nav-arr { transform: rotate(-135deg); border-right-color: #fff; border-bottom-color: #fff; }
-  .nav-submenu li a { padding: 8px 12px 8px 28px; font-size: .82rem; }
+  nav { height:68px;flex-wrap:nowrap;padding:0 5%;justify-content:flex-start; }
+  .nav-cta { display:none; }
+  .theme-toggle { margin-left:auto; }
+  .nav-ham { display:flex;align-items:center;justify-content:center;margin-left:10px; }
+  .nav-links { display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;background:var(--clr-dark-nav);padding:14px 0;gap:0;z-index:199; }
+  .nav-links li { width:100%; }
+  .nav-links a { display:block;padding:9px 20px;font-size:.9rem; }
+  .nav-links.open { display:flex; }
+  .nav-submenu { position:static;transform:none;box-shadow:none;background:rgba(0,0,0,.2);border-radius:var(--radius-sm);min-width:auto;padding:0;margin-top:4px; }
+  .nav-submenu::before { display:none; }
+  .nav-submenu li a { padding:8px 12px 8px 28px;font-size:.82rem; }
+  .nav-dropdown:hover .nav-submenu,.nav-dropdown:focus-within .nav-submenu { display:none; }
+  .nav-dropdown.open .nav-submenu { display:block; }
+  .nav-dropdown.open .nav-arr { transform:rotate(-135deg);border-right-color:#fff;border-bottom-color:#fff; }
   /* Delivery cards 2-col → 1-col */
   .dc-grid-2col { grid-template-columns: 1fr !important; }
 }
@@ -562,7 +564,7 @@ nav {
         <a href="services.html" class="active">Services <span class="nav-arr"></span></a>
         <ul class="nav-submenu">
           <li><a href="kinaxis.html">Kinaxis Maestro</a></li>
-          <li><a href="Kinaxis Planning One Page.html">Planning One Page</a></li>
+          <li><a href="Kinaxis Planning One Page.html">Kinaxis® Planning One™</a></li>
           <li><a href="databricks.html" class="active">Databricks</a></li>
         </ul>
       </li>
@@ -852,8 +854,9 @@ nav {
       <div class="footer-col">
         <h5>Services</h5>
         <ul>
-          <li><a href="kinaxis.html">Kinaxis Maestro Services</a></li>
-          <li><a href="databricks.html">Databricks Services</a></li>
+          <li><a href="kinaxis.html">Kinaxis Maestro</a></li>
+          <li><a href="Kinaxis Planning One Page.html">Kinaxis® Planning One™</a></li>
+          <li><a href="databricks.html">Databricks</a></li>
 
         </ul>
       </div>

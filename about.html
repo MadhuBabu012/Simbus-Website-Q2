@@ -91,9 +91,28 @@ nav {
 .nav-cta {
   background: #fff; color: var(--clr-primary); padding: 8px 20px;
   border-radius: var(--radius-sm); font-size: 0.85rem; font-weight: 700;
-  text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: background 0.2s;
+  text-decoration: none; white-space: nowrap; flex-shrink: 0;
+  position: relative; overflow: hidden; display: inline-flex; align-items: center;
+  transition: background .25s, color .25s, transform .25s, box-shadow .25s;
+  animation: navCtaPulse 2.8s ease-in-out infinite;
 }
-.nav-cta:hover { background: #d6ecf8; }
+@keyframes navCtaPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,.65); }
+  55%       { box-shadow: 0 0 0 9px rgba(255,255,255,0); }
+}
+.nav-cta::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.32) 50%, transparent 65%);
+  transform: translateX(-120%); transition: transform .5s ease;
+}
+.nav-cta:hover {
+  background: var(--clr-dark); color: #fff;
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 22px rgba(0,0,0,.25);
+  animation: none;
+}
+.nav-cta:hover::after { transform: translateX(120%); }
+.nav-cta:active { transform: scale(1); box-shadow: 0 2px 8px rgba(0,0,0,.15); }
 .nav-ham { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; padding: 4px; line-height: 1; }
 .nav-arr { display: inline-block; width: 7px; height: 7px; border: 2px solid transparent; border-right-color: rgba(255,255,255,.7); border-bottom-color: rgba(255,255,255,.7); transform: rotate(45deg); margin-left: 5px; margin-bottom: 2px; vertical-align: middle; transition: transform .22s ease; font-size: 0; }
 .nav-dropdown { position: relative; }
@@ -434,8 +453,9 @@ footer { background: var(--clr-dark); color: #8aabb8; padding: 56px 5% 24px; }
   .nav-links li { width: 100%; }
   .nav-links a { display: block; padding: 10px 5%; font-size: 0.92rem; color: rgba(255,255,255,0.88); }
   .nav-cta { display: none; }
+  .theme-toggle { margin-left: auto; }
+  .nav-ham { display: flex; align-items: center; justify-content: center; margin-left: 10px; }
   .nav-links.open { display: flex; }
-  .nav-ham { display: block; }
   .nav-submenu { position: static; transform: none; box-shadow: none; background: rgba(0,0,0,0.2); border-radius: var(--radius-sm); min-width: auto; padding: 0; margin-top: 4px; }
   .nav-submenu::before { display: none; }
   .nav-submenu li a { padding: 8px 12px 8px 28px; font-size: 0.82rem; }
@@ -466,7 +486,7 @@ footer { background: var(--clr-dark); color: #8aabb8; padding: 56px 5% 24px; }
         <a href="services.html">Services <span class="nav-arr"></span></a>
         <ul class="nav-submenu">
           <li><a href="kinaxis.html">Kinaxis Maestro</a></li>
-          <li><a href="Kinaxis Planning One Page.html">Planning One Page</a></li>
+          <li><a href="Kinaxis Planning One Page.html">Kinaxis® Planning One™</a></li>
           <li><a href="databricks.html">Databricks</a></li>
         </ul>
       </li>
@@ -866,8 +886,9 @@ footer { background: var(--clr-dark); color: #8aabb8; padding: 56px 5% 24px; }
       <div class="footer-col">
         <h5>Services</h5>
         <ul>
-          <li><a href="kinaxis.html">Kinaxis Maestro Services</a></li>
-          <li><a href="databricks.html">Databricks Services</a></li>
+          <li><a href="kinaxis.html">Kinaxis Maestro</a></li>
+          <li><a href="Kinaxis Planning One Page.html">Kinaxis® Planning One™</a></li>
+          <li><a href="databricks.html">Databricks</a></li>
         </ul>
       </div>
       <div class="footer-col">
