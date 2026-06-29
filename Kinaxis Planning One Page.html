@@ -59,14 +59,7 @@
   display: flex; flex-direction: column; align-items: flex-start;
   max-width: 680px; width: 100%;
 }
-.po-hero-eyebrow {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(0,111,183,0.25); border: 1px solid rgba(0,111,183,0.5);
-  border-radius: 20px; padding: 5px 14px;
-  font-size: 0.74rem; font-weight: 700; color: #7fd0f8;
-  letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 20px;
-}
-.po-hero-dot { width:6px; height:6px; background:var(--clr-primary); border-radius:50%; }
+.po-hero .eyebrow { color: rgba(255,255,255,0.85); font-size: 1.1rem; letter-spacing: 0.08em; margin-bottom: 20px; }
 .po-hero h1 {
   font-size: clamp(2.2rem, 4vw, 3.4rem); font-weight: 900;
   color: #fff; line-height: 1.1; letter-spacing: -0.025em; margin-bottom: 20px;
@@ -135,7 +128,7 @@
 .po-sec { padding: var(--section-pad); }
 .po-inner { }
 .po-sec-hd { margin-bottom: 40px; }
-.po-sec-hd .eyebrow { font-size: 0.76rem; }
+/* .po-sec-hd .eyebrow — uses shared css/styles.css standard */
 
 /* Industry tabs */
 .po-tabs {
@@ -357,10 +350,7 @@
 <section class="po-hero">
   <div class="po-hero-inner">
     <div class="po-hero-top">
-      <div class="po-hero-eyebrow">
-        <div class="po-hero-dot"></div>
-        Authorized Kinaxis® Planning One™ Partner
-      </div>
+      <div class="eyebrow">Authorized Kinaxis® Planning One™ Partner</div>
       <h1>Supply chain planning<br>built for <em>your industry</em></h1>
       <p class="po-hero-lead">
         Move from Excel to enterprise-grade supply chain planning in as few as 16 weeks. Simbus brings Kinaxis® Planning One™ to Pharma, Specialty Chemical, and Automotive manufacturers — with domain expertise and ongoing support.

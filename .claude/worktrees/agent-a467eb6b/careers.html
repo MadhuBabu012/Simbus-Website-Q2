@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Careers — Simbus Technologies</title>
+  <meta name="description" content="Join Simbus Technologies. Open positions in Kinaxis, Databricks and data engineering.">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    /* ================================================================
+       00. ACCESSIBILITY UTILITIES
+    ================================================================ */
+    .skip-link {
+      position: absolute; top: -999px; left: 0;
+      padding: 10px 18px; background: #006fb7; color: #fff;
+      font-size: .9rem; font-weight: 600;
+      border-radius: 0 0 6px 0; z-index: 9999; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ================================================================
+       01. CSS CUSTOM PROPERTIES
+    ================================================================ */
+    :root {
+      --clr-primary:        #006fb7;
+      --clr-primary-dark:   #0171bc;
+      --clr-navy:           #014e82;
+      --clr-dark:           #012d4a;
+      --clr-dark-nav:       #014e82;
+      --clr-body:           #322f2d;
+      --clr-text-secondary: #322f2d;
+      --clr-text-muted:     #322f2d;
+      --clr-heading:        #322f2d;
+      --clr-bg:             #ffffff;
+      --clr-bg-alt:         #f4f8fb;
+      --clr-bg-blue-soft:   #eaf5ff;
+      --clr-border:         #ccdde8;
+      --clr-border-light:   #d0e8f5;
+      --clr-green:          #1D9E75;
+      --clr-tag-bg:         #deeefa;
+      --font-base:          'Inter', sans-serif;
+      --section-pad:        80px 5%;
+      --section-pad-hero:   80px 5% 72px;
+      --radius-sm:          7px;
+      --radius-md:          11px;
+      --radius-lg:          13px;
+      --radius-xl:          18px;
+    }
+
+    /* ================================================================
+       02. RESET & BASE
+    ================================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-base);
+      color: var(--clr-body);
+      background: var(--clr-bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+
+    /* ================================================================
+       03. TYPOGRAPHY
+    ================================================================ */
+    .eyebrow {
+      font-size: 1rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--clr-primary); margin-bottom: 10px; display: block;
+    }
+    .sh2 {
+      font-size: clamp(2rem, 3.6vw, 3rem);
+      font-weight: 800; color: var(--clr-heading);
+      line-height: 1.18; margin-bottom: 18px;
+    }
+    .slead {
+      font-size: 1rem; color: var(--clr-text-secondary);
+      line-height: 1.78; max-width: 680px;
+    }
+    .center { text-align: center; }
+    .center .slead { margin: 0 auto; }
+    .tag {
+      background: var(--clr-tag-bg); color: var(--clr-primary);
+      font-size: 0.7rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 20px; display: inline-block;
+    }
+
+    /* ================================================================
+       04. NAVIGATION
+    ================================================================ */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%; height: 68px;
+      background: var(--clr-primary);
+      position: sticky; top: 0; z-index: 200;
+      box-shadow: 0 2px 20px rgba(14,90,138,.22);
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
+    .nav-logo img { height: 34px; width: auto; object-fit: contain; }
+    .nav-wordmark {
+      font-size: 1.05rem; font-weight: 800; color: #fff;
+      letter-spacing: -0.01em; text-decoration: none;
+    }
+    .nav-links {
+      display: flex; gap: 1.8rem; list-style: none; align-items: center;
+    }
+    .nav-links a {
+      text-decoration: none; color: rgba(255,255,255,.82);
+      font-size: 0.875rem; font-weight: 500;
+      transition: color 0.2s; white-space: nowrap;
+    }
+    .nav-links a:hover, .nav-links a.active { color: #fff; }
+    .nav-cta {
+      background: #fff; color: var(--clr-primary);
+      padding: 8px 20px; border-radius: var(--radius-sm);
+      font-size: 0.85rem; font-weight: 700;
+      text-decoration: none; white-space: nowrap; flex-shrink: 0;
+      position: relative; overflow: hidden; display: inline-flex; align-items: center;
+      transition: background .25s, color .25s, transform .25s, box-shadow .25s;
+      animation: navCtaPulse 2.8s ease-in-out infinite;
+    }
+    @keyframes navCtaPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,.65); }
+      55%       { box-shadow: 0 0 0 9px rgba(255,255,255,0); }
+    }
+    .nav-cta::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.32) 50%, transparent 65%);
+      transform: translateX(-120%); transition: transform .5s ease;
+    }
+    .nav-cta:hover {
+      background: var(--clr-dark); color: #fff;
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 6px 22px rgba(0,0,0,.25);
+      animation: none;
+    }
+    .nav-cta:hover::after { transform: translateX(120%); }
+    .nav-cta:active { transform: scale(1); box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+    .nav-ham {
+      display: none; background: none; border: none;
+      color: #fff; font-size: 1.5rem; cursor: pointer;
+      padding: 4px; line-height: 1;
+    }
+    .nav-dropdown { position: relative; }
+    .nav-arr { display: inline-block; width: 7px; height: 7px; border: 2px solid transparent; border-right-color: rgba(255,255,255,.7); border-bottom-color: rgba(255,255,255,.7); transform: rotate(45deg); margin-left: 5px; margin-bottom: 2px; vertical-align: middle; transition: transform .22s ease; font-size: 0; }
+    .nav-submenu {
+      display: none; position: absolute; top: 100%; left: 50%;
+      transform: translateX(-50%);
+      background: var(--clr-primary-dark);
+      border-radius: var(--radius-md); list-style: none;
+      min-width: 210px; box-shadow: 0 8px 28px rgba(0,0,0,.28);
+      padding: 10px 0 6px; z-index: 300;
+    }
+    .nav-submenu li { list-style: none; }
+    .nav-submenu li a {
+      display: block; padding: 10px 20px; font-size: 0.85rem;
+      color: rgba(255,255,255,.85) !important; white-space: nowrap;
+      transition: background 0.15s, color 0.15s; text-decoration: none;
+    }
+    .nav-submenu li a:hover { background: rgba(255,255,255,.1); color: #fff !important; }
+    .nav-dropdown:hover .nav-submenu,
+    .nav-dropdown:focus-within .nav-submenu { display: block; }
+    .nav-dropdown:hover .nav-arr { transform: rotate(-135deg); border-right-color: #fff; border-bottom-color: #fff; }
+
+    /* ================================================================
+       05. BUTTONS
+    ================================================================ */
+    .btn-white {
+      background: #fff; color: var(--clr-primary);
+      padding: 12px 26px; border-radius: var(--radius-sm);
+      font-weight: 700; font-size: 0.875rem;
+      text-decoration: none; display: inline-block; transition: background 0.2s;
+    }
+    .btn-white:hover { background: #d6ecf8; }
+    .btn-wout {
+      background: transparent; color: #fff;
+      padding: 11px 24px; border-radius: var(--radius-sm);
+      font-weight: 600; font-size: 0.875rem;
+      border: 1.5px solid rgba(255,255,255,.5);
+      text-decoration: none; display: inline-block; transition: all 0.2s;
+    }
+    .btn-wout:hover { border-color: #fff; background: rgba(255,255,255,.1); }
+    .btn-group { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* ================================================================
+       06. SECTION HELPERS
+    ================================================================ */
+    .sec { padding: var(--section-pad); }
+    .sec-alt { background: var(--clr-bg-alt); }
+
+    /* ================================================================
+       07. CARDS
+    ================================================================ */
+    .card {
+      background: #fff; border: 1px solid var(--clr-border);
+      border-radius: var(--radius-lg); padding: 26px; transition: box-shadow 0.2s;
+    }
+    .card:hover { box-shadow: 0 4px 24px rgba(14,90,138,.1); }
+
+    /* ================================================================
+       08. HERO SECTIONS
+    ================================================================ */
+    .cr-hero {
+      background:
+        url('../assets/images/careers.png') center top / cover no-repeat;
+      padding: var(--section-pad-hero);
+      text-align: left;
+    }
+    .cr-hero h1 {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 800; color: #fff;
+      line-height: 1.12; margin-bottom: 20px;
+    }
+    .cr-hero p {
+      font-size: 1.1rem; color: rgba(255,255,255,.85);
+      max-width: 640px; margin: 0 0 32px; line-height: 1.76;
+    }
+    .cr-hero .eyebrow {
+      color: rgba(255,255,255,.85);
+      font-size: 1.1rem; letter-spacing: 0.08em;
+    }
+
+    /* ================================================================
+       09. CTA DARK
+    ================================================================ */
+    .cta-dark {
+      background: var(--clr-primary);
+      padding: var(--section-pad); text-align: center;
+    }
+    .cta-dark .eyebrow { color: rgba(255,255,255,.85); }
+    .cta-dark .sh2 { color: #fff; }
+    .cta-dark .slead { color: rgba(255,255,255,.78); margin: 0 auto 32px; }
+
+    /* ================================================================
+       12. FOOTER
+    ================================================================ */
+    footer { background: var(--clr-dark); color: #8aabb8; padding: 56px 5% 24px; }
+    .footer-grid {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 36px; margin-bottom: 40px;
+    }
+    .footer-logo img { height: 30px; width: auto; filter: brightness(0) invert(1); opacity: 0.9; }
+    .footer-wordmark { font-size: 1.1rem; font-weight: 800; color: rgba(255,255,255,.9); }
+    .footer-desc { font-size: 0.87rem; line-height: 1.75; color: #6a8ea8; margin-top: 14px; }
+    .footer-col h5 {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.09em; color: #b0c8d8; margin-bottom: 14px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col a { color: #6a8ea8; font-size: 0.87rem; text-decoration: none; transition: color 0.2s; }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom {
+      border-top: 1px solid #152535; padding-top: 20px;
+      font-size: 0.78rem; color: #3a5565; text-align: center;
+    }
+
+    /* ================================================================
+       16. CAREERS PAGE
+    ================================================================ */
+
+    /* 16b. Who We Are Grid */
+    .cag { display: grid; grid-template-columns: 1fr 1fr; gap: 52px; align-items: center; }
+
+    /* 16c. Simbus Way Card */
+    .sw {
+      background: #fff; border: 1px solid var(--clr-border);
+      border-radius: var(--radius-lg); padding: 26px;
+    }
+    .sw h3 { font-size: 0.97rem; font-weight: 700; color: var(--clr-heading); margin-bottom: 13px; }
+    .sw ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .sw li {
+      font-size: 0.87rem; color: #3a5060;
+      display: flex; gap: 8px; align-items: flex-start;
+    }
+    .sw li::before { content: "→"; color: var(--clr-primary); font-weight: 700; flex-shrink: 0; }
+
+    /* 16d. Stats 3-col */
+    .s3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 24px; }
+    .s3c {
+      background: #fff; border: 1px solid var(--clr-border);
+      border-radius: var(--radius-md); padding: 16px; text-align: center;
+    }
+
+    /* 16e. What You'll Do Grid */
+    .do-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 17px; margin-top: 34px;
+    }
+
+    /* 16f. Benefits Grid */
+    .bg {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+      gap: 17px; margin-top: 34px;
+    }
+    .bc {
+      background: #fff; border: 1px solid var(--clr-border);
+      border-radius: 12px; padding: 22px;
+    }
+    .bc h3 {
+      font-size: 0.9rem; font-weight: 700; color: var(--clr-heading);
+      margin-bottom: 11px; display: flex; align-items: center; gap: 7px;
+    }
+    .bc ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .bc li {
+      font-size: 0.82rem; color: var(--clr-text-muted);
+      display: flex; gap: 7px; align-items: flex-start;
+    }
+    .bc li::before {
+      content: "→"; color: var(--clr-primary);
+      font-size: 0.78rem; flex-shrink: 0; margin-top: 1px;
+    }
+
+    /* 16g. Simbus Difference Grid */
+    .d3g { display: grid; grid-template-columns: repeat(3,1fr); gap: 17px; margin-top: 34px; }
+    .d3c {
+      background: #fff; border: 1px solid var(--clr-border);
+      border-radius: 12px; padding: 22px;
+    }
+    .d3c h3 { font-size: 0.9rem; font-weight: 700; color: var(--clr-primary); margin-bottom: 13px; }
+    .d3c ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .d3c li {
+      font-size: 0.82rem; color: #3a5060;
+      display: flex; gap: 8px; align-items: flex-start;
+    }
+    .d3c li::before { content: ""; color: var(--clr-primary); font-weight: 700; flex-shrink: 0; }
+
+    /* 16h. Testimonials */
+    .tg2 {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+      gap: 17px; margin-top: 34px;
+    }
+    .tc { background: #fff; border: 1px solid var(--clr-border); border-radius: 12px; padding: 22px; }
+    .tc p {
+      font-size: 0.875rem; color: #4a5e6e; line-height: 1.72;
+      margin-bottom: 15px; font-style: italic;
+    }
+    .tc-av {
+      width: 38px; height: 38px; border-radius: 50%;
+      background: var(--clr-primary); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 700; flex-shrink: 0;
+    }
+
+    /* 16i. Open Positions */
+    .pl { display: flex; flex-direction: column; gap: 15px; margin-top: 34px; }
+    .pc {
+      background: #fff; border: 1px solid var(--clr-border);
+      border-radius: 12px; padding: 22px 26px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 18px; flex-wrap: wrap; transition: box-shadow 0.2s;
+    }
+    .pc:hover { box-shadow: 0 4px 22px rgba(14,90,138,.1); }
+    .ab {
+      background: var(--clr-primary); color: #fff;
+      padding: 10px 22px; border-radius: var(--radius-sm);
+      font-weight: 700; font-size: 0.875rem;
+      text-decoration: none; white-space: nowrap;
+      display: inline-flex; align-items: center;
+      position: relative; overflow: hidden;
+      transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .ab::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,0.38) 50%, transparent 65%);
+      transform: translateX(-120%);
+      transition: transform 0.5s ease;
+    }
+    .ab:hover {
+      background: var(--clr-navy);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0,111,183,.45);
+    }
+    .ab:hover::after { transform: translateX(120%); }
+    .ab:active { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,111,183,.35); }
+
+    /* ================================================================
+       21. THEME TOGGLE
+    ================================================================ */
+    .theme-toggle {
+      background: rgba(255,255,255,.15);
+      border: 1.5px solid rgba(255,255,255,.3);
+      color: #fff; width: 36px; height: 36px; border-radius: 50%;
+      cursor: pointer; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: background 0.2s, border-color 0.2s;
+      line-height: 1; padding: 0;
+    }
+    .theme-toggle:hover { background: rgba(255,255,255,.25); border-color: rgba(255,255,255,.6); }
+
+    /* ================================================================
+       22. DARK MODE
+    ================================================================ */
+    [data-theme="dark"] {
+      --clr-primary:          #4a9fd4;
+      --clr-primary-dark:     #3a8fc4;
+      --clr-body:             #b8ccd8;
+      --clr-text-secondary:   #86a4b8;
+      --clr-text-muted:       #6a8a9a;
+      --clr-heading:          #dce8f2;
+      --clr-bg:               #0d1520;
+      --clr-bg-alt:           #111c2a;
+      --clr-bg-blue-soft:     #152030;
+      --clr-border:           #1e3448;
+      --clr-border-light:     #1e3448;
+      --clr-tag-bg:           #1a3050;
+      --clr-dark-nav:         #0a1828;
+    }
+    [data-theme="dark"] body     { background: var(--clr-bg); }
+    [data-theme="dark"] .sec-alt { background: var(--clr-bg-alt); }
+    [data-theme="dark"] h1,
+    [data-theme="dark"] h2,
+    [data-theme="dark"] h3,
+    [data-theme="dark"] h4,
+    [data-theme="dark"] h5       { color: var(--clr-heading) !important; }
+    [data-theme="dark"] p        { color: var(--clr-body) !important; }
+    [data-theme="dark"] li       { color: var(--clr-body); }
+    [data-theme="dark"] strong   { color: var(--clr-heading); }
+    [data-theme="dark"] [style*="color:#322f2d"] { color: var(--clr-heading) !important; }
+    [data-theme="dark"] [style*="color:#322f2d"] { color: var(--clr-body) !important; }
+    [data-theme="dark"] [style*="color:#7a8fa0"] { color: var(--clr-text-muted) !important; }
+    [data-theme="dark"] [style*="color:#006fb7"] { color: var(--clr-primary) !important; }
+    [data-theme="dark"] [style*="color:#322f2d"] { color: var(--clr-text-muted) !important; }
+    [data-theme="dark"] .card,
+    [data-theme="dark"] .bc,
+    [data-theme="dark"] .d3c,
+    [data-theme="dark"] .tc,
+    [data-theme="dark"] .pc,
+    [data-theme="dark"] .sw,
+    [data-theme="dark"] .s3c    { background: #131f2e; border-color: var(--clr-border); }
+    [data-theme="dark"] .card:hover,
+    [data-theme="dark"] .pc:hover { box-shadow: 0 6px 28px rgba(0,0,0,.5), 0 0 0 1px rgba(74,159,212,.14); }
+    [data-theme="dark"] .tag    { background: var(--clr-tag-bg); color: #6ab8e8; }
+    [data-theme="dark"] .cta-dark { background: #0d2640; }
+    [data-theme="dark"] .sw li,
+    [data-theme="dark"] .d3c li { color: var(--clr-body); }
+    [data-theme="dark"] .tc p   { color: var(--clr-body) !important; }
+
+    /* ================================================================
+       19. RESPONSIVE — TABLET
+    ================================================================ */
+    @media (max-width: 960px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links {
+        display: none; flex-direction: column;
+        position: absolute; top: 68px; left: 0; right: 0;
+        background: var(--clr-dark-nav); padding: 14px 5%; gap: 1rem;
+      }
+      .nav-cta { display: none; }
+      .theme-toggle { margin-left: auto; }
+      .nav-ham { display: flex; align-items: center; justify-content: center; margin-left: 10px; }
+      .nav-links.open { display: flex; }
+      .nav-submenu {
+        position: static; transform: none; box-shadow: none;
+        background: rgba(0,0,0,.2); border-radius: var(--radius-sm);
+        min-width: auto; padding: 0; margin-top: 4px;
+      }
+      .nav-submenu::before { display: none; }
+      .nav-submenu li a { padding: 8px 12px 8px 28px; font-size: 0.82rem; }
+      .nav-dropdown:hover .nav-submenu,
+      .nav-dropdown:focus-within .nav-submenu { display: none; }
+      .nav-dropdown.open .nav-submenu { display: block; }
+      .nav-dropdown.open .nav-arr { transform: rotate(-135deg); border-right-color: #fff; border-bottom-color: #fff; }
+      .cag, .d3g { grid-template-columns: 1fr; }
+    }
+
+    /* ================================================================
+       20. RESPONSIVE — MOBILE
+    ================================================================ */
+    @media (max-width: 560px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .sec { padding: 56px 5%; }
+      .s3 { grid-template-columns: repeat(3,1fr); }
+    }
+    @media (max-width: 480px) {
+      .s3 { grid-template-columns: 1fr; }
+      .d3g { grid-template-columns: 1fr; }
+    }
+
+    /* ================================================================
+       SIMBUS VOICES CAROUSEL
+    ================================================================ */
+    .sv-carousel-wrap {
+      position: relative;
+      overflow: hidden;
+      margin-top: 36px;
+      border-radius: var(--radius-lg);
+    }
+    .sv-track {
+      display: flex;
+      gap: 20px;
+      width: max-content;
+      cursor: grab;
+    }
+    .sv-track:active { cursor: grabbing; }
+    .sv-track.paused { animation-play-state: paused; }
+    .sv-slide {
+      flex-shrink: 0;
+      width: 600px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,.12);
+    }
+    .sv-slide img {
+      width: 100%;
+      height: 338px;
+      object-fit: cover;
+      display: block;
+    }
+      100% { transform: translateX(-50%); }
+    }
+    /* Prev/Next buttons — centred below the carousel */
+    .sv-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      margin: 28px auto 0;
+    }
+    .sv-btn {
+      background: var(--clr-primary);
+      border: 2.5px solid transparent;
+      color: #fff;
+      width: 25px; height: 25px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 18px rgba(0,111,183,.38);
+      transition: background 0.22s, transform 0.2s, box-shadow 0.22s, border-color 0.22s;
+      position: relative;
+    }
+    .sv-btn:hover {
+      background: var(--clr-primary-dark);
+      border-color: rgba(255,255,255,.3);
+      transform: scale(1.1);
+      box-shadow: 0 8px 28px rgba(0,111,183,.55);
+    }
+    .sv-btn:active { transform: scale(0.96); }
+    .sv-btn-label {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .sv-btn-text {
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--clr-primary);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    /* Fade edges */
+    .sv-carousel-wrap::before,
+    .sv-carousel-wrap::after {
+      content: "";
+      position: absolute; top: 0; bottom: 0;
+      width: 80px; z-index: 5; pointer-events: none;
+    }
+    .sv-carousel-wrap::before { left:  0; background: linear-gradient(to right, var(--clr-bg-alt), transparent); }
+    .sv-carousel-wrap::after  { right: 0; background: linear-gradient(to left,  var(--clr-bg-alt), transparent); }
+    @media (max-width: 760px) {
+      .sv-slide { width: 340px; }
+      .sv-slide img { height: 191px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="../assets/images/simbus-technologies.webp" alt="Simbus Technologies" style="height:34px;width:auto;object-fit:contain;">
+    </a>
+    <ul class="nav-links" id="navlinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">Who We Are</a></li>
+      <li class="nav-dropdown">
+        <a href="services.html">Services <span class="nav-arr"></span></a>
+        <ul class="nav-submenu">
+          <li><a href="kinaxis.html">Kinaxis Maestro</a></li>
+          <li><a href="Kinaxis Planning One Page.html">Kinaxis® Planning One™</a></li>
+          <li><a href="databricks.html">Databricks</a></li>
+        </ul>
+      </li>
+      <li><a href="careers.html" class="active">Careers</a></li>
+      <li><a href="roi-calculator.html">ROI Calculator</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Free Kinaxis Health Check</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+    <button class="nav-ham" aria-label="Open navigation menu" onclick="document.getElementById('navlinks').classList.toggle('open')">&#9776;</button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="cr-hero">
+    <div class="eyebrow">Careers at Simbus</div>
+    <h1>Build. Innovate.<br>Transform. Grow.</h1>
+    <p>Join a team shaping the future of enterprise technology consulting. We&apos;re hiring people who love solving real problems with real impact.</p>
+    <div class="btn-group" style="justify-content:flex-start">
+      <a href="#open-positions" class="btn-white">View Open Positions &rarr;</a>
+      <a href="contact.html" class="btn-wout">Contact Talent Team</a>
+    </div>
+  </section>
+  <section class="sec sec-alt">
+    <div class="cag">
+      <div>
+        <div class="eyebrow">Who We Are</div>
+        <h2 class="sh2">A $200M Technology Consulting Company On the Rise</h2>
+        <p class="slead" style="margin-bottom:11px">Simbus Technologies Pvt Ltd is headquartered in Bengaluru, with offices in Chennai and the US. Our mission is to be among the <strong>Top Global Technology Consulting Firms</strong>.</p>
+        <p class="slead">We are a trusted Kinaxis implementation partner with 100+ successful projects, and bring deep expertise in Data Engineering with Databricks.</p>
+        <div class="s3">
+          <div class="s3c">
+            <div style="font-size:1.55rem;font-weight:800;color:#006fb7">100+</div>
+            <div style="font-size:.73rem;color:#6a7a8a;margin-top:3px">Projects</div>
+          </div>
+          <div class="s3c">
+            <div style="font-size:1.55rem;font-weight:800;color:#006fb7">$200M</div>
+            <div style="font-size:.73rem;color:#6a7a8a;margin-top:3px">Target Revenue</div>
+          </div>
+          <div class="s3c" style="border:2px solid #e8f0fe;background:linear-gradient(135deg,#fff 60%,#eaf5ff);">
+            <div style="font-size:1.1rem;font-weight:800;color:#c0392b;line-height:1.1;">Great Place<br>To Work&#174;</div>
+            <div style="font-size:.68rem;color:#006fb7;font-weight:700;margin-top:5px;letter-spacing:0.03em;">Certified &middot; India</div>
+          </div>
+        </div>
+      </div>
+      <div class="sw">
+        <img src="../assets/images/simbus-team.png" alt="Simbus Team" style="width:100%;border-radius:10px;margin-bottom:16px;display:block;">
+        <h3>The Simbus Way &mdash; Built on People, Purpose &amp; Performance</h3>
+        <ul>
+          <li>Fast, flexible, and collaborative environment</li>
+          <li>Ownership from Day 1</li>
+          <li>Work on real problems with real business impact</li>
+          <li>Continuous learning with modern tools and platforms</li>
+          <li>Remote-first, transparent, outcome-focused culture</li>
+          <li>Open communication and accessible leadership</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT YOU'LL DO -->
+  <section class="sec">
+    <div class="eyebrow">What You&apos;ll Do</div>
+    <h2 class="sh2">Build, Innovate, and Transform</h2>
+    <div class="do-grid">
+      <div class="card">
+        <h3 style="font-weight:700;color:#322f2d;margin-bottom:7px">Innovation &amp; Continuous Learning</h3>
+        <p style="font-size:.83rem;color:#322f2d;line-height:1.62">We embrace change and invest constantly in new technologies, methodologies, and skills.</p>
+      </div>
+      <div class="card">
+        <h3 style="font-weight:700;color:#322f2d;margin-bottom:7px">Collaboration &amp; Teamwork</h3>
+        <p style="font-size:.83rem;color:#322f2d;line-height:1.62">Great solutions are built by empowered teams working closely with clients and each other.</p>
+      </div>
+      <div class="card">
+        <h3 style="font-weight:700;color:#322f2d;margin-bottom:7px">Customer-Centric Thinking</h3>
+        <p style="font-size:.83rem;color:#322f2d;line-height:1.62">Every decision we make starts with: how does this create value for our clients?</p>
+      </div>
+      <div class="card">
+        <h3 style="font-weight:700;color:#322f2d;margin-bottom:7px">Integrity &amp; Accountability</h3>
+        <p style="font-size:.83rem;color:#322f2d;line-height:1.62">We do what we say, own our outcomes, and hold ourselves to the highest professional standards.</p>
+      </div>
+      <div class="card">
+        <h3 style="font-weight:700;color:#322f2d;margin-bottom:7px">Commitment to Excellence</h3>
+        <p style="font-size:.83rem;color:#322f2d;line-height:1.62">We settle for nothing less than exceptional quality in everything we deliver.</p>
+      </div>
+      <div class="card">
+        <h3 style="font-weight:700;color:#322f2d;margin-bottom:7px">Forward-Looking Mindset</h3>
+        <p style="font-size:.83rem;color:#322f2d;line-height:1.62">We continuously invest in new technologies and capabilities to stay ahead for our clients.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="sec sec-alt">
+    <div class="eyebrow">What You&apos;ll Get</div>
+    <h2 class="sh2">Benefits Built for Real People</h2>
+    <div class="bg">
+      <div class="bc">
+        <h3> Growth &amp; Learning</h3>
+        <ul>
+          <li>Hands-on experience from Day 1</li>
+          <li>Cross-domain exposure</li>
+          <li>Continuous learning opportunities</li>
+          <li>High visibility with leadership</li>
+        </ul>
+      </div>
+      <div class="bc">
+        <h3> Rewards &amp; Benefits</h3>
+        <ul>
+          <li>Industry-leading compensation</li>
+          <li>Annual, joining &amp; retention bonuses</li>
+          <li>Provident Fund (PF) &amp; gratuity</li>
+          <li>Broadband reimbursement</li>
+        </ul>
+      </div>
+      <div class="bc">
+        <h3> Health &amp; Wellbeing</h3>
+        <ul>
+          <li>Medical insurance (employee, spouse, 2 children)</li>
+          <li>Menstrual Wellness Leave (1 day/month)</li>
+          <li>Mental health support</li>
+        </ul>
+      </div>
+      <div class="bc">
+        <h3> Time Off &amp; Culture</h3>
+        <ul>
+          <li>16 earned leaves + 10 holidays</li>
+          <li>Team lunches &amp; annual outings</li>
+          <li>Recognition programs &amp; awards</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- EMPLOYEE ENGAGEMENT -->
+  <section class="sec sec-alt" style="padding:40px 5%;">
+    <div class="center" style="margin-bottom:20px">
+      <h2 class="sh2">Employee Engagement</h2>
+      <p class="slead" style="margin:0 auto">From team offsites and fun activities to giving back to the community — we believe great work and great culture go hand in hand.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+      <div style="border-radius:12px;overflow:hidden;box-shadow:0 2px 16px rgba(0,111,183,.10);">
+        <img src="../assets/images/team-activity.png" alt="Team Activity" style="width:100%;height:180px;object-fit:cover;display:block;">
+        <div style="background:#fff;padding:14px 18px;border:1px solid #ccdde8;border-top:none;border-radius:0 0 12px 12px;">
+          <p style="font-size:.85rem;font-weight:600;color:#006fb7;margin:0;">Team Building &amp; Activities</p>
+        </div>
+      </div>
+      <div style="border-radius:12px;overflow:hidden;box-shadow:0 2px 16px rgba(0,111,183,.10);">
+        <img src="../assets/images/team-activity-2.png" alt="Team Outing" style="width:100%;height:180px;object-fit:cover;display:block;">
+        <div style="background:#fff;padding:14px 18px;border:1px solid #ccdde8;border-top:none;border-radius:0 0 12px 12px;">
+          <p style="font-size:.85rem;font-weight:600;color:#006fb7;margin:0;">Team Outings &amp; Retreats</p>
+        </div>
+      </div>
+      <div style="border-radius:12px;overflow:hidden;box-shadow:0 2px 16px rgba(0,111,183,.10);">
+        <img src="../assets/images/team-outing.png" alt="Fun &amp; Sports" style="width:100%;height:180px;object-fit:cover;display:block;">
+        <div style="background:#fff;padding:14px 18px;border:1px solid #ccdde8;border-top:none;border-radius:0 0 12px 12px;">
+          <p style="font-size:.85rem;font-weight:600;color:#006fb7;margin:0;">Sports, Games &amp; Fun</p>
+        </div>
+      </div>
+      <div style="border-radius:12px;overflow:hidden;box-shadow:0 2px 16px rgba(0,111,183,.10);">
+        <img src="../assets/images/fun-amp-sports.png" alt="Community Service" style="width:100%;height:180px;object-fit:cover;display:block;">
+        <div style="background:#fff;padding:14px 18px;border:1px solid #ccdde8;border-top:none;border-radius:0 0 12px 12px;">
+          <p style="font-size:.85rem;font-weight:600;color:#006fb7;margin:0;">CSR</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE SIMBUS DIFFERENCE -->
+  <section class="sec">
+    <div class="eyebrow">The Simbus Difference</div>
+    <h2 class="sh2">Why People Join, Stay &amp; Grow Faster</h2>
+    <div class="d3g">
+      <div class="d3c">
+        <h3> Why Join</h3>
+        <ul>
+          <li>Ideas are heard and valued</li>
+          <li>Ownership without bureaucracy</li>
+          <li>Remote-first, transparent culture</li>
+          <li>Continuous learning and fast career growth</li>
+          <li>Leaders who coach, not gatekeep</li>
+        </ul>
+      </div>
+      <div class="d3c">
+        <h3> Why Stay</h3>
+        <ul>
+          <li>Increasing responsibilities over time</li>
+          <li>Work that creates real impact</li>
+          <li>Zero politics, fast decision-making</li>
+          <li>Strong culture of trust and autonomy</li>
+          <li>Sense of belonging and community</li>
+        </ul>
+      </div>
+      <div class="d3c">
+        <h3> Why Grow Faster</h3>
+        <ul>
+          <li>Early ownership of projects</li>
+          <li>High leadership visibility</li>
+          <li>Real accountability and outcomes</li>
+          <li>Learning across multiple domains</li>
+          <li>Growth is built into the DNA</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS / LIFE AT SIMBUS -->
+  <section class="sec sec-alt">
+    <div class="eyebrow">Life at Simbus</div>
+    <h2 class="sh2">Hear From Our Team</h2>
+
+    <div class="sv-carousel-wrap">
+      <div class="sv-track" id="svTrack">
+        <div class="sv-slide">
+          <img src="../assets/images/aravinth-m-trainee-digital-technolo.jpg" alt="Aravinth M — Trainee - Digital Technologies">
+        </div>
+        <div class="sv-slide">
+          <img src="../assets/images/aravinth-m-trainee-digital-technolo-2.jpg" alt="Hemanth Vijimireddi — Solution Consultant (Kinaxis)">
+        </div>
+        <div class="sv-slide">
+          <img src="../assets/images/manthesh-l-trainee-digital-technolo.jpg" alt="Manthesh L — Trainee - Digital Technologies">
+        </div>
+        <div class="sv-slide">
+          <img src="../assets/images/manthesh-l-trainee-digital-technolo-2.jpg" alt="Byrapa Bhuvanachandra — Associate Software Engineer">
+        </div>
+        <div class="sv-slide">
+          <img src="../assets/images/k-pravallika-associate-consultant.jpg" alt="K Pravallika — Associate Consultant">
+        </div>
+        <div class="sv-slide">
+          <img src="../assets/images/k-pravallika-associate-consultant-2.jpg" alt="Nageswara Reddy Pothireddy — Trainee - Digital Technologies">
+        </div>
+        <div class="sv-slide">
+          <img src="../assets/images/eshwar-r-swaroop-trainee-digital-te.jpg" alt="Eshwar R Swaroop — Trainee - Digital Technologies">
+        </div>
+        <div class="sv-slide">
+          <img src="../assets/images/eshwar-r-swaroop-trainee-digital-te-2.jpg" alt="Uday Bhaskar Reddy — Trainee - Digital Technologies">
+        </div>
+        <div class="sv-slide">
+          <img src="../assets/images/priyanka-kumari-hr-executive.jpg" alt="Priyanka Kumari — HR Executive">
+        </div>
+        <div class="sv-slide">
+          <img src="../assets/images/priyanka-kumari-hr-executive-2.jpg" alt="Ganga D Sarmah — HR Recruiter">
+        </div>
+        <div class="sv-slide">
+          <img src="../assets/images/ganga-d-sarmah-hr-recruiter.jpg" alt="Rohith K — Manager - Finance">
+        </div>
+        <div class="sv-slide">
+          <img src="../assets/images/rohith-k-manager-finance.jpg" alt="Adarsh Guttedar — Associate Software Engineer">
+        </div>
+        <div class="sv-slide">
+          <img src="../assets/images/adarsh-guttedar-associate-software-.jpg" alt="Shreepunya Jagate — Associate Consultant">
+        </div>
+        <div class="sv-slide">
+          <img src="../assets/images/shreepunya-jagate-associate-consult.jpg" alt="Yogitha Lakshmi — Software Engineer">
+        </div>
+        <div class="sv-slide">
+          <img src="../assets/images/yogitha-lakshmi-software-engineer.jpg" alt="Vamsi Krishna — Team Lead - Development">
+        </div>
+        <div class="sv-slide" aria-hidden="true">
+          <img src="../assets/images/aravinth-m-trainee-digital-technolo.jpg" alt="Aravinth M — Trainee - Digital Technologies">
+        </div>
+        <div class="sv-slide" aria-hidden="true">
+          <img src="../assets/images/aravinth-m-trainee-digital-technolo-2.jpg" alt="Hemanth Vijimireddi — Solution Consultant (Kinaxis)">
+        </div>
+        <div class="sv-slide" aria-hidden="true">
+          <img src="../assets/images/manthesh-l-trainee-digital-technolo.jpg" alt="Manthesh L — Trainee - Digital Technologies">
+        </div>
+        <div class="sv-slide" aria-hidden="true">
+          <img src="../assets/images/manthesh-l-trainee-digital-technolo-2.jpg" alt="Byrapa Bhuvanachandra — Associate Software Engineer">
+        </div>
+        <div class="sv-slide" aria-hidden="true">
+          <img src="../assets/images/k-pravallika-associate-consultant.jpg" alt="K Pravallika — Associate Consultant">
+        </div>
+        <div class="sv-slide" aria-hidden="true">
+          <img src="../assets/images/k-pravallika-associate-consultant-2.jpg" alt="Nageswara Reddy Pothireddy — Trainee - Digital Technologies">
+        </div>
+        <div class="sv-slide" aria-hidden="true">
+          <img src="../assets/images/eshwar-r-swaroop-trainee-digital-te.jpg" alt="Eshwar R Swaroop — Trainee - Digital Technologies">
+        </div>
+        <div class="sv-slide" aria-hidden="true">
+          <img src="../assets/images/eshwar-r-swaroop-trainee-digital-te-2.jpg" alt="Uday Bhaskar Reddy — Trainee - Digital Technologies">
+        </div>
+        <div class="sv-slide" aria-hidden="true">
+          <img src="../assets/images/priyanka-kumari-hr-executive.jpg" alt="Priyanka Kumari — HR Executive">
+        </div>
+        <div class="sv-slide" aria-hidden="true">
+          <img src="../assets/images/priyanka-kumari-hr-executive-2.jpg" alt="Ganga D Sarmah — HR Recruiter">
+        </div>
+        <div class="sv-slide" aria-hidden="true">
+          <img src="../assets/images/ganga-d-sarmah-hr-recruiter.jpg" alt="Rohith K — Manager - Finance">
+        </div>
+        <div class="sv-slide" aria-hidden="true">
+          <img src="../assets/images/rohith-k-manager-finance.jpg" alt="Adarsh Guttedar — Associate Software Engineer">
+        </div>
+        <div class="sv-slide" aria-hidden="true">
+          <img src="../assets/images/adarsh-guttedar-associate-software-.jpg" alt="Shreepunya Jagate — Associate Consultant">
+        </div>
+        <div class="sv-slide" aria-hidden="true">
+          <img src="../assets/images/shreepunya-jagate-associate-consult.jpg" alt="Yogitha Lakshmi — Software Engineer">
+        </div>
+        <div class="sv-slide" aria-hidden="true">
+          <img src="../assets/images/yogitha-lakshmi-software-engineer.jpg" alt="Vamsi Krishna — Team Lead - Development">
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Prev / Next controls — centred below the carousel -->
+    <div class="sv-controls">
+      <button class="sv-btn sv-btn-prev" id="svPrev" aria-label="Previous slide">&#8592;</button>
+      <button class="sv-btn sv-btn-next" id="svNext" aria-label="Next slide">&#8594;</button>
+    </div>
+  </section>
+
+  <!-- OPEN POSITIONS -->
+  <section class="sec" id="open-positions">
+    <div class="eyebrow">Open Positions</div>
+    <h2 class="sh2">Find Your Role at Simbus</h2>
+    <p class="slead">We&apos;re growing fast and looking for talented people to join our mission.</p>
+    <div class="pl">
+
+      <div class="pc">
+        <div>
+          <h3 style="font-weight:700;color:#322f2d;margin-bottom:5px">Data Engineer</h3>
+          <p style="font-size:.84rem;color:#322f2d;margin-bottom:9px">Build high-performance data pipelines and lakehouse architectures on Databricks</p>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <span class="tag">Databricks</span><span class="tag">Python</span><span class="tag">Spark</span><span class="tag">Bangalore</span><span class="tag">Remote-Friendly</span>
+          </div>
+        </div>
+        <a href="contact.html" class="ab">Apply Now &rarr;</a>
+      </div>
+
+      <div class="pc">
+        <div>
+          <h3 style="font-weight:700;color:#322f2d;margin-bottom:5px">Senior Data Engineer</h3>
+          <p style="font-size:.84rem;color:#322f2d;margin-bottom:9px">Lead data platform modernization projects and mentor junior team members</p>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <span class="tag">Databricks</span><span class="tag">Data Architecture</span><span class="tag">Leadership</span><span class="tag">Bangalore</span>
+          </div>
+        </div>
+        <a href="contact.html" class="ab">Apply Now &rarr;</a>
+      </div>
+
+      <div class="pc">
+        <div>
+          <h3 style="font-weight:700;color:#322f2d;margin-bottom:5px">Solution Architect</h3>
+          <p style="font-size:.84rem;color:#322f2d;margin-bottom:9px">Design scalable supply chain and data solutions on Kinaxis Maestro and Databricks</p>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <span class="tag">Kinaxis</span><span class="tag">Databricks</span><span class="tag">Architecture</span><span class="tag">Bangalore / US</span>
+          </div>
+        </div>
+        <a href="contact.html" class="ab">Apply Now &rarr;</a>
+      </div>
+
+      <div class="pc">
+        <div>
+          <h3 style="font-weight:700;color:#322f2d;margin-bottom:5px">Senior Solution Consultant</h3>
+          <p style="font-size:.84rem;color:#322f2d;margin-bottom:9px">Lead client engagements for supply chain transformation using Kinaxis Maestro</p>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <span class="tag">Kinaxis Maestro</span><span class="tag">Supply Chain</span><span class="tag">S&amp;OP</span><span class="tag">Bangalore</span>
+          </div>
+        </div>
+        <a href="contact.html" class="ab">Apply Now &rarr;</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-dark">
+    <div class="eyebrow">Join Our Team</div>
+    <h2 class="sh2">Ready to Build, Innovate, and Grow?</h2>
+    <p class="slead">Be part of a team shaping the future of technology consulting. At Simbus, growth is built into the DNA.</p>
+    <div class="btn-group" style="justify-content:center">
+      <a href="#open-positions" class="btn-white">Apply Now &rarr;</a>
+      <a href="contact.html" class="btn-wout">Contact Talent Team</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <img src="../assets/images/simbus-technologies.webp" alt="Simbus Technologies" style="height:30px;width:auto;filter:brightness(0) invert(1);opacity:0.9;">
+        </div>
+        <p class="footer-desc">A global consulting and technology partner helping enterprises modernize their supply chain and data ecosystems.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="roi-calculator.html">ROI Calculator</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="kinaxis.html">Kinaxis Maestro</a></li>
+          <li><a href="Kinaxis Planning One Page.html">Kinaxis® Planning One™</a></li>
+          <li><a href="databricks.html">Databricks</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:sales@simbustech.com">sales@simbustech.com</a></li>
+          <li><a href="tel:+918310047700">+91 8310047700</a></li>
+          <li><a href="contact.html">Bangalore, India</a></li>
+          <li><a href="contact.html">Atlanta, USA</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul><li><a href="privacy.html">Privacy Policy</a></li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">&copy; 2026 Simbus Technologies. All rights reserved. Bangalore &middot; Atlanta</div>
+  </footer>
+
+  <script>
+    // ── SIMBUS VOICES CAROUSEL ─────────────────────────────────
+    (function() {
+      const track  = document.getElementById('svTrack');
+      const prevBtn = document.getElementById('svPrev');
+      const nextBtn = document.getElementById('svNext');
+      if (!track) return;
+
+      const slideCount = track.querySelectorAll('.sv-slide').length / 2; // original count
+      const slideW     = track.querySelector('.sv-slide').offsetWidth + 20; // +gap
+      let offset   = 0;
+      let isPaused = false;
+      let rafId    = null;
+      let speed    = 0.6; // px per frame
+      let isDragging  = false;
+      let dragStartX  = 0;
+      let dragStartOffset = 0;
+
+      function loop() {
+        if (!isPaused && !isDragging) {
+          offset += speed;
+          const maxOffset = slideCount * slideW;
+          if (offset >= maxOffset) offset -= maxOffset;
+          track.style.transform = `translateX(${-offset}px)`;
+        }
+        rafId = requestAnimationFrame(loop);
+      }
+      // Remove CSS animation — we drive it via JS for pause/drag support
+      track.style.animation = 'none';
+      rafId = requestAnimationFrame(loop);
+
+      // Pause on hover
+      track.addEventListener('mouseenter', () => { isPaused = true; });
+      track.addEventListener('mouseleave', () => { isPaused = false; });
+
+      // Arrow buttons
+      prevBtn.addEventListener('click', () => {
+        isPaused = true;
+        offset = Math.max(0, offset - slideW);
+        track.style.transform = `translateX(${-offset}px)`;
+        setTimeout(() => { isPaused = false; }, 800);
+      });
+      nextBtn.addEventListener('click', () => {
+        isPaused = true;
+        const maxOffset = slideCount * slideW;
+        offset = (offset + slideW) % maxOffset;
+        track.style.transform = `translateX(${-offset}px)`;
+        setTimeout(() => { isPaused = false; }, 800);
+      });
+
+      // Drag support (mouse)
+      track.addEventListener('mousedown', (e) => {
+        isDragging    = true;
+        dragStartX    = e.clientX;
+        dragStartOffset = offset;
+      });
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const dx = dragStartX - e.clientX;
+        const maxOffset = slideCount * slideW;
+        offset = ((dragStartOffset + dx) % maxOffset + maxOffset) % maxOffset;
+        track.style.transform = `translateX(${-offset}px)`;
+      });
+      window.addEventListener('mouseup', () => { isDragging = false; });
+
+      // Touch support
+      track.addEventListener('touchstart', (e) => {
+        isDragging    = true;
+        dragStartX    = e.touches[0].clientX;
+        dragStartOffset = offset;
+      }, { passive: true });
+      track.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        const dx = dragStartX - e.touches[0].clientX;
+        const maxOffset = slideCount * slideW;
+        offset = ((dragStartOffset + dx) % maxOffset + maxOffset) % maxOffset;
+        track.style.transform = `translateX(${-offset}px)`;
+      }, { passive: true });
+      track.addEventListener('touchend', () => { isDragging = false; });
+    })();
+  </script>
+
+  <script src="../js/main.js"></script>
+</body>
+</html>
