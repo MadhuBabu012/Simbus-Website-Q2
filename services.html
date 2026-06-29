@@ -31,6 +31,7 @@
   font-size: 1.1rem; letter-spacing: 0.08em;
   margin-bottom: 28px;
 }
+/* Eyebrow anchor links handled by shared css/styles.css */
 .sov-hero h1 {
   font-size: clamp(2.4rem, 4.5vw, 3.6rem);
   font-weight: 900; line-height: 1.1;
@@ -146,9 +147,6 @@
   padding: 36px 36px 28px;
   background: linear-gradient(135deg, var(--clr-dark) 0%, var(--clr-navy) 100%);
   position: relative; overflow: hidden;
-  display: flex; flex-direction: row;
-  align-items: flex-start; justify-content: space-between;
-  gap: 20px;
 }
 .sbc-header::after {
   content: '';
@@ -157,25 +155,27 @@
   background: rgba(255,255,255,.05);
   border-radius: 50%; pointer-events: none;
 }
-.sbc-header-text { flex: 1; display: flex; flex-direction: column; }
+.sbc-header-text { display: flex; flex-direction: column; }
 .sbc-logo-right {
-  flex-shrink: 0;
-  display: flex; align-items: center; justify-content: flex-end;
-  align-self: center; padding-left: 16px; position: relative; z-index: 1;
+  position: absolute; top: 28px; right: 28px; z-index: 2;
+  display: flex; align-items: center; justify-content: center;
 }
 .sbc-tag {
   display: inline-block;
-  background: rgba(255,255,255,.15); color: rgba(255,255,255,.9);
-  font-size: 0.7rem; font-weight: 700;
+  font-size: 0.75rem; font-weight: 800;
   text-transform: uppercase; letter-spacing: 0.1em;
-  padding: 5px 14px; border-radius: 20px; margin-bottom: 20px;
+  margin-bottom: 16px; padding-right: 120px;
+  background: linear-gradient(135deg, #7fd0f8 0%, #4dffc3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 .sbc-header h3 {
   font-size: 1.55rem; font-weight: 900;
   color: #fff; line-height: 1.2;
   letter-spacing: -0.02em; margin-bottom: 12px;
 }
-.sbc-header p { font-size: 0.88rem; color: rgba(255,255,255,.72); line-height: 1.65; max-width: 380px; }
+.sbc-header p { font-size: 0.88rem; color: rgba(255,255,255,.72); line-height: 1.65; }
 .sbc-body { padding: 28px 36px 32px; display: flex; flex-direction: column; }
 .sbc-features {
   list-style: none; display: flex;
@@ -205,12 +205,38 @@
   padding: 5px 13px; border-radius: 20px;
 }
 .sbc-link {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 0.875rem; font-weight: 700; color: var(--clr-primary);
-  text-decoration: none; transition: gap .2s;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 0.85rem; font-weight: 700; color: #fff;
+  text-decoration: none;
+  background: var(--clr-primary);
+  padding: 10px 20px; border-radius: 8px;
+  position: relative; overflow: hidden;
+  transition: background .2s, transform .2s, box-shadow .2s;
+  box-shadow: 0 2px 10px rgba(0,111,183,.25);
 }
-.sbc-link:hover { gap: 10px; }
-.sbc-link svg { width: 16px; height: 16px; }
+.sbc-link::before {
+  content: '';
+  position: absolute; top: 0; left: -100%;
+  width: 60%; height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,.22), transparent);
+  transition: left .45s ease;
+}
+.sbc-link:hover::before { left: 150%; }
+.sbc-link:hover {
+  background: var(--clr-navy);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,111,183,.4);
+}
+.sbc-link svg {
+  width: 15px; height: 15px;
+  transition: transform .2s cubic-bezier(.34,1.56,.64,1);
+}
+.sbc-link:hover svg { transform: translateX(4px); }
+@keyframes sbc-pulse {
+  0%,100% { box-shadow: 0 2px 10px rgba(0,111,183,.25); }
+  50%      { box-shadow: 0 2px 18px rgba(0,111,183,.5); }
+}
+.sbc-link { animation: sbc-pulse 2.4s ease-in-out infinite; }
 
 /* Capability grid */
 .cap-section { background: var(--clr-bg-alt); padding: 80px 5%; }
@@ -323,7 +349,7 @@
       </ul>
     </li>
     <li><a href="careers.html">Careers</a></li>
-    <li><a href="roi-calculator.html">ROI Calculator</a></li>
+    <li><a href="roi-calculator.html">Beneficiary Calculator</a></li>
     <li><a href="contact.html">Contact Us</a></li>
   </ul>
   <a href="contact.html" class="nav-cta">Free Kinaxis Health Check</a>
@@ -335,8 +361,8 @@
 <main id="main">
 
   <!-- HERO -->
-  <section class="sov-hero">
-    <div class="eyebrow">Simbus Technologies &middot; Services</div>
+  <section class="sov-hero" id="services-we-offer">
+    <div class="eyebrow"><a href="#platform-journey">Services We Offer</a></div>
     <h1 class="reveal">Two Practices.<br>One Mission.</h1>
     <p class="reveal delay-1">We go deep on three platforms where we know we can make the biggest difference — Kinaxis Maestro and Kinaxis® Planning One™ for supply chain planning, and Databricks for data &amp; AI. No generalism. No diluted expertise.</p>
     <div class="btn-group reveal delay-2">
@@ -366,9 +392,9 @@
   </div>
 
   <!-- INTRO -->
-  <section class="intro-strip">
+  <section class="intro-strip" id="our-approach">
     <div>
-      <span class="eyebrow reveal">Our Approach</span>
+      <span class="eyebrow reveal"><a href="#our-approach">Our Approach</a></span>
       <h2 class="sh2 reveal delay-1">Specialist Depth, Not Broad Generalism</h2>
       <p class="slead reveal delay-2">Most consultancies spread thin across dozens of platforms. Simbus doesn't. We've chosen two best-in-class platforms and built unrivalled depth in both — so every engagement benefits from the collective experience of a team that has seen and solved your exact problem before.</p>
     </div>
@@ -405,10 +431,9 @@
   </section>
 
   <!-- SERVICE CARDS -->
-  <section class="svc-cards-section">
+  <section class="svc-cards-section" id="platform-journey">
     <div class="center">
-      <span class="eyebrow reveal">Our Practices</span>
-      <h2 class="sh2 reveal delay-1">Choose Your Platform Journey</h2>
+      <h2 class="sh2 reveal">Choose Your Platform Journey</h2>
       <p class="slead center reveal delay-2">Three specialist practices, each with deep bench strength and a proven delivery methodology. Explore what we can do for you.</p>
     </div>
 
@@ -514,9 +539,9 @@
   </section>
 
   <!-- CAPABILITY GRID -->
-  <section class="cap-section">
+  <section class="cap-section" id="why-choose-simbus">
     <div class="center">
-      <span class="eyebrow reveal">Why Choose Simbus</span>
+      <span class="eyebrow reveal"><a href="#why-choose-simbus">Why Choose Simbus</a></span>
       <h2 class="sh2 reveal delay-1">What Sets Our Delivery Apart</h2>
       <p class="slead center reveal delay-2">Six principles that shape every engagement — regardless of platform, size, or complexity.</p>
     </div>
@@ -574,9 +599,9 @@
   </section>
 
   <!-- HOW WE WORK -->
-  <section class="process-section">
+  <section class="process-section" id="how-we-engage">
     <div class="center">
-      <span class="eyebrow reveal">How We Engage</span>
+      <span class="eyebrow reveal"><a href="#how-we-engage">How We Engage</a></span>
       <h2 class="sh2 reveal delay-1">From First Call to Ongoing Value</h2>
       <p class="slead center reveal delay-2">A repeatable, transparent four-stage process that gets you to ROI faster — and keeps you there.</p>
     </div>
@@ -605,13 +630,13 @@
   </section>
 
   <!-- CTA BAND -->
-  <section class="cta-sov">
-    <span class="eyebrow">Get Started</span>
+  <section class="cta-sov" id="get-started">
+    <span class="eyebrow"><a href="#get-started">Get Started</a></span>
     <h2 class="sh2 reveal">Not Sure Which Service Fits?</h2>
     <p class="slead reveal delay-1">Our team will help you map your challenge to the right practice — and give you an honest assessment of where Simbus can add the most value.</p>
     <div class="btn-group reveal delay-2" style="justify-content:center;">
       <a href="contact.html" class="btn-white">Book a Free Consultation &rarr;</a>
-      <a href="roi-calculator.html" class="btn-wout">Use the ROI Calculator</a>
+      <a href="roi-calculator.html" class="btn-wout">Use the Beneficiary Calculator</a>
     </div>
   </section>
 
