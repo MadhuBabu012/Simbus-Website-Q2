@@ -6,10 +6,51 @@
 (function () {
   'use strict';
 
-  /* ── 1. DARK MODE TOGGLE ──────────────────────────────────── */
+  /* ── 1. NAV INJECTION ────────────────────────────────────────
+     Single source of truth for navigation.
+     Edit here — applies to all 9 pages automatically.
+  ──────────────────────────────────────────────────────────── */
+  const nav = document.querySelector('nav');
+  if (nav) {
+    nav.innerHTML = `
+      <a href="index.html" class="nav-logo">
+        <img src="assets/images/shared/simbus-technologies.webp" alt="Simbus Technologies" style="height:34px;width:auto;object-fit:contain;">
+      </a>
+      <ul class="nav-links" id="navlinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">Who We Are</a></li>
+        <li class="nav-dropdown">
+          <a href="services.html">Services <span class="nav-arr"></span></a>
+          <ul class="nav-submenu">
+            <li><a href="kinaxis.html">Kinaxis Maestro</a></li>
+            <li><a href="Kinaxis Planning One Page.html">Kinaxis&reg; Planning One&trade;</a></li>
+            <li><a href="databricks.html">Databricks</a></li>
+          </ul>
+        </li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="roi-calculator.html">Benefit Calc</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+      </ul>
+      <a href="contact.html" class="nav-cta">Free Kinaxis Health Check</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+      <button class="nav-ham" id="navHam" aria-label="Open navigation menu">&#9776;</button>
+    `;
+
+    // Mark active link based on current page
+    const page = location.pathname.split('/').pop() || 'index.html';
+    const serviceSubPages = ['kinaxis.html', 'databricks.html', 'Kinaxis Planning One Page.html'];
+    nav.querySelectorAll('.nav-links > li > a').forEach(a => {
+      const linkPage = a.getAttribute('href').split('/').pop();
+      if (linkPage === page) a.classList.add('active');
+      if (a.getAttribute('href') === 'services.html' && serviceSubPages.includes(page)) {
+        a.classList.add('active');
+      }
+    });
+  }
+
+  /* ── 2. DARK MODE TOGGLE ──────────────────────────────────── */
   const themeBtn = document.getElementById('themeToggle');
   if (themeBtn) {
-    // Restore saved theme on page load
     const savedTheme = localStorage.getItem('simbus-theme');
     if (savedTheme === 'dark') {
       document.documentElement.setAttribute('data-theme', 'dark');
@@ -30,7 +71,14 @@
     });
   }
 
-  /* ── 2. MOBILE NAV DROPDOWN ───────────────────────────────── */
+  /* ── 3. MOBILE NAV ────────────────────────────────────────── */
+  const navHam = document.getElementById('navHam');
+  if (navHam) {
+    navHam.addEventListener('click', () => {
+      document.getElementById('navlinks').classList.toggle('open');
+    });
+  }
+
   document.querySelectorAll('.nav-dropdown > a').forEach(link => {
     link.addEventListener('click', e => {
       if (window.innerWidth <= 960) {
@@ -40,7 +88,6 @@
     });
   });
 
-  // Close nav when clicking outside
   document.addEventListener('click', e => {
     if (!e.target.closest('nav')) {
       const navlinks = document.getElementById('navlinks');
@@ -48,7 +95,7 @@
     }
   });
 
-  /* ── 3. SCROLL REVEAL (IntersectionObserver) ─────────────── */
+  /* ── 4. SCROLL REVEAL (IntersectionObserver) ─────────────── */
   const revealEls = document.querySelectorAll(
     '.reveal, .reveal-left, .reveal-scale, .stagger'
   );
@@ -65,9 +112,7 @@
     revealEls.forEach(el => revealObs.observe(el));
   }
 
-  /* ── 4. ANIMATED COUNTERS ─────────────────────────────────── */
-  // Supports data-count + data-suffix (index/about style)
-  // and data-target + data-prefix + data-suffix + data-decimal (kinaxis/databricks style)
+  /* ── 5. ANIMATED COUNTERS ─────────────────────────────────── */
   function animateCounter(el) {
     const target   = parseFloat(el.dataset.count || el.dataset.target || 0);
     const prefix   = el.dataset.prefix  || '';
@@ -87,18 +132,14 @@
     requestAnimationFrame(step);
   }
 
-  // Trigger counters when their container scrolls into view
-  const counterContainerSelectors = '.stats-row, .hstats, .s4, [data-count], [data-target]';
   const counterEls = document.querySelectorAll('[data-count], [data-target]');
   if (counterEls.length) {
     const counterObs = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) {
-          // If the element itself is a counter
           if (e.target.dataset.count || e.target.dataset.target) {
             animateCounter(e.target);
           } else {
-            // It's a container — find counters inside
             e.target.querySelectorAll('[data-count], [data-target]').forEach(animateCounter);
           }
           counterObs.unobserve(e.target);
@@ -106,18 +147,13 @@
       });
     }, { threshold: 0.3 });
 
-    // Observe stat containers and individual counter elements
     document.querySelectorAll('.stats-row, .hstats, .s4').forEach(el => counterObs.observe(el));
     counterEls.forEach(el => {
-      // Only observe directly if not inside a container already observed
-      if (!el.closest('.stats-row, .hstats, .s4')) {
-        counterObs.observe(el);
-      }
+      if (!el.closest('.stats-row, .hstats, .s4')) counterObs.observe(el);
     });
   }
 
-  /* ── 5. STAGGER ANIMATION DELAY HELPER ───────────────────── */
-  // Auto-sets nth-child transition delays on stagger containers
+  /* ── 6. STAGGER ANIMATION DELAY HELPER ───────────────────── */
   document.querySelectorAll('.stagger').forEach(container => {
     container.querySelectorAll(':scope > *').forEach((child, i) => {
       if (i >= 8) child.style.transitionDelay = (i * 0.1) + 's';

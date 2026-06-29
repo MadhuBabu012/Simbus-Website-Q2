@@ -6,206 +6,16 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Careers — Simbus Technologies</title>
   <meta name="description" content="Join Simbus Technologies. Open positions in Kinaxis, Databricks and data engineering.">
-  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="css/styles.css">
   <style>
     /* ================================================================
-       00. ACCESSIBILITY UTILITIES
+       PAGE-SPECIFIC STYLES — careers.html
     ================================================================ */
-    .skip-link {
-      position: absolute; top: -999px; left: 0;
-      padding: 10px 18px; background: #006fb7; color: #fff;
-      font-size: .9rem; font-weight: 600;
-      border-radius: 0 0 6px 0; z-index: 9999; text-decoration: none;
-    }
-    .skip-link:focus { top: 0; }
 
-    /* ================================================================
-       01. CSS CUSTOM PROPERTIES
-    ================================================================ */
-    :root {
-      --clr-primary:        #006fb7;
-      --clr-primary-dark:   #0171bc;
-      --clr-navy:           #014e82;
-      --clr-dark:           #012d4a;
-      --clr-dark-nav:       #014e82;
-      --clr-body:           #322f2d;
-      --clr-text-secondary: #322f2d;
-      --clr-text-muted:     #322f2d;
-      --clr-heading:        #322f2d;
-      --clr-bg:             #ffffff;
-      --clr-bg-alt:         #f4f8fb;
-      --clr-bg-blue-soft:   #eaf5ff;
-      --clr-border:         #ccdde8;
-      --clr-border-light:   #d0e8f5;
-      --clr-green:          #1D9E75;
-      --clr-tag-bg:         #deeefa;
-      --font-base:          'Inter', sans-serif;
-      --section-pad:        80px 5%;
-      --section-pad-hero:   80px 5% 72px;
-      --radius-sm:          7px;
-      --radius-md:          11px;
-      --radius-lg:          13px;
-      --radius-xl:          18px;
-    }
-
-    /* ================================================================
-       02. RESET & BASE
-    ================================================================ */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: var(--font-base);
-      color: var(--clr-body);
-      background: var(--clr-bg);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-    img { display: block; max-width: 100%; }
-    a { color: inherit; }
-
-    /* ================================================================
-       03. TYPOGRAPHY
-    ================================================================ */
-    .eyebrow {
-      font-size: 1rem; font-weight: 700;
-      letter-spacing: 0.06em; text-transform: uppercase;
-      color: var(--clr-primary); margin-bottom: 10px; display: block;
-    }
-    .sh2 {
-      font-size: clamp(2rem, 3.6vw, 3rem);
-      font-weight: 800; color: var(--clr-heading);
-      line-height: 1.18; margin-bottom: 18px;
-    }
-    .slead {
-      font-size: 1rem; color: var(--clr-text-secondary);
-      line-height: 1.78; max-width: 680px;
-    }
-    .center { text-align: center; }
-    .center .slead { margin: 0 auto; }
-    .tag {
-      background: var(--clr-tag-bg); color: var(--clr-primary);
-      font-size: 0.7rem; font-weight: 700;
-      padding: 3px 10px; border-radius: 20px; display: inline-block;
-    }
-
-    /* ================================================================
-       04. NAVIGATION
-    ================================================================ */
-    nav {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 5%; height: 68px;
-      background: var(--clr-primary);
-      position: sticky; top: 0; z-index: 200;
-      box-shadow: 0 2px 20px rgba(14,90,138,.22);
-    }
-    .nav-logo { display: flex; align-items: center; text-decoration: none; flex-shrink: 0; }
-    .nav-logo img { height: 34px; width: auto; object-fit: contain; }
-    .nav-wordmark {
-      font-size: 1.05rem; font-weight: 800; color: #fff;
-      letter-spacing: -0.01em; text-decoration: none;
-    }
-    .nav-links {
-      display: flex; gap: 1.8rem; list-style: none; align-items: center;
-    }
-    .nav-links a {
-      text-decoration: none; color: rgba(255,255,255,.82);
-      font-size: 0.875rem; font-weight: 500;
-      transition: color 0.2s; white-space: nowrap;
-    }
-    .nav-links a:hover, .nav-links a.active { color: #fff; }
-    .nav-cta {
-      background: #fff; color: var(--clr-primary);
-      padding: 8px 20px; border-radius: var(--radius-sm);
-      font-size: 0.85rem; font-weight: 700;
-      text-decoration: none; white-space: nowrap; flex-shrink: 0;
-      position: relative; overflow: hidden; display: inline-flex; align-items: center;
-      transition: background .25s, color .25s, transform .25s, box-shadow .25s;
-      animation: navCtaPulse 2.8s ease-in-out infinite;
-    }
-    @keyframes navCtaPulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,.65); }
-      55%       { box-shadow: 0 0 0 9px rgba(255,255,255,0); }
-    }
-    .nav-cta::after {
-      content: ''; position: absolute; inset: 0;
-      background: linear-gradient(105deg, transparent 35%, rgba(255,255,255,.32) 50%, transparent 65%);
-      transform: translateX(-120%); transition: transform .5s ease;
-    }
-    .nav-cta:hover {
-      background: var(--clr-dark); color: #fff;
-      transform: translateY(-2px) scale(1.05);
-      box-shadow: 0 6px 22px rgba(0,0,0,.25);
-      animation: none;
-    }
-    .nav-cta:hover::after { transform: translateX(120%); }
-    .nav-cta:active { transform: scale(1); box-shadow: 0 2px 8px rgba(0,0,0,.15); }
-    .nav-ham {
-      display: none; background: none; border: none;
-      color: #fff; font-size: 1.5rem; cursor: pointer;
-      padding: 4px; line-height: 1;
-    }
-    .nav-dropdown { position: relative; }
-    .nav-arr { display: inline-block; width: 7px; height: 7px; border: 2px solid transparent; border-right-color: rgba(255,255,255,.7); border-bottom-color: rgba(255,255,255,.7); transform: rotate(45deg); margin-left: 5px; margin-bottom: 2px; vertical-align: middle; transition: transform .22s ease; font-size: 0; }
-    .nav-submenu {
-      display: none; position: absolute; top: 100%; left: 50%;
-      transform: translateX(-50%);
-      background: var(--clr-primary-dark);
-      border-radius: var(--radius-md); list-style: none;
-      min-width: 210px; box-shadow: 0 8px 28px rgba(0,0,0,.28);
-      padding: 10px 0 6px; z-index: 300;
-    }
-    .nav-submenu li { list-style: none; }
-    .nav-submenu li a {
-      display: block; padding: 10px 20px; font-size: 0.85rem;
-      color: rgba(255,255,255,.85) !important; white-space: nowrap;
-      transition: background 0.15s, color 0.15s; text-decoration: none;
-    }
-    .nav-submenu li a:hover { background: rgba(255,255,255,.1); color: #fff !important; }
-    .nav-dropdown:hover .nav-submenu,
-    .nav-dropdown:focus-within .nav-submenu { display: block; }
-    .nav-dropdown:hover .nav-arr { transform: rotate(-135deg); border-right-color: #fff; border-bottom-color: #fff; }
-
-    /* ================================================================
-       05. BUTTONS
-    ================================================================ */
-    .btn-white {
-      background: #fff; color: var(--clr-primary);
-      padding: 12px 26px; border-radius: var(--radius-sm);
-      font-weight: 700; font-size: 0.875rem;
-      text-decoration: none; display: inline-block; transition: background 0.2s;
-    }
-    .btn-white:hover { background: #d6ecf8; }
-    .btn-wout {
-      background: transparent; color: #fff;
-      padding: 11px 24px; border-radius: var(--radius-sm);
-      font-weight: 600; font-size: 0.875rem;
-      border: 1.5px solid rgba(255,255,255,.5);
-      text-decoration: none; display: inline-block; transition: all 0.2s;
-    }
-    .btn-wout:hover { border-color: #fff; background: rgba(255,255,255,.1); }
-    .btn-group { display: flex; gap: 14px; flex-wrap: wrap; }
-
-    /* ================================================================
-       06. SECTION HELPERS
-    ================================================================ */
-    .sec { padding: var(--section-pad); }
-    .sec-alt { background: var(--clr-bg-alt); }
-
-    /* ================================================================
-       07. CARDS
-    ================================================================ */
-    .card {
-      background: #fff; border: 1px solid var(--clr-border);
-      border-radius: var(--radius-lg); padding: 26px; transition: box-shadow 0.2s;
-    }
-    .card:hover { box-shadow: 0 4px 24px rgba(14,90,138,.1); }
-
-    /* ================================================================
-       08. HERO SECTIONS
-    ================================================================ */
+    /* ── HERO ── */
     .cr-hero {
       background:
-        url('../assets/images/careers/careers.png') center top / cover no-repeat;
+        url('assets/images/careers/careers.png') center top / cover no-repeat;
       padding: var(--section-pad-hero);
       text-align: left;
     }
@@ -223,40 +33,7 @@
       font-size: 1.1rem; letter-spacing: 0.08em;
     }
 
-    /* ================================================================
-       09. CTA DARK
-    ================================================================ */
-    .cta-dark {
-      background: var(--clr-primary);
-      padding: var(--section-pad); text-align: center;
-    }
-    .cta-dark .eyebrow { color: rgba(255,255,255,.85); }
-    .cta-dark .sh2 { color: #fff; }
-    .cta-dark .slead { color: rgba(255,255,255,.78); margin: 0 auto 32px; }
-
-    /* ================================================================
-       12. FOOTER
-    ================================================================ */
-    footer { background: var(--clr-dark); color: #8aabb8; padding: 56px 5% 24px; }
-    .footer-grid {
-      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
-      gap: 36px; margin-bottom: 40px;
-    }
-    .footer-logo img { height: 30px; width: auto; filter: brightness(0) invert(1); opacity: 0.9; }
-    .footer-wordmark { font-size: 1.1rem; font-weight: 800; color: rgba(255,255,255,.9); }
-    .footer-desc { font-size: 0.87rem; line-height: 1.75; color: #6a8ea8; margin-top: 14px; }
-    .footer-col h5 {
-      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.09em; color: #b0c8d8; margin-bottom: 14px;
-    }
-    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-    .footer-col a { color: #6a8ea8; font-size: 0.87rem; text-decoration: none; transition: color 0.2s; }
-    .footer-col a:hover { color: #fff; }
-    .footer-bottom {
-      border-top: 1px solid #152535; padding-top: 20px;
-      font-size: 0.78rem; color: #3a5565; text-align: center;
-    }
-
+    /* ── CAREERS PAGE ── */
     /* ================================================================
        16. CAREERS PAGE
     ================================================================ */
@@ -377,102 +154,20 @@
     .ab:hover::after { transform: translateX(120%); }
     .ab:active { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,111,183,.35); }
 
-    /* ================================================================
-       21. THEME TOGGLE
-    ================================================================ */
-    .theme-toggle {
-      background: rgba(255,255,255,.15);
-      border: 1.5px solid rgba(255,255,255,.3);
-      color: #fff; width: 36px; height: 36px; border-radius: 50%;
-      cursor: pointer; font-size: 1rem;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; transition: background 0.2s, border-color 0.2s;
-      line-height: 1; padding: 0;
-    }
-    .theme-toggle:hover { background: rgba(255,255,255,.25); border-color: rgba(255,255,255,.6); }
-
-    /* ================================================================
-       22. DARK MODE
-    ================================================================ */
-    [data-theme="dark"] {
-      --clr-primary:          #4a9fd4;
-      --clr-primary-dark:     #3a8fc4;
-      --clr-body:             #b8ccd8;
-      --clr-text-secondary:   #86a4b8;
-      --clr-text-muted:       #6a8a9a;
-      --clr-heading:          #dce8f2;
-      --clr-bg:               #0d1520;
-      --clr-bg-alt:           #111c2a;
-      --clr-bg-blue-soft:     #152030;
-      --clr-border:           #1e3448;
-      --clr-border-light:     #1e3448;
-      --clr-tag-bg:           #1a3050;
-      --clr-dark-nav:         #0a1828;
-    }
-    [data-theme="dark"] body     { background: var(--clr-bg); }
-    [data-theme="dark"] .sec-alt { background: var(--clr-bg-alt); }
-    [data-theme="dark"] h1,
-    [data-theme="dark"] h2,
-    [data-theme="dark"] h3,
-    [data-theme="dark"] h4,
-    [data-theme="dark"] h5       { color: var(--clr-heading) !important; }
-    [data-theme="dark"] p        { color: var(--clr-body) !important; }
-    [data-theme="dark"] li       { color: var(--clr-body); }
-    [data-theme="dark"] strong   { color: var(--clr-heading); }
-    [data-theme="dark"] [style*="color:#322f2d"] { color: var(--clr-heading) !important; }
-    [data-theme="dark"] [style*="color:#322f2d"] { color: var(--clr-body) !important; }
-    [data-theme="dark"] [style*="color:#7a8fa0"] { color: var(--clr-text-muted) !important; }
-    [data-theme="dark"] [style*="color:#006fb7"] { color: var(--clr-primary) !important; }
-    [data-theme="dark"] [style*="color:#322f2d"] { color: var(--clr-text-muted) !important; }
-    [data-theme="dark"] .card,
-    [data-theme="dark"] .bc,
-    [data-theme="dark"] .d3c,
-    [data-theme="dark"] .tc,
-    [data-theme="dark"] .pc,
-    [data-theme="dark"] .sw,
-    [data-theme="dark"] .s3c    { background: #131f2e; border-color: var(--clr-border); }
-    [data-theme="dark"] .card:hover,
-    [data-theme="dark"] .pc:hover { box-shadow: 0 6px 28px rgba(0,0,0,.5), 0 0 0 1px rgba(74,159,212,.14); }
-    [data-theme="dark"] .tag    { background: var(--clr-tag-bg); color: #6ab8e8; }
-    [data-theme="dark"] .cta-dark { background: #0d2640; }
+    /* ── PAGE DARK MODE ── */
     [data-theme="dark"] .sw li,
     [data-theme="dark"] .d3c li { color: var(--clr-body); }
     [data-theme="dark"] .tc p   { color: var(--clr-body) !important; }
 
-    /* ================================================================
-       19. RESPONSIVE — TABLET
-    ================================================================ */
+    /* ── PAGE RESPONSIVE ── */
     @media (max-width: 960px) {
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-      .nav-links {
-        display: none; flex-direction: column;
-        position: absolute; top: 68px; left: 0; right: 0;
-        background: var(--clr-dark-nav); padding: 14px 5%; gap: 1rem;
-      }
-      .nav-cta { display: none; }
-      .theme-toggle { margin-left: auto; }
-      .nav-ham { display: flex; align-items: center; justify-content: center; margin-left: 10px; }
-      .nav-links.open { display: flex; }
-      .nav-submenu {
-        position: static; transform: none; box-shadow: none;
-        background: rgba(0,0,0,.2); border-radius: var(--radius-sm);
-        min-width: auto; padding: 0; margin-top: 4px;
-      }
-      .nav-submenu::before { display: none; }
-      .nav-submenu li a { padding: 8px 12px 8px 28px; font-size: 0.82rem; }
-      .nav-dropdown:hover .nav-submenu,
-      .nav-dropdown:focus-within .nav-submenu { display: none; }
-      .nav-dropdown.open .nav-submenu { display: block; }
-      .nav-dropdown.open .nav-arr { transform: rotate(-135deg); border-right-color: #fff; border-bottom-color: #fff; }
-      .cag, .d3g { grid-template-columns: 1fr; }
+          .cag, .d3g { grid-template-columns: 1fr; }
     }
 
     /* ================================================================
        20. RESPONSIVE — MOBILE
     ================================================================ */
     @media (max-width: 560px) {
-      .footer-grid { grid-template-columns: 1fr; }
-      .sec { padding: 56px 5%; }
       .s3 { grid-template-columns: repeat(3,1fr); }
     }
     @media (max-width: 480px) {
@@ -567,34 +262,13 @@
       .sv-slide img { height: 191px; }
     }
   </style>
+  </style>
 </head>
 
 <body>
 
   <!-- NAVIGATION -->
-  <nav>
-    <a href="index.html" class="nav-logo">
-      <img src="../assets/images/shared/simbus-technologies.webp" alt="Simbus Technologies" style="height:34px;width:auto;object-fit:contain;">
-    </a>
-    <ul class="nav-links" id="navlinks">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">Who We Are</a></li>
-      <li class="nav-dropdown">
-        <a href="services.html">Services <span class="nav-arr"></span></a>
-        <ul class="nav-submenu">
-          <li><a href="kinaxis.html">Kinaxis Maestro</a></li>
-          <li><a href="Kinaxis Planning One Page.html">Kinaxis® Planning One™</a></li>
-          <li><a href="databricks.html">Databricks</a></li>
-        </ul>
-      </li>
-      <li><a href="careers.html" class="active">Careers</a></li>
-      <li><a href="roi-calculator.html">Beneficiary Calculator</a></li>
-      <li><a href="contact.html">Contact Us</a></li>
-    </ul>
-    <a href="contact.html" class="nav-cta">Free Kinaxis Health Check</a>
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-    <button class="nav-ham" aria-label="Open navigation menu" onclick="document.getElementById('navlinks').classList.toggle('open')">&#9776;</button>
-  </nav>
+  <nav></nav>
 
   <!-- HERO -->
   <section class="cr-hero" id="careers-hero">
@@ -629,7 +303,7 @@
         </div>
       </div>
       <div class="sw">
-        <img src="../assets/images/careers/simbus-team.png" alt="Simbus Team" style="width:100%;border-radius:10px;margin-bottom:16px;display:block;">
+        <img src="assets/images/careers/simbus-team.png" alt="Simbus Team" style="width:100%;border-radius:10px;margin-bottom:16px;display:block;">
         <h3>The Simbus Way &mdash; Built on People, Purpose &amp; Performance</h3>
         <ul>
           <li>Fast, flexible, and collaborative environment</li>
@@ -726,25 +400,25 @@
     </div>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
       <div style="border-radius:12px;overflow:hidden;box-shadow:0 2px 16px rgba(0,111,183,.10);">
-        <img src="../assets/images/careers/team-activity.png" alt="Team Activity" style="width:100%;height:180px;object-fit:cover;display:block;">
+        <img src="assets/images/careers/team-activity.png" alt="Team Activity" style="width:100%;height:180px;object-fit:cover;display:block;">
         <div style="background:#fff;padding:14px 18px;border:1px solid #ccdde8;border-top:none;border-radius:0 0 12px 12px;">
           <p style="font-size:.85rem;font-weight:600;color:#006fb7;margin:0;">Team Building &amp; Activities</p>
         </div>
       </div>
       <div style="border-radius:12px;overflow:hidden;box-shadow:0 2px 16px rgba(0,111,183,.10);">
-        <img src="../assets/images/careers/team-activity-2.png" alt="Team Outing" style="width:100%;height:180px;object-fit:cover;display:block;">
+        <img src="assets/images/careers/team-activity-2.png" alt="Team Outing" style="width:100%;height:180px;object-fit:cover;display:block;">
         <div style="background:#fff;padding:14px 18px;border:1px solid #ccdde8;border-top:none;border-radius:0 0 12px 12px;">
           <p style="font-size:.85rem;font-weight:600;color:#006fb7;margin:0;">Team Outings &amp; Retreats</p>
         </div>
       </div>
       <div style="border-radius:12px;overflow:hidden;box-shadow:0 2px 16px rgba(0,111,183,.10);">
-        <img src="../assets/images/careers/team-outing.png" alt="Fun &amp; Sports" style="width:100%;height:180px;object-fit:cover;display:block;">
+        <img src="assets/images/careers/team-outing.png" alt="Fun &amp; Sports" style="width:100%;height:180px;object-fit:cover;display:block;">
         <div style="background:#fff;padding:14px 18px;border:1px solid #ccdde8;border-top:none;border-radius:0 0 12px 12px;">
           <p style="font-size:.85rem;font-weight:600;color:#006fb7;margin:0;">Sports, Games &amp; Fun</p>
         </div>
       </div>
       <div style="border-radius:12px;overflow:hidden;box-shadow:0 2px 16px rgba(0,111,183,.10);">
-        <img src="../assets/images/careers/fun-amp-sports.png" alt="Community Service" style="width:100%;height:180px;object-fit:cover;display:block;">
+        <img src="assets/images/careers/fun-amp-sports.png" alt="Community Service" style="width:100%;height:180px;object-fit:cover;display:block;">
         <div style="background:#fff;padding:14px 18px;border:1px solid #ccdde8;border-top:none;border-radius:0 0 12px 12px;">
           <p style="font-size:.85rem;font-weight:600;color:#006fb7;margin:0;">CSR</p>
         </div>
@@ -798,94 +472,94 @@
     <div class="sv-carousel-wrap">
       <div class="sv-track" id="svTrack">
         <div class="sv-slide">
-          <img src="../assets/images/careers/aravinth-m-trainee-digital-technolo.jpg" alt="Aravinth M — Trainee - Digital Technologies">
+          <img src="assets/images/careers/aravinth-m-trainee-digital-technolo.jpg" alt="Aravinth M — Trainee - Digital Technologies">
         </div>
         <div class="sv-slide">
-          <img src="../assets/images/careers/aravinth-m-trainee-digital-technolo-2.jpg" alt="Hemanth Vijimireddi — Solution Consultant (Kinaxis)">
+          <img src="assets/images/careers/aravinth-m-trainee-digital-technolo-2.jpg" alt="Hemanth Vijimireddi — Solution Consultant (Kinaxis)">
         </div>
         <div class="sv-slide">
-          <img src="../assets/images/careers/manthesh-l-trainee-digital-technolo.jpg" alt="Manthesh L — Trainee - Digital Technologies">
+          <img src="assets/images/careers/manthesh-l-trainee-digital-technolo.jpg" alt="Manthesh L — Trainee - Digital Technologies">
         </div>
         <div class="sv-slide">
-          <img src="../assets/images/careers/manthesh-l-trainee-digital-technolo-2.jpg" alt="Byrapa Bhuvanachandra — Associate Software Engineer">
+          <img src="assets/images/careers/manthesh-l-trainee-digital-technolo-2.jpg" alt="Byrapa Bhuvanachandra — Associate Software Engineer">
         </div>
         <div class="sv-slide">
-          <img src="../assets/images/careers/k-pravallika-associate-consultant.jpg" alt="K Pravallika — Associate Consultant">
+          <img src="assets/images/careers/k-pravallika-associate-consultant.jpg" alt="K Pravallika — Associate Consultant">
         </div>
         <div class="sv-slide">
-          <img src="../assets/images/careers/k-pravallika-associate-consultant-2.jpg" alt="Nageswara Reddy Pothireddy — Trainee - Digital Technologies">
+          <img src="assets/images/careers/k-pravallika-associate-consultant-2.jpg" alt="Nageswara Reddy Pothireddy — Trainee - Digital Technologies">
         </div>
         <div class="sv-slide">
-          <img src="../assets/images/careers/eshwar-r-swaroop-trainee-digital-te.jpg" alt="Eshwar R Swaroop — Trainee - Digital Technologies">
+          <img src="assets/images/careers/eshwar-r-swaroop-trainee-digital-te.jpg" alt="Eshwar R Swaroop — Trainee - Digital Technologies">
         </div>
         <div class="sv-slide">
-          <img src="../assets/images/careers/eshwar-r-swaroop-trainee-digital-te-2.jpg" alt="Uday Bhaskar Reddy — Trainee - Digital Technologies">
+          <img src="assets/images/careers/eshwar-r-swaroop-trainee-digital-te-2.jpg" alt="Uday Bhaskar Reddy — Trainee - Digital Technologies">
         </div>
         <div class="sv-slide">
-          <img src="../assets/images/careers/priyanka-kumari-hr-executive.jpg" alt="Priyanka Kumari — HR Executive">
+          <img src="assets/images/careers/priyanka-kumari-hr-executive.jpg" alt="Priyanka Kumari — HR Executive">
         </div>
         <div class="sv-slide">
-          <img src="../assets/images/careers/priyanka-kumari-hr-executive-2.jpg" alt="Ganga D Sarmah — HR Recruiter">
+          <img src="assets/images/careers/priyanka-kumari-hr-executive-2.jpg" alt="Ganga D Sarmah — HR Recruiter">
         </div>
         <div class="sv-slide">
-          <img src="../assets/images/careers/ganga-d-sarmah-hr-recruiter.jpg" alt="Rohith K — Manager - Finance">
+          <img src="assets/images/careers/ganga-d-sarmah-hr-recruiter.jpg" alt="Rohith K — Manager - Finance">
         </div>
         <div class="sv-slide">
-          <img src="../assets/images/careers/rohith-k-manager-finance.jpg" alt="Adarsh Guttedar — Associate Software Engineer">
+          <img src="assets/images/careers/rohith-k-manager-finance.jpg" alt="Adarsh Guttedar — Associate Software Engineer">
         </div>
         <div class="sv-slide">
-          <img src="../assets/images/careers/adarsh-guttedar-associate-software-.jpg" alt="Shreepunya Jagate — Associate Consultant">
+          <img src="assets/images/careers/adarsh-guttedar-associate-software-.jpg" alt="Shreepunya Jagate — Associate Consultant">
         </div>
         <div class="sv-slide">
-          <img src="../assets/images/careers/shreepunya-jagate-associate-consult.jpg" alt="Yogitha Lakshmi — Software Engineer">
+          <img src="assets/images/careers/shreepunya-jagate-associate-consult.jpg" alt="Yogitha Lakshmi — Software Engineer">
         </div>
         <div class="sv-slide">
-          <img src="../assets/images/careers/yogitha-lakshmi-software-engineer.jpg" alt="Vamsi Krishna — Team Lead - Development">
+          <img src="assets/images/careers/yogitha-lakshmi-software-engineer.jpg" alt="Vamsi Krishna — Team Lead - Development">
         </div>
         <div class="sv-slide" aria-hidden="true">
-          <img src="../assets/images/careers/aravinth-m-trainee-digital-technolo.jpg" alt="Aravinth M — Trainee - Digital Technologies">
+          <img src="assets/images/careers/aravinth-m-trainee-digital-technolo.jpg" alt="Aravinth M — Trainee - Digital Technologies">
         </div>
         <div class="sv-slide" aria-hidden="true">
-          <img src="../assets/images/careers/aravinth-m-trainee-digital-technolo-2.jpg" alt="Hemanth Vijimireddi — Solution Consultant (Kinaxis)">
+          <img src="assets/images/careers/aravinth-m-trainee-digital-technolo-2.jpg" alt="Hemanth Vijimireddi — Solution Consultant (Kinaxis)">
         </div>
         <div class="sv-slide" aria-hidden="true">
-          <img src="../assets/images/careers/manthesh-l-trainee-digital-technolo.jpg" alt="Manthesh L — Trainee - Digital Technologies">
+          <img src="assets/images/careers/manthesh-l-trainee-digital-technolo.jpg" alt="Manthesh L — Trainee - Digital Technologies">
         </div>
         <div class="sv-slide" aria-hidden="true">
-          <img src="../assets/images/careers/manthesh-l-trainee-digital-technolo-2.jpg" alt="Byrapa Bhuvanachandra — Associate Software Engineer">
+          <img src="assets/images/careers/manthesh-l-trainee-digital-technolo-2.jpg" alt="Byrapa Bhuvanachandra — Associate Software Engineer">
         </div>
         <div class="sv-slide" aria-hidden="true">
-          <img src="../assets/images/careers/k-pravallika-associate-consultant.jpg" alt="K Pravallika — Associate Consultant">
+          <img src="assets/images/careers/k-pravallika-associate-consultant.jpg" alt="K Pravallika — Associate Consultant">
         </div>
         <div class="sv-slide" aria-hidden="true">
-          <img src="../assets/images/careers/k-pravallika-associate-consultant-2.jpg" alt="Nageswara Reddy Pothireddy — Trainee - Digital Technologies">
+          <img src="assets/images/careers/k-pravallika-associate-consultant-2.jpg" alt="Nageswara Reddy Pothireddy — Trainee - Digital Technologies">
         </div>
         <div class="sv-slide" aria-hidden="true">
-          <img src="../assets/images/careers/eshwar-r-swaroop-trainee-digital-te.jpg" alt="Eshwar R Swaroop — Trainee - Digital Technologies">
+          <img src="assets/images/careers/eshwar-r-swaroop-trainee-digital-te.jpg" alt="Eshwar R Swaroop — Trainee - Digital Technologies">
         </div>
         <div class="sv-slide" aria-hidden="true">
-          <img src="../assets/images/careers/eshwar-r-swaroop-trainee-digital-te-2.jpg" alt="Uday Bhaskar Reddy — Trainee - Digital Technologies">
+          <img src="assets/images/careers/eshwar-r-swaroop-trainee-digital-te-2.jpg" alt="Uday Bhaskar Reddy — Trainee - Digital Technologies">
         </div>
         <div class="sv-slide" aria-hidden="true">
-          <img src="../assets/images/careers/priyanka-kumari-hr-executive.jpg" alt="Priyanka Kumari — HR Executive">
+          <img src="assets/images/careers/priyanka-kumari-hr-executive.jpg" alt="Priyanka Kumari — HR Executive">
         </div>
         <div class="sv-slide" aria-hidden="true">
-          <img src="../assets/images/careers/priyanka-kumari-hr-executive-2.jpg" alt="Ganga D Sarmah — HR Recruiter">
+          <img src="assets/images/careers/priyanka-kumari-hr-executive-2.jpg" alt="Ganga D Sarmah — HR Recruiter">
         </div>
         <div class="sv-slide" aria-hidden="true">
-          <img src="../assets/images/careers/ganga-d-sarmah-hr-recruiter.jpg" alt="Rohith K — Manager - Finance">
+          <img src="assets/images/careers/ganga-d-sarmah-hr-recruiter.jpg" alt="Rohith K — Manager - Finance">
         </div>
         <div class="sv-slide" aria-hidden="true">
-          <img src="../assets/images/careers/rohith-k-manager-finance.jpg" alt="Adarsh Guttedar — Associate Software Engineer">
+          <img src="assets/images/careers/rohith-k-manager-finance.jpg" alt="Adarsh Guttedar — Associate Software Engineer">
         </div>
         <div class="sv-slide" aria-hidden="true">
-          <img src="../assets/images/careers/adarsh-guttedar-associate-software-.jpg" alt="Shreepunya Jagate — Associate Consultant">
+          <img src="assets/images/careers/adarsh-guttedar-associate-software-.jpg" alt="Shreepunya Jagate — Associate Consultant">
         </div>
         <div class="sv-slide" aria-hidden="true">
-          <img src="../assets/images/careers/shreepunya-jagate-associate-consult.jpg" alt="Yogitha Lakshmi — Software Engineer">
+          <img src="assets/images/careers/shreepunya-jagate-associate-consult.jpg" alt="Yogitha Lakshmi — Software Engineer">
         </div>
         <div class="sv-slide" aria-hidden="true">
-          <img src="../assets/images/careers/yogitha-lakshmi-software-engineer.jpg" alt="Vamsi Krishna — Team Lead - Development">
+          <img src="assets/images/careers/yogitha-lakshmi-software-engineer.jpg" alt="Vamsi Krishna — Team Lead - Development">
         </div>
       </div>
 
@@ -968,7 +642,7 @@
     <div class="footer-grid">
       <div>
         <div class="footer-logo">
-          <img src="../assets/images/shared/simbus-technologies.webp" alt="Simbus Technologies" style="height:30px;width:auto;filter:brightness(0) invert(1);opacity:0.9;">
+          <img src="assets/images/shared/simbus-technologies.webp" alt="Simbus Technologies" style="height:30px;width:auto;filter:brightness(0) invert(1);opacity:0.9;">
         </div>
         <p class="footer-desc">A global consulting and technology partner helping enterprises modernize their supply chain and data ecosystems.</p>
       </div>
@@ -978,7 +652,7 @@
           <li><a href="about.html">About Us</a></li>
           <li><a href="services.html">Services</a></li>
           <li><a href="careers.html">Careers</a></li>
-          <li><a href="roi-calculator.html">Beneficiary Calculator</a></li>
+          <li><a href="roi-calculator.html">Benefit Calc</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
@@ -1089,6 +763,6 @@
     })();
   </script>
 
-  <script src="../js/main.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

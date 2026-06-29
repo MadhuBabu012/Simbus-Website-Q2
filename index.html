@@ -11,10 +11,6 @@
    PAGE-SPECIFIC STYLES — index.html
 ================================================================ */
 
-/* ── SKIP LINK ── */
-.skip-link { position:absolute;top:-999px;left:0;padding:10px 18px;background:#006fb7;color:#fff;font-size:.9rem;font-weight:600;border-radius:0 0 6px 0;z-index:9999;text-decoration:none; }
-.skip-link:focus { top:0; }
-
 /* ── HERO ── */
 .hero {
   background:transparent;
@@ -71,23 +67,17 @@
   width:1px;background:var(--clr-border);
 }
 
-@keyframes fadeSlideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-
-/* ── WAVE DIVIDERS ── */
-.wave-divider { display:block;width:100%;overflow:hidden;line-height:0; }
-.wave-divider svg { display:block;width:100%;height:60px; }
-
 /* ── CAROUSEL ── */
-.carousel { background:#edf5fc;padding:18px 0;border-top:1px solid var(--clr-border);border-bottom:1px solid var(--clr-border);overflow:hidden; }
-.c-lbl { font-size:1.1rem;font-weight:900;text-transform:uppercase;letter-spacing:0.1em;color:var(--clr-primary);text-align:center;margin-bottom:16px; }
+.carousel { background:#edf5fc;padding:28px 0;border-top:1px solid var(--clr-border);border-bottom:1px solid var(--clr-border);overflow:hidden; }
+.c-lbl { font-size:1.2rem;font-weight:900;text-transform:uppercase;letter-spacing:0.1em;color:var(--clr-primary);text-align:center;margin-bottom:22px; }
 .c-track-w { overflow:hidden; }
 .c-track { display:flex;width:max-content;animation:marquee 32s linear infinite; }
 .c-track:hover { animation-play-state:paused; }
 @media (prefers-reduced-motion:reduce) { .c-track { animation:none; } }
-@keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-.c-item { display:flex;align-items:center;justify-content:center;padding:0 36px;border-right:1px solid #c0d8e8;flex-shrink:0;transition:opacity .2s,transform .2s; }
+.c-item { display:flex;align-items:center;justify-content:center;padding:0 48px;border-right:1px solid #c0d8e8;flex-shrink:0;transition:opacity .2s,transform .2s; }
 .c-item:hover { opacity:.8;transform:scale(1.05); }
-.c-logo { height:44px;width:auto;max-width:160px;object-fit:contain;filter:none;opacity:1;transition:transform .3s ease,opacity .2s; }
+.c-logo { height:62px;width:auto;max-width:200px;object-fit:contain;filter:none;opacity:1;transition:transform .3s ease,opacity .2s; }
+.c-logo-white { background:#fff;border-radius:6px;padding:6px 12px; }
 .c-item:hover .c-logo { filter:none;opacity:1; }
 
 /* ── DIFFERENTIATORS ── */
@@ -143,85 +133,21 @@
 }
 .diff-card-new:hover::after { left:130%; }
 
-/* ── STATS BAND ── */
-.stats-band { background:#006fb7;padding:60px 5%;text-align:center;position:relative;overflow:hidden; }
-.stats-band .eyebrow { color:rgba(255,255,255,.75);font-size:1rem;font-weight:800;letter-spacing:0.1em; }
-.stats-band .sh2 { color:#fff;text-shadow:0 2px 16px rgba(0,0,0,.18); }
-.stats-band-inner { position:relative;z-index:1; }
-.stats-row { display:flex;justify-content:center;gap:60px;margin-top:36px;flex-wrap:wrap; }
-.stat-item { cursor:default; }
-.stat-big { font-size:2.5rem;font-weight:800;color:#fff; }
-.stat-lbl { font-size:.83rem;color:rgba(255,255,255,.62);margin-top:4px; }
-.stat-ring {
-  position:absolute;width:120px;height:120px;border-radius:50%;
-  border:1px solid rgba(255,255,255,.06);
-  animation:ringPulse 3s ease-in-out infinite;
-}
-@keyframes ringPulse { 0%,100%{transform:scale(1);opacity:.6} 50%{transform:scale(1.3);opacity:.2} }
-
 /* ── TEAM GRID ── */
 .team-grid {
   display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
   margin-top:38px;max-width:860px;margin-left:auto;margin-right:auto;
-}
-.av {
-  width:110px;height:110px;border-radius:50%;
-  overflow:hidden;margin:0 auto 16px;flex-shrink:0;position:relative;
-  border:3px solid transparent;
-  background:linear-gradient(white,white) padding-box,
-             linear-gradient(135deg,#006fb7,#4db8ff) border-box;
-  box-shadow:0 4px 18px rgba(0,111,183,.2);
-  transition:transform .4s cubic-bezier(.34,1.56,.64,1),box-shadow .35s ease;
-  animation:teamFloat 4s ease-in-out infinite;
-}
-.team-grid .card:nth-child(2) .av { animation-delay:.4s; }
-.team-grid .card:nth-child(3) .av { animation-delay:.8s; }
-.team-grid .card:nth-child(4) .av { animation-delay:1.2s; }
-.team-grid .card:nth-child(5) .av { animation-delay:1.6s; }
-.team-grid .card:nth-child(6) .av { animation-delay:2.0s; }
-@keyframes teamFloat { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-6px); } }
-.av img {
-  width:100%;height:100%;object-fit:cover;object-position:top center;
-  display:block;border-radius:50%;
-  transition:transform .45s cubic-bezier(.34,1.56,.64,1),filter .3s ease;
 }
 .av-initials {
   width:100%;height:100%;display:flex;align-items:center;justify-content:center;
   background:var(--clr-primary);color:#fff;font-size:1.3rem;font-weight:800;
   border-radius:50%;
 }
-.card:hover .av { animation:none;transform:scale(1.1) translateY(-4px);box-shadow:0 12px 36px rgba(0,111,183,.4); }
-.card:hover .av img { transform:scale(1.07); }
-.av::after {
-  content:'';position:absolute;inset:0;border-radius:50%;
-  background:linear-gradient(135deg,transparent 30%,rgba(255,255,255,.3) 50%,transparent 70%);
-  transform:translateX(-130%) rotate(30deg);transition:transform .55s ease;pointer-events:none;
-}
-.card:hover .av::after { transform:translateX(130%) rotate(30deg); }
-.trole { font-size:.7rem;font-weight:700;color:var(--clr-primary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px; }
-
-/* ── TEAM LINKEDIN ── */
-.team-linkedin {
-  display:inline-flex;align-items:center;justify-content:center;
-  margin-top:12px;width:34px;height:34px;border-radius:8px;
-  background:#0077B5;color:#fff;text-decoration:none;
-  transition:background .25s ease,transform .25s ease,box-shadow .25s ease;
-  box-shadow:0 2px 8px rgba(0,119,181,.28);
-}
-.team-linkedin:hover { background:#005f94;transform:translateY(-2px) scale(1.08);box-shadow:0 6px 18px rgba(0,119,181,.42); }
-.team-linkedin svg { display:block; }
-
-/* ── CTA SECTION ── */
-.cta-dark { background:var(--clr-primary);padding:80px 5%;text-align:center;position:relative;overflow:hidden; }
-.cta-dark .eyebrow { color:rgba(255,255,255,.8);font-size:1rem;font-weight:800;letter-spacing:0.1em; }
-.cta-dark .sh2 { color:#fff; }
-.cta-dark .slead { color:rgba(255,255,255,.78);margin:0 auto 32px; }
-.cta-bg-rings { position:absolute;inset:0;pointer-events:none;overflow:hidden; }
-.cta-ring { position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.08); }
-.cta-ring:nth-child(1) { width:300px;height:300px;left:-80px;top:-80px;animation:cta-spin 20s linear infinite; }
-.cta-ring:nth-child(2) { width:500px;height:500px;right:-120px;bottom:-150px;animation:cta-spin 30s linear infinite reverse; }
-.cta-ring:nth-child(3) { width:200px;height:200px;right:30%;top:-40px;animation:cta-spin 15s linear infinite; }
-@keyframes cta-spin { to{transform:rotate(360deg)} }
+.team-grid .card:nth-child(2) .av { animation-delay:.4s; }
+.team-grid .card:nth-child(3) .av { animation-delay:.8s; }
+.team-grid .card:nth-child(4) .av { animation-delay:1.2s; }
+.team-grid .card:nth-child(5) .av { animation-delay:1.6s; }
+.team-grid .card:nth-child(6) .av { animation-delay:2.0s; }
 
 /* ── DARK MODE ADDITIONS ── */
 [data-theme="dark"] .hero { background:transparent; }
@@ -235,38 +161,11 @@
 [data-theme="dark"] .diff-card-new:hover { box-shadow:0 16px 40px rgba(0,0,0,.45);border-color:rgba(77,184,255,.2); }
 [data-theme="dark"] .diff-card-new h4 { color:var(--clr-heading)!important; }
 [data-theme="dark"] .diff-card-new p { color:var(--clr-body)!important; }
-[data-theme="dark"] .cta-dark { background:#0d2640; }
-[data-theme="dark"] .av {
-  background:linear-gradient(#131f2e,#131f2e) padding-box,
-             linear-gradient(135deg,#006fb7,#4db8ff) border-box;
-  box-shadow:0 4px 18px rgba(0,111,183,.3);
-}
-[data-theme="dark"] .card:hover .av { box-shadow:0 12px 36px rgba(0,111,183,.5); }
-[data-theme="dark"] .team-linkedin { box-shadow:0 2px 10px rgba(0,119,181,.45); }
-
-/* ── SCROLL REVEAL ── */
-.reveal { opacity:0;transform:translateY(32px);transition:opacity .65s ease,transform .65s ease; }
-.reveal.visible { opacity:1;transform:translateY(0); }
-.reveal-left { opacity:0;transform:translateX(-32px);transition:opacity .65s ease,transform .65s ease; }
-.reveal-left.visible { opacity:1;transform:translateX(0); }
-.reveal-scale { opacity:0;transform:scale(.92);transition:opacity .5s ease,transform .5s ease; }
-.reveal-scale.visible { opacity:1;transform:scale(1); }
-.stagger > * { opacity:0;transform:translateY(24px);transition:opacity .5s ease,transform .5s ease; }
-.stagger.visible > *:nth-child(1) { opacity:1;transform:translateY(0);transition-delay:.0s; }
-.stagger.visible > *:nth-child(2) { opacity:1;transform:translateY(0);transition-delay:.1s; }
-.stagger.visible > *:nth-child(3) { opacity:1;transform:translateY(0);transition-delay:.2s; }
-.stagger.visible > *:nth-child(4) { opacity:1;transform:translateY(0);transition-delay:.3s; }
-.stagger.visible > *:nth-child(5) { opacity:1;transform:translateY(0);transition-delay:.4s; }
-.stagger.visible > *:nth-child(6) { opacity:1;transform:translateY(0);transition-delay:.5s; }
 
 /* ── RESPONSIVE ── */
 @media (max-width:960px) {
   .diff-grid-new { grid-template-columns:1fr; }
   .team-grid { grid-template-columns:1fr; }
-  .stats-row { gap:32px; }
-}
-@media (max-width:560px) {
-  .stats-row { gap:32px; }
 }
   </style>
 </head>
@@ -275,29 +174,7 @@
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <!-- NAVIGATION -->
-<nav>
-  <a href="index.html" class="nav-logo">
-    <img src="assets/images/shared/simbus-technologies.webp" alt="Simbus Technologies" style="height:34px;width:auto;object-fit:contain;">
-  </a>
-  <ul class="nav-links" id="navlinks">
-    <li><a href="index.html" class="active">Home</a></li>
-    <li><a href="about.html">Who We Are</a></li>
-    <li class="nav-dropdown">
-      <a href="services.html">Services <span class="nav-arr"></span></a>
-      <ul class="nav-submenu">
-        <li><a href="kinaxis.html">Kinaxis Maestro</a></li>
-        <li><a href="Kinaxis Planning One Page.html">Kinaxis® Planning One™</a></li>
-        <li><a href="databricks.html">Databricks</a></li>
-      </ul>
-    </li>
-    <li><a href="careers.html">Careers</a></li>
-    <li><a href="roi-calculator.html">Beneficiary Calculator</a></li>
-    <li><a href="contact.html">Contact Us</a></li>
-  </ul>
-  <a href="contact.html" class="nav-cta">Free Kinaxis Health Check</a>
-  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
-  <button class="nav-ham" aria-label="Open navigation menu" onclick="document.getElementById('navlinks').classList.toggle('open')">☰</button>
-</nav>
+<nav></nav>
 
 <main id="main-content">
 
@@ -348,37 +225,37 @@
   <div class="c-track-w">
     <div class="c-track">
       <!-- First set — Aditya Birla at position 8 (center) -->
-      <div class="c-item"><a href="https://www.arvindstore.com/" target="_blank" rel="noopener"><img src="assets/trusted_partners/the-arvind-store.png" alt="The Arvind Store" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.vmart.co.in/" target="_blank" rel="noopener"><img src="assets/trusted_partners/v-mart.png" alt="V Mart" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.titancompany.in/" target="_blank" rel="noopener"><img src="assets/trusted_partners/titan-company.png" alt="Titan Company" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.myntra.com/" target="_blank" rel="noopener"><img src="assets/trusted_partners/myntra.png" alt="Myntra" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.maxfashion.in/" target="_blank" rel="noopener"><img src="assets/trusted_partners/max-fashion.png" alt="Max Fashion" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.fashionfactory.co.in/" target="_blank" rel="noopener"><img src="assets/trusted_partners/fashion-factory.png" alt="Fashion Factory" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://blackberrys.com/" target="_blank" rel="noopener"><img src="assets/trusted_partners/blackberrys.png" alt="Blackberrys" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.abfrl.com/" target="_blank" rel="noopener"><img src="assets/trusted_partners/aditya-birla-fashion-retail.png" alt="Aditya Birla Fashion &amp; Retail" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.stl.tech/" target="_blank" rel="noopener"><img src="assets/trusted_partners/stl.png" alt="STL" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.tetrapak.com/" target="_blank" rel="noopener"><img src="assets/trusted_partners/tetra-pak.png" alt="Tetra Pak" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.drreddys.com/" target="_blank" rel="noopener"><img src="assets/trusted_partners/dr-reddy-s.png" alt="Dr. Reddy's" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.wipro.com/" target="_blank" rel="noopener"><img src="assets/trusted_partners/wipro.png" alt="Wipro" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.gelighting.com/" target="_blank" rel="noopener"><img src="assets/trusted_partners/ge-lighting.png" alt="GE Lighting" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.accenture.com/" target="_blank" rel="noopener"><img src="assets/trusted_partners/accenture.png" alt="Accenture" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.kinaxis.com/" target="_blank" rel="noopener"><img src="assets/trusted_partners/kinaxis.png" alt="Kinaxis" class="c-logo"></a></div>
+      <div class="c-item"><img src="assets/trusted_partners/the-arvind-store.png" alt="The Arvind Store" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/v-mart.png" alt="V Mart" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/titan-company.png" alt="Titan Company" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/myntra.png" alt="Myntra" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/max-fashion.png" alt="Max Fashion" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/fashion-factory.png" alt="Fashion Factory" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/blackberrys.png" alt="Blackberrys" class="c-logo c-logo-white"></div>
+      <div class="c-item"><img src="assets/trusted_partners/aditya-birla-fashion-retail.png" alt="Aditya Birla Fashion &amp; Retail" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/stl.png" alt="STL" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/tetra-pak.png" alt="Tetra Pak" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/dr-reddy-s.png" alt="Dr. Reddy's" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/wipro.png" alt="Wipro" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/ge-lighting.png" alt="GE Lighting" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/accenture.png" alt="Accenture" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/kinaxis.png" alt="Kinaxis" class="c-logo"></div>
       <!-- Duplicate set for infinite loop -->
-      <div class="c-item"><a href="https://www.arvindstore.com/" target="_blank" rel="noopener"><img src="assets/trusted_partners/the-arvind-store.png" alt="The Arvind Store" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.vmart.co.in/" target="_blank" rel="noopener"><img src="assets/trusted_partners/v-mart.png" alt="V Mart" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.titancompany.in/" target="_blank" rel="noopener"><img src="assets/trusted_partners/titan-company.png" alt="Titan Company" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.myntra.com/" target="_blank" rel="noopener"><img src="assets/trusted_partners/myntra.png" alt="Myntra" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.maxfashion.in/" target="_blank" rel="noopener"><img src="assets/trusted_partners/max-fashion.png" alt="Max Fashion" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.fashionfactory.co.in/" target="_blank" rel="noopener"><img src="assets/trusted_partners/fashion-factory.png" alt="Fashion Factory" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://blackberrys.com/" target="_blank" rel="noopener"><img src="assets/trusted_partners/blackberrys.png" alt="Blackberrys" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.abfrl.com/" target="_blank" rel="noopener"><img src="assets/trusted_partners/aditya-birla-fashion-retail.png" alt="Aditya Birla Fashion &amp; Retail" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.stl.tech/" target="_blank" rel="noopener"><img src="assets/trusted_partners/stl.png" alt="STL" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.tetrapak.com/" target="_blank" rel="noopener"><img src="assets/trusted_partners/tetra-pak.png" alt="Tetra Pak" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.drreddys.com/" target="_blank" rel="noopener"><img src="assets/trusted_partners/dr-reddy-s.png" alt="Dr. Reddy's" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.wipro.com/" target="_blank" rel="noopener"><img src="assets/trusted_partners/wipro.png" alt="Wipro" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.gelighting.com/" target="_blank" rel="noopener"><img src="assets/trusted_partners/ge-lighting.png" alt="GE Lighting" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.accenture.com/" target="_blank" rel="noopener"><img src="assets/trusted_partners/accenture.png" alt="Accenture" class="c-logo"></a></div>
-      <div class="c-item"><a href="https://www.kinaxis.com/" target="_blank" rel="noopener"><img src="assets/trusted_partners/kinaxis.png" alt="Kinaxis" class="c-logo"></a></div>
+      <div class="c-item"><img src="assets/trusted_partners/the-arvind-store.png" alt="The Arvind Store" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/v-mart.png" alt="V Mart" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/titan-company.png" alt="Titan Company" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/myntra.png" alt="Myntra" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/max-fashion.png" alt="Max Fashion" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/fashion-factory.png" alt="Fashion Factory" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/blackberrys.png" alt="Blackberrys" class="c-logo c-logo-white"></div>
+      <div class="c-item"><img src="assets/trusted_partners/aditya-birla-fashion-retail.png" alt="Aditya Birla Fashion &amp; Retail" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/stl.png" alt="STL" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/tetra-pak.png" alt="Tetra Pak" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/dr-reddy-s.png" alt="Dr. Reddy's" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/wipro.png" alt="Wipro" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/ge-lighting.png" alt="GE Lighting" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/accenture.png" alt="Accenture" class="c-logo"></div>
+      <div class="c-item"><img src="assets/trusted_partners/kinaxis.png" alt="Kinaxis" class="c-logo"></div>
     </div>
   </div>
 </div>
@@ -615,7 +492,7 @@
         <li><a href="about.html">About Us</a></li>
         <li><a href="services.html">Services</a></li>
         <li><a href="careers.html">Careers</a></li>
-        <li><a href="roi-calculator.html">Beneficiary Calculator</a></li>
+        <li><a href="roi-calculator.html">Benefit Calc</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
