@@ -32,7 +32,6 @@
         <li><a href="contact.html">Contact Us</a></li>
       </ul>
       <a href="contact.html" class="nav-cta">Free Kinaxis Health Check</a>
-      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
       <button class="nav-ham" id="navHam" aria-label="Open navigation menu">&#9776;</button>
     `;
 
@@ -48,30 +47,7 @@
     });
   }
 
-  /* ── 2. DARK MODE TOGGLE ──────────────────────────────────── */
-  const themeBtn = document.getElementById('themeToggle');
-  if (themeBtn) {
-    const savedTheme = localStorage.getItem('simbus-theme');
-    if (savedTheme === 'dark') {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      themeBtn.textContent = '☀️';
-    }
-
-    themeBtn.addEventListener('click', () => {
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      if (isDark) {
-        document.documentElement.removeAttribute('data-theme');
-        themeBtn.textContent = '🌙';
-        localStorage.setItem('simbus-theme', 'light');
-      } else {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        themeBtn.textContent = '☀️';
-        localStorage.setItem('simbus-theme', 'dark');
-      }
-    });
-  }
-
-  /* ── 3. MOBILE NAV ────────────────────────────────────────── */
+  /* ── 2. MOBILE NAV ────────────────────────────────────────── */
   const navHam = document.getElementById('navHam');
   if (navHam) {
     navHam.addEventListener('click', () => {
