@@ -245,23 +245,6 @@
   box-shadow: 0 3px 10px rgba(0,111,183,.15);
 }
 
-/* ================================================================
-   MOTION — NAV LINK UNDERLINE SLIDE
-   ================================================================ */
-.nav-links a {
-  position: relative;
-}
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  bottom: -2px; left: 0;
-  width: 0; height: 2px;
-  background: #fff;
-  border-radius: 2px;
-  transition: width 0.25s cubic-bezier(0.22,1,0.36,1);
-}
-.nav-links a:hover::after,
-.nav-links a.active::after { width: 100%; }
 
 /* ================================================================
    MOTION — CTA SECTION PULSE GLOW
@@ -515,5 +498,6 @@
 
 
   <script src="js/main.js"></script>
+  <script src="https://instant.page/5.2.0/instant.page" type="module"></script>
 </body>
 </html>
