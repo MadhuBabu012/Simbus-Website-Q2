@@ -581,12 +581,12 @@ footer { background: var(--clr-dark); color: #8aabb8; padding: 56px 5% 24px; }
   .ag, .tg { grid-template-columns: 1fr; }
   .s4 { grid-template-columns: repeat(2, 1fr); }
   .tcard-grid { grid-template-columns: 1fr; }
-}
 
   /* Page-specific inline-grid replacements */
   .grid-2col { grid-template-columns: 1fr !important; }
   .grid-4col { grid-template-columns: repeat(2, 1fr) !important; }
   .dc-grid-2col { grid-template-columns: 1fr !important; }
+}
 
 /* ── Mobile (≤560px) ──────────────────────────────── */
 @media (max-width: 560px) {

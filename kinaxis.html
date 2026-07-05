@@ -53,13 +53,16 @@
   background: #fff; border: 1px solid var(--clr-border);
   border-radius: var(--radius-lg); padding: 26px;
   margin-bottom: 18px; transition: box-shadow .2s;
+  display: flex; flex-direction: column;
 }
+.dc .cm { margin-top: auto; }
 .dc:hover { box-shadow: 0 4px 24px rgba(14,90,138,.09); }
 .dc-badge {
   font-size: 0.68rem; font-weight: 700;
   text-transform: uppercase; letter-spacing: .08em;
   background: var(--clr-tag-bg); color: var(--clr-primary);
   padding: 4px 12px; border-radius: 20px; display: inline-block;
+  align-self: center;
 }
 .dc-title {
   font-size: 1.02rem; font-weight: 700;

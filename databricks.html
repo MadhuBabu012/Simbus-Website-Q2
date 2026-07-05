@@ -41,11 +41,13 @@
 }
 .dc:hover { box-shadow: 0 4px 24px rgba(14,90,138,.09); }
 
-.dc { width: 100%; box-sizing: border-box; }
+.dc { width: 100%; box-sizing: border-box; display: flex; flex-direction: column; }
+.dc .cm { margin-top: auto; }
 .dc-badge {
   font-size: .68rem; font-weight: 700; text-transform: uppercase;
   letter-spacing: .08em; background: var(--clr-tag-bg); color: var(--clr-primary);
   padding: 4px 12px; border-radius: 20px; display: inline-block;
+  align-self: center;
 }
 .dc-title { font-size: 1.02rem; font-weight: 700; color: var(--clr-heading); margin: 12px 0 6px; }
 .dc-sub   { font-size: .87rem; color: var(--clr-text-muted); font-style: italic; margin-bottom: 14px; }
@@ -149,7 +151,7 @@
 
 /* Technology stack badges */
 .tech-stack {
-  display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px;
+  display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; justify-content: center;
 }
 .tech-badge {
   display: inline-flex; align-items: center; gap: 7px;
