@@ -52,7 +52,7 @@
    03. RESET & BASE
 ================================================================ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; font-size: 14px; }
 body {
   font-family: var(--font-base);
   color: var(--clr-body);
@@ -68,7 +68,7 @@ a { color: inherit; }
    04. TYPOGRAPHY
 ================================================================ */
 .eyebrow {
-  font-size: 1rem; font-weight: 800; letter-spacing: 0.08em;
+  font-size: 1.15rem; font-weight: 800; letter-spacing: 0.08em;
   text-transform: uppercase; color: var(--clr-primary);
   margin-bottom: 12px; display: block;
 }
@@ -78,13 +78,13 @@ a { color: inherit; }
 }
 .eyebrow a:hover { opacity: .7; letter-spacing: 0.12em; }
 .sh2 {
-  font-size: clamp(2rem, 3.8vw, 3rem);
-  font-weight: 900; color: var(--clr-heading);
-  line-height: 1.14; margin-bottom: 16px; letter-spacing: -0.02em;
+  font-size: clamp(1.25rem, 2.1vw, 1.75rem);
+  font-weight: 800; color: var(--clr-heading);
+  line-height: 1.22; margin-bottom: 14px; letter-spacing: -0.02em;
 }
 .slead {
-  font-size: 1rem; color: var(--clr-text-secondary);
-  line-height: 1.78; max-width: 680px;
+  font-size: 0.92rem; color: var(--clr-text-secondary);
+  line-height: 1.75; max-width: 680px;
 }
 .center { text-align: center; }
 .center .slead { margin: 0 auto; }
@@ -116,7 +116,7 @@ nav {
   margin-left: 10px; padding-left: 10px;
   border-left: 1px solid rgba(255,255,255,.3);
 }
-.nav-links { display: flex; gap: 0.4rem; list-style: none; align-items: center; }
+.nav-links { display: flex; gap: 0.4rem; list-style: none; align-items: center; margin-left: auto; }
 .nav-links a {
   text-decoration: none; color: rgba(255,255,255,.82);
   font-size: .875rem; font-weight: 500; white-space: nowrap;
@@ -136,9 +136,10 @@ nav {
   background: rgba(255,255,255,.12);
 }
 .nav-cta {
-  background: #fff; color: var(--clr-primary); padding: 8px 20px;
+  background: #fff; color: var(--clr-primary); padding: 5px 12px;
   border-radius: var(--radius-sm); font-size: .85rem; font-weight: 700;
   text-decoration: none; white-space: nowrap; flex-shrink: 0;
+  margin-left: 16px;
   position: relative; overflow: hidden; display: inline-flex; align-items: center;
   transition: background .25s, color .25s, transform .25s, box-shadow .25s;
   animation: navCtaPulse 2.8s ease-in-out infinite;
@@ -177,8 +178,16 @@ nav {
   transition: opacity .22s ease, transform .22s ease, visibility .22s;
 }
 .nav-submenu li { list-style: none; }
+.nav-sub-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 6px;
+  background: rgba(255,255,255,0.1); margin-right: 10px;
+  flex-shrink: 0; transition: background 0.2s ease;
+}
+.nav-submenu li a:hover .nav-sub-icon { background: rgba(255,255,255,0.2); }
+
 .nav-submenu li a {
-  display: block; padding: 10px 20px; font-size: .85rem;
+  display: flex; align-items: center; padding: 10px 20px; font-size: .85rem;
   color: rgba(255,255,255,.85) !important; white-space: nowrap;
   transition: background .15s, padding-left .15s; text-decoration: none;
   border-radius: 0; position: relative;
@@ -299,7 +308,7 @@ footer { background: var(--clr-dark); color: #8aabb8; padding: 56px 5% 24px; }
   display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
   gap: 36px; margin-bottom: 40px;
 }
-.footer-logo img { height: 30px; width: auto; display: block; filter: brightness(0) invert(1); opacity: 0.9; }
+.footer-logo img { height: 48px; width: auto; display: block; filter: brightness(0) invert(1); opacity: 0.9; }
 .footer-logo-text { font-size: 1.15rem; font-weight: 800; color: rgba(255,255,255,.9); }
 .footer-desc { font-size: .87rem; line-height: 1.75; color: #6a8ea8; margin-top: 14px; }
 .footer-col h5 {
@@ -535,7 +544,48 @@ footer { background: var(--clr-dark); color: #8aabb8; padding: 56px 5% 24px; }
 [data-theme="dark"] [style*="color:#006fb7"] { color: var(--clr-primary) !important; }
 
 /* ================================================================
-   15. RESPONSIVE
+   15. HERO ENTRANCE ANIMATIONS (all pages)
+================================================================ */
+
+@keyframes heroSlideDown {
+  from { opacity: 0; transform: translateY(-28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Eyebrow labels */
+.hero .eyebrow,
+.ab-hero .eyebrow,
+.sov-hero .eyebrow,
+.sv-hero .eyebrow,
+.cr-hero .eyebrow,
+.ch .eyebrow,
+.po-hero .eyebrow {
+  animation: heroSlideDown 0.55s ease both;
+  animation-delay: 0.08s;
+}
+
+/* H1 headings */
+.hero h1,
+.ab-hero h1,
+.sov-hero h1,
+.sv-hero h1,
+.cr-hero h1,
+.ch h1,
+.po-hero h1 {
+  animation: heroSlideDown 0.6s ease both;
+  animation-delay: 0.2s;
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .hero .eyebrow, .ab-hero .eyebrow, .sov-hero .eyebrow, .sv-hero .eyebrow, .cr-hero .eyebrow, .ch .eyebrow, .po-hero .eyebrow,
+  .hero h1, .ab-hero h1, .sov-hero h1, .sv-hero h1, .cr-hero h1, .ch h1, .po-hero h1 {
+    animation: none;
+  }
+}
+
+/* ================================================================
+   16. RESPONSIVE
 ================================================================ */
 
 /* ── Responsive grid utilities ───────────────────── */
